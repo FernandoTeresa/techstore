@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,31 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TechStore';
+
+  constructor(public userservice: UserService, public router:Router){}
+
+  ngOnInit(): void {
+
+    
+    // let log_obj = JSON.parse(localStorage.getItem('user') || '{}');
+    
+    // if (log_obj === "" || log_obj === null){
+
+    //   this.router.navigate(['/login']);
+    // }else{
+
+    //   this.userservice.user = log_obj;
+
+    //   this.router.navigate(['/']);
+    // }
+  }
+
+
+
+
+
+
+
+
+
 }
