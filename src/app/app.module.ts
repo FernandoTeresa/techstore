@@ -13,6 +13,9 @@ import { ProductComponent } from './components/products/product/product.componen
 import { UpdateProductComponent } from './components/products/update-product/update-product.component';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ListProductsComponent,
     ProductComponent,
     UpdateProductComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

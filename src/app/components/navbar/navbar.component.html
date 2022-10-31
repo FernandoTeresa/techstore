@@ -1,100 +1,101 @@
+
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container">
-      <!-- Navbar brand -->
-      <a class="navbar-brand me-2" href="/">
-        <img
-          src="./../../../assets/icon/techstore.png";
-          height="16"
-          alt="TechStore Logo"
-          loading="lazy"
-          style="margin-top: -1px;"
-        />
-      </a>
-  
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarButtonsExample"
-        aria-controls="navbarButtonsExample"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarButtonsExample">
+<!--Main Navigation-->
+<header>
 
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <!-- Navbar -->
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggler -->
+        <button data-bs-toggle="sidenav" data-bs-target="#sidenav-1" class="btn shadow-0 p-0 me-3 d-block d-xxl-none"
+          aria-controls="#sidenav-1" aria-haspopup="true">
+          <i class="fas fa-bars fa-lg"></i>
+        </button>
+  
+  
+        <!-- Right links -->
+        <ul class="navbar-nav d-flex align-items-center flex-row">
+
+          <button type="button" class="btn btn-success px-3 me-2 btn-lg" (click)="login()" >Login</button>
+
+          <button type="button" class="btn btn-primary btn-lg" (click)="register()">SignUp</button>
+
+
           <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link me-3 py-1" href="#" data-mdb-toggle="tooltip" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+          </li>
+
+
+          <li class="nav-item me-3">
+            <a class="nav-link py-1" href="#" data-mdb-toggle="tooltip" title="Notifications">
+              <i class="fas fa-bell"></i>
+            </a>
+          </li>
+  
+          <!-- Avatar -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center py-1" href="#"
+              id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+              <i class="fas fa-user"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" style="min-width: 19rem;">
+              <li>
+                <div class="px-3 pt-3 d-flex">
+                    <!-- imagem do User -->
+                  <!-- <img src="" class="rounded-circle me-3" height="40" alt="" loading="lazy" />-->
+                  <div>
+                    <!-- nome -->
+                    <h6 class="mb-0">Marie Campbell</h6>
+                    <!-- email -->
+                    <p class="mb-2">mariecampbell@example.com</p>
+                  </div>
+                </div>
+                <hr class="mb-2">
+              </li>
+
+                <li>
+                    <a class="dropdown-item" href="#"><i class="fas fa-user-circle fa-fw me-3"></i><span>Your channel</span></a>
+                </li> 
+
+              <li><a class="dropdown-item" href="#"><i class="fas fa-dollar-sign fa-fw me-3"></i><span>Paid
+                    memberships</span></a></li>
+                <li>
+                    <a class="dropdown-item" href="#"><i class="fas fa-play-circle fa-fw me-3"></i><span>YouTube Studio</span></a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" href="#"><i class="fas fa-users-cog fa-fw me-3"></i><span>Switch account</span><i class="fas fa-chevron-right float-end mt-1"></i></a>
+                </li>
+             
+                <li>
+                    <a class="dropdown-item"(click)="logout()"><i class="fas fa-sign-out-alt me-3"></i><span>Sign out</span></a>
+                </li>
+            </ul>
           </li>
         </ul>
-
-        <!-- Left links -->
-  
-        <div class="d-flex align-items-center">
-
-          <button type="button" class="btn btn-link px-3 me-2">Login</button>
-
-          <button type="button" class="btn btn-primary me-3">Sign up</button>
-
-          <div class="container-fluid">
-            <ul class="navbar-nav d-flex flex-row">
-
-              <!-- Icons -->
-              <li class="nav-item me-3 me-lg-0">
-                <a class="nav-link" href="#">
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
-              </li>
-
-              <!-- Icon dropdown -->
-              <li class="nav-item me-3 me-lg-0 dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-user"></i>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a class="dropdown-item" href="#">Action</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Another action</a>
-                  </li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
       </div>
-      <!-- Collapsible wrapper -->
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+  </header>
+
+  <!--Main Navigation-->
+
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
     </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
-
-
-
-
- 
+  </div>

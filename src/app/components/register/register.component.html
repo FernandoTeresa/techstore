@@ -1,1 +1,32 @@
-<p>register works!</p>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+<div class="main-block">
+    <h1>Registration</h1>
+    <form #registerform="ngForm" (ngSubmit)="adduser(registerform.value)">
+      <hr>
+      <label id="icon" for="email"><i class="fas fa-envelope"></i></label>
+      <input type="text" name="email" id="email" placeholder="Email" required ngModel/><br>
+
+      <label id="icon" for="username"><i class="fas fa-user"></i></label>
+      <input type="text" name="username" id="new_username" placeholder="Userame" required ngModel/>
+
+      <label id="icon" for="password"><i class="fas fa-unlock-alt"></i></label>
+      <input type="password" name="password" id="new_password" placeholder="Password" required ngModel/>
+
+      <label id="icon" for="password"><i class="fas fa-unlock-alt"></i></label>
+      <input type="password" name="repeat_password" id="repeat_password" placeholder="Repeat Password" required ngModel/>
+
+      <label id="icon" for="fname"><i class="fas fa-user-tie"></i></label>
+      <input type="text" name="first_name" id="new_fname" placeholder="First name" required ngModel/>
+
+      <label id="icon" for="lname"><i class="fas fa-user-tie"></i></label>
+      <input type="text"  name="last_name" id="new_lname" placeholder="Last name" required ngModel/>
+      <hr>
+      <div class="btn-block">
+        <p>By clicking Register, you agree on our <a href="https://www.TechStore.com/privacy-policy">Privacy Policy for Face App</a>.</p>
+        <button type="submit" href="/">Submit</button>
+      </div>
+    </form>
+  </div>            
