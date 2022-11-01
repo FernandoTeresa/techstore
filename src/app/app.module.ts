@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CarouselComponent } from './components/products/carousel/carousel.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ProductComponent,
     UpdateProductComponent,
     SidebarComponent,
+    ProfileComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,4 +12,9 @@ export class FileUploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  upload(value:File){
+    
+  }
+
+
 }

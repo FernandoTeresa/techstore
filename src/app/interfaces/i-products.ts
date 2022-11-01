@@ -4,5 +4,4 @@ export interface iProducts{
     desc:string;
     price:number;
     stock:number;
-    sub_categories_id: number;
 }

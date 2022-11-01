@@ -46,7 +46,6 @@ export class UserService {
 
   }
 
-
   log(){
     let logon = localStorage.getItem('token');
 
@@ -120,7 +119,70 @@ export class UserService {
    
   }
 
+  addUser(value: User){
+    this.http.post<User>('http://localhost:85/user/add',value, Header).subscribe((res:User)=>{
 
+      this.user = new User(res.id,res.username, res.password, res.first_name, res.last_name, res.email);
+
+    },(err) => {
+
+      switch(err.status){
+        case 400:
+          alert('ERROR!! Bad Request');
+          break;
+        case 401:
+          alert('ERROR!! Unauthorized');
+          break;
+        case 403:
+          alert('ERROR!! Forbidden');
+          break;
+        case 404:
+          alert('ERROR!! Not Found');
+          break;
+        case 500:
+          alert('ERROR!! Server Error');
+          break;
+        default:
+          alert ('Unknow Error!!');
+          break;
+      }
+    })
+
+
+  }
+
+  updateUser(value:User){
+
+    this.http.put<User>('http://localhost:85/user/'+ this.getUser().id, value, Header).subscribe((res:User)=>{    
+
+    },(err) => {
+      switch(err.status){
+        case 400:
+          alert('ERROR!! Bad Request');
+          break;
+        case 401:
+          alert('ERROR!! Unauthorized');
+          break;
+        case 403:
+          alert('ERROR!! Forbidden');
+          break;
+        case 404:
+          alert('ERROR!! Not Found');
+          break;
+        case 500:
+          alert('ERROR!! Server Error');
+          break;
+        default:
+          alert ('Unknow Error!!');
+          break;
+      }
+    })
+
+  }
+
+  UploadUser(value:File){
+    //falta
+  }
 
 
 

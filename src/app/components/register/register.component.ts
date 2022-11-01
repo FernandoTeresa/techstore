@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
             repeat_pass.value = '';  
 
       }else{
-        // this.userservice.addUser(values);
+        this.userservice.addUser(values);
         this.router.navigate(['/login']);
       }
     }else{
