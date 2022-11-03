@@ -4,7 +4,7 @@ import { Categories } from './../../../classes/categories';
 import { Products } from 'src/app/classes/products';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-products',
@@ -13,50 +13,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ListProductsComponent implements OnInit {
 
-  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute) { }
-
-  //public url:any = [];
-  //public images:any = [];
+  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute, public router:Router) { }
 
   public get products(): Products[] {
     return this.productservice.products;
   }
 
-  public get images(): ProductsImages[] {
-    return this.productservice.images;
-  }
-
-  public get categories(): Categories[] {
-    return this.productservice.categories;
-  }
-
-  public get subcategories(): SubCategories[] {
-    return this.productservice.subcategories;
-  }
-
   ngOnInit(): void {
-
-    this.activatedroute.paramMap.subscribe((params: any) => {
-      const id = +params.get('id');
-
-      this.productservice.getProduct(id).subscribe((res: Products[]) => {
-
-        this.productservice.setProducts(res);
-
+      this.productservice.getProducts().subscribe((res: Products[]) => {
+        for (let i=0;i<res.length;i++){
+          let array = new Products(res[i].id,res[i].name, res[i].desc, res[i].price, res[i].stock, res[i].products_images);
+          this.products.push(array);
+        }
+        
       });
-
-      this.productservice.getImages(id).subscribe((res: ProductsImages[]) => {
-
-        this.productservice.setImages(res);
-      });
-    });
   }
 
   background(id: number) {
 
-    let image = this.images.find(item=>item.product_id === id);
-    return 'http://localhost:8080/'+image?.images;
+    let product = this.products.find(item=>item.id === id);
 
+    if (!product?.products_images){
+      return
+    }
+    for(let i =0; i<product.products_images.length;i++){
+      return 'http://localhost:8080/'+product.products_images[i].images;
+    }
+    
+  }
+
+  productDetail(id: number){
+    this.router.navigate(['/product/',id]);
   }
 
 

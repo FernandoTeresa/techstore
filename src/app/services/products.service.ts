@@ -25,6 +25,7 @@ export class ProductsService {
   subcategories: SubCategories[] = [];
   categories: Categories[] = [];
   images: ProductsImages[] = [];
+  cart: any[] = []; 
 
   constructor(private http: HttpClient, private router: Router, public userservice:UserService) { }
 
@@ -79,21 +80,28 @@ export class ProductsService {
   }
 
   setProducts(products:Products[]){
-    this.products= [];
 
+    this.products= [];
     for (let i = 0; i < products.length; i++) { 
       let a = products[i];
-      let product: Products = new Products(a.id, a.name, a.desc, a.price, a.stock,a.sub_categories, a.categories);
+
+      console.log(a);
+      let product: Products = new Products(a.id, a.name, a.desc, a.price, a.stock,a.products_images,a.sub_categories, a.categories);
+
       this.products.push(product);
     }
   }
 
-  getProduct(id:number |null = null){
+  getProduct(id:number){
     let url = "http://localhost:85/products";
     if (id && id>0){
       url += "/"+id;
     }
-    return this.http.get<Products[]>(url,Header);
+    return this.http.get<Products>(url,Header);
+  }
+
+  getProducts(){
+    return this.http.get<Products[]>("http://localhost:85/products",Header);
   }
 
   updateProduct(value:Products, productId:number){
@@ -124,36 +132,66 @@ export class ProductsService {
     })
   }
 
-  requestImages(){
+  // requestImages(){
 
-    this.http.get<ProductsImages[]>('http://localhost:85/product/imgs').subscribe((res: ProductsImages[]) => {
+  //   this.http.get<ProductsImages[]>('http://localhost:85/product/imgs').subscribe((res: ProductsImages[]) => {
       
-      this.setImages(res);
+  //     this.setImages(res);
 
-  });
+  // });
 
+  // }
+
+  // setImages(images:ProductsImages[]){
+  //   this.images= [];
+
+  //   for (let i = 0; i < images.length; i++) { 
+  //     let a = images[i];
+  //     let image: ProductsImages = new ProductsImages(a.id, a.images, a.product_id);
+  //     this.images.push(image);
+  //   }
+
+  // }
+
+  // getImages(id:number |null = null){
+  //   let url = "http://localhost:85/product/imgs";
+  //   if (id && id>0){
+  //     url+="/"+id;
+  //   }
+  //   return this.http.get<ProductsImages[]>(url);
+  // }
+
+  // SHOPPING CART
+  savecart(){
+    localStorage.setItem('cart_items', JSON.stringify(this.cart));
   }
 
-  setImages(images:ProductsImages[]){
-    this.images= [];
+  addToCart(addproduct: any){
+    this.cart.push(addproduct);
+    this.savecart();
+  }
 
-    for (let i = 0; i < images.length; i++) { 
-      let a = images[i];
-      let image: ProductsImages = new ProductsImages(a.id, a.images, a.product_id);
-      this.images.push(image);
+  loadCart(){
+
+    return this.cart = JSON.parse(localStorage.getItem('cart_items') as any) || [];
+  }
+
+  productCart(product: any){
+    return this.cart.findIndex((item:any) => item.id === product.id) > -1;
+  }
+
+  removeProductCart(product: any){
+    const index = this.cart.findIndex((item:any)=>item.id === product.id);
+
+    if (index > -1){
+      this.cart.splice(index,1);
+      this.savecart();
     }
-
   }
 
-  getImages(id:number |null = null){
-    let url = "http://localhost:85/product/imgs";
-    if (id && id>0){
-      url+="/"+id;
-    }
-    return this.http.get<ProductsImages[]>(url);
+  clearCart(){
+    localStorage.removeItem('cart_items');
   }
-
-
   
   
 

@@ -24,6 +24,14 @@ export class CarouselComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  image(id:number){
+
+    //fazer localstorage dos favoritos os ultimos 3
+
+    let image = this.images.find(item=>item.product_id === id);
+    return 'http://localhost:8080/'+image?.images;
+  }
+
 
 
 }
