@@ -21,11 +21,11 @@
 
           <button type="button" class="btn btn-success px-3 me-2 btn-lg" (click)="login()" >Login</button>
 
-          <button type="button" class="btn btn-primary btn-lg" (click)="register()">SignUp</button>
+          <button type="button" class="btn btn-primary btn-lg me-3" (click)="register()">SignUp</button>
 
 
           <li class="nav-item">
-            <a class="nav-link me-3 py-1" href="#" data-mdb-toggle="tooltip" title="Shopping Cart">
+            <a class="nav-link me-3 py-1" (click)="cart()" data-mdb-toggle="tooltip" title="Shopping Cart">
                 <i class="fas fa-shopping-cart"></i>
             </a>
           </li>

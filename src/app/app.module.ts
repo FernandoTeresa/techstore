@@ -36,7 +36,7 @@ import { CartComponent } from './components/products/cart/cart.component';
     ProfileComponent,
     CarouselComponent,
     ProductDetailsComponent,
-    CartComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

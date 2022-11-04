@@ -1,3 +1,5 @@
+import { CartService } from './../../../services/cart.service';
+import { Cart } from './../../../classes/cart';
 import { ProductComponent } from './../product/product.component';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -23,7 +25,15 @@ export class ProductDetailsComponent implements OnInit {
     this._product = value;
   }
 
-  constructor(public productservice:ProductsService, private activatedroute: ActivatedRoute) { }
+  private _cart: Cart | null = null;
+  public get cart(): Cart | null {
+    return this._cart;
+  }
+  public set cart(value: Cart | null) {
+    this._cart = value;
+  }
+
+  constructor(public productservice:ProductsService, private activatedroute: ActivatedRoute, public cartservice:CartService) { }
 
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params: any) => {
@@ -32,20 +42,25 @@ export class ProductDetailsComponent implements OnInit {
       this.productservice.getProduct(id).subscribe((res:Products) => {
           
         this.product= new Products (res.id, res.name, res.desc, res.price, res.stock, res.products_images);
-
       });
+
     })
   }
 
 
-  cartButton(product:Products){
-    this.productservice.addToCart(product);
+  cartButton(productId:number, count:number){
+    let cart : Cart = {
+      productId: productId,
+      count: count
+    }
+
+    this.cartservice.addToCart(cart);
     alert("added to cart");
   }
 
   img(name:string){
     
-    return 'http://localhost:8080/'+name;
+    return 'http://localhost:8080'+name;
    
   }
 

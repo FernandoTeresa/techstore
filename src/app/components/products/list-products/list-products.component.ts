@@ -37,7 +37,7 @@ export class ListProductsComponent implements OnInit {
       return
     }
     for(let i =0; i<product.products_images.length;i++){
-      return 'http://localhost:8080/'+product.products_images[i].images;
+      return 'http://localhost:8080'+product.products_images[i].images;
     }
     
   }

@@ -1,19 +1,19 @@
-<div *ngIf="this.product">
-<div class='container-fluid'>
+<div *ngIf="this.product" style="margin: auto;">
+<div class='container-fluid' style="width: 800px;">
     
     <div class="card mx-auto col-md-3 col-10 mt-5">
         
         <div>
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
+                <!-- <div class="carousel-indicators">
                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
+                </div> -->
                 <div class="carousel-inner" >
-                    <div>
+                    <div style="width: 700px;">
                         <div class="carousel-item active" data-bs-interval="10000" *ngFor="let image of product.products_images">
-                            <img [src]="img(image.images)" class="d-block" alt="..." style="width: 600px; margin: auto;">
+                            <img [src]="img(image.images)" class="d-block" alt="..." style="width: 500px; margin: auto; height: 500px;">
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <h5 class="card-title font-weight-bold">{{product.name}}</h5>
                 <p class="card-text">{{product.price}}€</p>
                 <p class="px-auto">{{product.desc}}</p><br />
-                <button type="button" class="btn cart px-auto" (click)="cartButton(product)" >ADD TO CART</button>
+                <button type="button" class="btn cart px-auto" (click)="cartButton(product.id, 1)" >ADD TO CART</button>
             </div>
         </div>
     </div>

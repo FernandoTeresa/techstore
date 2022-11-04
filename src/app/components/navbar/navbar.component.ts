@@ -32,6 +32,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  cart(){
+    this.router.navigate(['/cart']);
+  }
+
   openNav() {
     let x = <HTMLInputElement>document.getElementById("mySidenav");
     x.style.width = "250px";

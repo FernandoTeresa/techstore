@@ -1,3 +1,4 @@
+import { CartComponent } from './components/products/cart/cart.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'product/:id', component: ProductDetailsComponent}
+  { path: 'product/:id', component: ProductDetailsComponent},
+  { path: 'cart', component: CartComponent}
 
 ];
 
