@@ -37,6 +37,37 @@ export class CartService {
 
   }
 
+  addCountToCart(cart:Cart){
+
+    let item = this.cart.find((item:Cart)=> item.productId === cart.productId)
+
+    if (!item){
+      return;
+    }
+
+    item.count ++;
+    this.savecart();
+
+  }
+
+  removeCountToCart(cart:Cart){
+
+    let item = this.cart.find((item:Cart)=> item.productId === cart.productId)
+
+    if (!item){
+      return;
+    }
+
+    if (item.count>0){
+      item.count --;
+      this.savecart();
+    }else{
+      item.count = 0;
+      this.savecart();
+    }
+
+  }
+
   getCart(){
     return this.cart
   }
@@ -45,9 +76,9 @@ export class CartService {
     let local = localStorage.getItem('cart');
 
     if(local){
-      this.cart = JSON.parse(local)
+      return this.cart = JSON.parse(local)
     }else{
-      this.cart = []
+      return this.cart = []
     }
    
   }
@@ -73,7 +104,13 @@ export class CartService {
     localStorage.removeItem('cart');
   }
   
-  
 
+  totalCountCart(){
+    return this.cart. reduce((accumulator, current) => {
+      
+        return accumulator + (Number(current.count))
+    }, 0)
+
+  }
 
 }

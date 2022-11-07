@@ -27,13 +27,7 @@
           <li class="nav-item">
             <a class="nav-link me-3 py-1" (click)="cart()" data-mdb-toggle="tooltip" title="Shopping Cart">
                 <i class="fas fa-shopping-cart"></i>
-            </a>
-          </li>
-
-
-          <li class="nav-item me-3">
-            <a class="nav-link py-1" href="#" data-mdb-toggle="tooltip" title="Notifications">
-              <i class="fas fa-bell"></i>
+                <span class="badge rounded-pill" style="color: red;">{{this.cartservice.totalCountCart()}}</span>
             </a>
           </li>
   

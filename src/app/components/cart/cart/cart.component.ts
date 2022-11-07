@@ -1,4 +1,5 @@
-import { CartService } from './../../../services/cart.service';
+import { ProductComponent } from './../../products/product/product.component';
+import { CartService } from '../../../services/cart.service';
 import { Products } from 'src/app/classes/products';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
@@ -21,8 +22,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.cartservice.loadCart();
-    this.cart = this.cartservice.getCart();
+    // this.cartservice.loadCart();
+    this.cart = this.cartservice.loadCart();
 
     this.productservice.getProducts().subscribe((res: Products[]) => {
       for (let i=0;i<res.length;i++){
@@ -32,10 +33,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-  addCart(cartItem:Cart){
-    this.cartservice.addToCart(cartItem);
-  }
-
   cleanCart(){
     this.cartservice.clearCart();
     this.router.navigate(['/cart']).then(()=>{
@@ -43,56 +40,28 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeFromCart(id:any){
-    this.cartservice.removeProductCart(id);
-    this.cart = this.cartservice.getCart();
-  }
-
-  img(){
-      return 'http://localhost:8080'+this.getImages();
-  }
-
   continueShopp(){
     this.router.navigate(['']);
   }
 
 
- getProduct(){
-  for (let i=0;i< this.products.length;i++){
-    for(let j=0;j<this.cart.length;j++){
-      if (this.products[i].id === this.cart[j].productId){
-        return this.products[i];
+  totalPriceCart(){
+    return this.products. reduce((accumulator, current) => {
+      let cartProduct = this.cart.find((item)=>item.productId === current.id)
+
+      if(cartProduct){
+
+        return accumulator + (Number(current.price) * cartProduct.count)
       }
-    }
+      return accumulator
+    }, 0)
   }
- }
 
-  getImages(){
-    for (let i=0;i< this.products.length;i++){
-      for(let j=0;j<this.cart.length;j++){
-        if (this.products[i].id === this.cart[j].productId){
-          return this.products[i].products_images[0].images;
-        }
+  checkout(){
+      if (this.cart.length < 1){
+        return alert('You dont have any products to pay');
       }
+      this.router.navigate(['/checkout']);
   }
-}
-
-getCount(){
-  for (let i=0;i< this.products.length;i++){
-    for(let j=0;j<this.cart.length;j++){
-      if (this.products[i].id === this.cart[j].productId){
-        return this.cart[j].count;
-      }
-    }
-  }
-}
-
-    
-
-
-
-
-
-
 
 }

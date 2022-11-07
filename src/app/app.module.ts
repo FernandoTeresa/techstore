@@ -18,7 +18,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CarouselComponent } from './components/products/carousel/carousel.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
-import { CartComponent } from './components/products/cart/cart.component';
+import { CartComponent } from './components/cart/cart/cart.component';
+import { CartItemsComponent } from './components/cart/cart-items/cart-items.component';
+import { CheckoutComponent } from './components/cart/checkout/checkout.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { CartComponent } from './components/products/cart/cart.component';
     ProfileComponent,
     CarouselComponent,
     ProductDetailsComponent,
-    CartComponent
+    CartComponent,
+    CartItemsComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
-import { CartComponent } from './components/products/cart/cart.component';
+import { CheckoutComponent } from './components/cart/checkout/checkout.component';
+import { CartComponent } from './components/cart/cart/cart.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'navbar', component: NavbarComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'product/:id', component: ProductDetailsComponent},
-  { path: 'cart', component: CartComponent}
+  { path: 'cart', component: CartComponent},
+  { path: 'checkout', component:CheckoutComponent}
 
 ];
 
