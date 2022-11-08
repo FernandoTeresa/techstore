@@ -10,6 +10,5 @@ export interface iUserInfo{
     mobile: number;
     telephone: number;
     users_id: number;
-    user: User
 
 }

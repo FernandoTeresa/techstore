@@ -11,9 +11,8 @@ export class UserInfos implements iUserInfo{
     mobile: number;
     telephone: number;
     users_id: number;
-    user: User;
 
-    constructor(id:number, address_1:string, address_2: string, city: string, postal_code: number,  country: string,  mobile: number, telephone: number, users_id: number, user:User ){
+    constructor(id:number, address_1:string, address_2: string, city: string, postal_code: number,  country: string,  mobile: number, telephone: number, users_id: number){
         this.id = id;
         this.address_1 = address_1;
         this.address_2 = address_2;
@@ -23,7 +22,6 @@ export class UserInfos implements iUserInfo{
         this.mobile = mobile;
         this.telephone = telephone;
         this.users_id = users_id;
-        this.user = new User(user.id, user.username, user.password, user.first_name, user.last_name, user.email, user.admin);
     }
 
 }

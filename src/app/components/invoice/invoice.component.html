@@ -1,0 +1,125 @@
+<div class="card">
+    <div class="card-body">
+      <div class="container mb-5 mt-3">
+        <div class="row d-flex align-items-baseline">
+          <div class="col-xl-9">
+            <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #123-123</strong></p>
+          </div>
+          <div class="col-xl-3 float-end">
+            <button class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark" printSectionId="print-section" ngxPrint [useExistingCss]="true"><i
+                class="fas fa-print text-primary"></i> Print</button>
+            <button class="btn btn-light text-capitalize" data-mdb-ripple-color="dark" printSectionId="print-section" ngxPrint [useExistingCss]="true" ><i
+                class="far fa-file-pdf text-danger"></i> Export</button>
+          </div>
+          <hr>
+        </div>
+  
+        <div class="container" >
+        <div id="print-section">
+          <div class="col-md-12">
+            <div class="text-center">
+              <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
+              <p class="pt-0">TechStore.com</p>
+            </div>
+  
+            </div>
+  
+  
+          <div class="row">
+            <div *ngIf="this.user && this.userInfo">
+            <div class="col-xl-8">
+              <ul class="list-unstyled">
+                <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{this.user.first_name}} {{this.user.last_name}}</span></li>
+               
+                <div *ngIf='this.userInfo.address_2 === "" || this.userInfo.address_2 === null; else valid'>
+                    <li class="text-muted">{{this.userInfo.address_1}}, {{this.userInfo.city}}</li>
+                </div>
+
+                <ng-template #valid>
+                    <li class="text-muted">{{this.userInfo.address_1}}, {{this.userInfo.address_2}}, {{this.userInfo.city}}</li>
+                    
+                </ng-template>
+
+
+                <li class="text-muted">{{this.userInfo.country}}</li>
+
+                <div *ngIf="this.userInfo.telephone != null; else exist">
+                    <li class="text-muted"><i class="fas fa-phone"></i> {{this.userInfo.telephone}}</li>
+                    <li class="text-muted"><i class="fas fa-mobile"></i> {{this.userInfo.mobile}}</li>
+                </div>
+                <ng-template #exist>
+                    <li class="text-muted"><i class="fas fa-mobile"></i> {{this.userInfo.mobile}}</li>
+                </ng-template>
+
+              </ul>
+            </div>
+            <div class="col-xl-4">
+              <p class="text-muted">Invoice</p>
+              <ul class="list-unstyled">
+                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                    class="fw-bold">ID:</span>#123-456</li> <!-- falta introduzir o numero da encomenda    -->
+                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                    class="fw-bold">Creation Date: </span>Jun 23,2021</li><!-- falta introduzir a data da encomenda    -->
+                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                    class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
+                    Unpaid</span></li> <!-- falta introduzir o status se foi pago    -->
+              </ul>
+            </div>
+            </div>
+          </div>
+  
+          <div class="row my-2 mx-1 justify-content-center">
+            <table class="table table-striped table-borderless">
+              <thead style="background-color:#84B0CA ;" class="text-white">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              
+              <tbody>
+                <tr *ngFor="let cart of this.cart"> <!-- FALTA-->
+                  <th scope="row">{{increment()}}</th>
+                  <td>{{this.getProduct(cart.productId)?.name}}</td>
+                  <td>{{cart.count}}</td>
+                  <td>{{this.getProduct(cart.productId)?.price}}€</td>
+                  <td>{{this.itemCountPrice(cart.productId)}}€</td>
+                </tr>
+              </tbody>
+  
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-xl-8">
+              <p class="ms-3">Add additional notes and payment information</p>
+  
+            </div>
+            <div class="col-xl-3">
+              <ul class="list-unstyled">
+                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>{{this.totalPriceCart()}}€</li>
+                <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(23%)</span>{{this.totalTax()}}€</li>
+              </ul>
+              <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
+                  style="font-size: 25px;">{{this.totalPay()}}€</span></p>
+            </div>
+          </div>
+        </div>
+          <hr>
+          <div class="row">
+            <div class="col-xl-10">
+              <p>Thank you for your purchase</p>
+            </div>
+            <div class="col-xl-2">
+              <button type="button" class="btn btn-success text-capitalize m-2" (click)="pay()">Pay Now</button>
+
+                <button type="button" class="btn btn-primary text-capitalize m-2" (click)="return()">Return</button>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>

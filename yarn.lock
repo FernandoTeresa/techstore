@@ -6650,6 +6650,13 @@
   dependencies:
     "tslib" "^2.3.0"
 
+"ngx-print@^1.2.1":
+  "integrity" "sha512-+xz5wbVO9N5vAT/W6dgTzbE1RBB1jUeBOSF04Gs66QqTrb46paRAjHgqMr4TvE8CUiTp5aMmkL54QEKat9gj6w=="
+  "resolved" "https://registry.npmjs.org/ngx-print/-/ngx-print-1.2.1.tgz"
+  "version" "1.2.1"
+  dependencies:
+    "tslib" "^1.9.3"
+
 "nice-napi@^1.0.2":
   "integrity" "sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA=="
   "resolved" "https://registry.npmjs.org/nice-napi/-/nice-napi-1.0.2.tgz"
@@ -9245,6 +9252,11 @@
   "version" "1.2.2"
 
 "tslib@^1.9.0":
+  "integrity" "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
+  "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
+  "version" "1.14.1"
+
+"tslib@^1.9.3":
   "integrity" "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"

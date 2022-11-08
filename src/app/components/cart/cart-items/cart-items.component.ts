@@ -112,9 +112,6 @@ getProductsCart(){
         return this.products[i]
     }
   }
-
-
 }
-
 
 }

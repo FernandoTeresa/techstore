@@ -21,6 +21,10 @@ import { ProductDetailsComponent } from './components/products/product-details/p
 import { CartComponent } from './components/cart/cart/cart.component';
 import { CartItemsComponent } from './components/cart/cart-items/cart-items.component';
 import { CheckoutComponent } from './components/cart/checkout/checkout.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import {NgxPrintModule} from 'ngx-print';
+import { OrderComponent } from './components/orders/order/order.component';
+import { ListordersComponent } from './components/orders/listorders/listorders.component';
 
 
 @NgModule({
@@ -40,7 +44,10 @@ import { CheckoutComponent } from './components/cart/checkout/checkout.component
     ProductDetailsComponent,
     CartComponent,
     CartItemsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    InvoiceComponent,
+    OrderComponent,
+    ListordersComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,7 @@ import { CheckoutComponent } from './components/cart/checkout/checkout.component
     HttpClientModule,
     FormsModule,
     TooltipModule.forRoot(),
+    NgxPrintModule
   ],
   providers: [],
   bootstrap: [AppComponent]

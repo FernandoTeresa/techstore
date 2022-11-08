@@ -61,7 +61,9 @@ export class CartComponent implements OnInit {
       if (this.cart.length < 1){
         return alert('You dont have any products to pay');
       }
-      this.router.navigate(['/checkout']);
+      this.router.navigate(['/invoice']);
   }
+
+
 
 }

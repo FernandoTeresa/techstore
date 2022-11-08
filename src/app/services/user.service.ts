@@ -1,3 +1,4 @@
+import { UserInfos } from './../classes/user-infos';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -26,6 +27,16 @@ export class UserService {
   public set user(value: User | null) {
     this._user = value;
   }
+
+  private _userInfo: UserInfos | null = null;
+
+  public get userInfo(): UserInfos | null {
+    return this._userInfo;
+  }
+  public set userInfo(value: UserInfos | null) {
+    this._userInfo = value;
+  }
+
 
   constructor(private http:HttpClient, private router:Router) { }
 
@@ -148,7 +159,6 @@ export class UserService {
       }
     })
 
-
   }
 
   updateUser(value:User){
@@ -179,6 +189,12 @@ export class UserService {
     })
 
   }
+
+  getUserInfo(){
+    return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.getUser().id, Header);
+  }
+
+
 
   UploadUser(value:File){
     //falta

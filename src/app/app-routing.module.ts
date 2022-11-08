@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListProductsComponent } from './components/products/list-products/list-products.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 
 const routes: Routes = [
   { path: '', component: ListProductsComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'product/:id', component: ProductDetailsComponent},
   { path: 'cart', component: CartComponent},
-  { path: 'checkout', component:CheckoutComponent}
+  { path: 'checkout', component:CheckoutComponent},
+  { path: 'invoice', component:InvoiceComponent}
 
 ];
 
