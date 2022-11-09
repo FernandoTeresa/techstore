@@ -14,6 +14,8 @@ export class AppComponent {
 
   ngOnInit(): void {
 
+    // adicionar o local storage aqui
+
     
     // let log_obj = JSON.parse(localStorage.getItem('user') || '{}');
     

@@ -1,4 +1,3 @@
-import { ProductDetailsComponent } from './../products/product-details/product-details.component';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
