@@ -25,8 +25,6 @@ export class OrderComponent implements OnInit {
     this._order = value;
   }
 
-  items:OrderItem[]=[];
-
   private _user: User | null = null;
 
   public get user(): User | null {
@@ -47,38 +45,17 @@ export class OrderComponent implements OnInit {
     this._userInfo = value;
   }
 
-  private _orderid: number | null = null;
-  public get orderid(): number | null {
-    return this._orderid;
-  }
-  public set orderid(value: number | null) {
-    this._orderid = value;
-  }
-
-  product:Products[]=[];
-
-
 
   constructor(private activatedroute: ActivatedRoute, public productservice:ProductsService, public orderservice:OrderService, public userservice:UserService) { }
 
   ngOnInit(): void {
-    // this.activatedroute.paramMap.subscribe((params: any) => {
-    //   const id = +params.get('id');
-    //   this.orderid = id;
+    this.activatedroute.paramMap.subscribe((params: any) => {
+      const id = +params.get('id');
 
-    //   if(!this.user){
-    //     return
-    //   }
-    //   this.orderservice.getOrders(this.user.id).subscribe((res:Order[])=>{
+      this.orderservice.getOrderById(id).subscribe((res:Order)=>{
+          this.order = new Order(res.id, res.user_id, res.total, res.order_items);
+      });
 
-    //     let find = res.find((item:Order)=>item.id === id);
-
-    //     if (!find){
-    //       return
-    //     }
-
-    //     this.order = new Order(find.id, find.user_id, find.total, find.order_items);
-    //   });
       this.user = this.userservice.getUser();
 
       this.userservice.getUserInfo().subscribe((res:UserInfos)=>{
@@ -87,14 +64,56 @@ export class OrderComponent implements OnInit {
 
       });
 
-    })
+    });
 
+  }
 
-    console.log(this.order)
+  getImages(productId:number):string{
+    if (!this.order){
+      return "";
+    }
+    if(!this.order.order_items){
+      return "";
+    }
+
+    let image = this.order.order_items.find((item)=>item.product.id === productId);
+
+    if(!image){
+      return "";
+    }
+
+    return 'http://localhost:8080'+image.product.products_images[0].images;
 
   }
 
 
+  price():number{
+    if (!this.order){
+      return 0;
+    }
 
+    return this.order.order_items.reduce((accumulator, current) => {
+
+      let item = this.order?.order_items.find((res)=> res.id === current.id)
+
+      if (item){
+        return accumulator + (Number(current.unitprice) * item.count)
+      }
+      return accumulator;
+
+    },0)
+  }
+
+  totalTax():number{
+
+    if (!this.price()){
+      return 0;
+    }
+    return this.price() *0.23;
+  }
+
+  totalPay():number{
+    return this.price() + this.totalTax();
+  }
 
 }

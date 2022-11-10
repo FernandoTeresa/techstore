@@ -38,11 +38,17 @@ export class OrderService {
     }
   }
 
-  getOrders(userId:number){
+  getOrders(){
 
-    return this.http.get<Order[]>('http://localhost:85/order/'+userId, Header);
+    return this.http.get<Order[]>('http://localhost:85/order', Header);
   }
 
+
+  getOrderById(orderId:number){
+    return this.http.get<Order>('http://localhost:85/order/'+orderId, Header);
+  }
+
+  
 
   addOrder(){
 

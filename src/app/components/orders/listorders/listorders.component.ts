@@ -32,7 +32,7 @@ export class ListordersComponent implements OnInit {
       return; 
     }
 
-    this.orderservice.getOrders(this.user.id).subscribe((res:Order[])=>{
+    this.orderservice.getOrders().subscribe((res:Order[])=>{
 
       for (let i = 0; i<res.length;i++){
         let array = res[i]

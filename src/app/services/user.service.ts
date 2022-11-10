@@ -123,10 +123,11 @@ export class UserService {
   }
 
   logout(){
-    this.http.post('http://localhost:85/logout',Header).subscribe(()=>{
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-    });
+      this.http.post('http://localhost:85/logout',Header)
+      this.router.navigate(['/']);
+      
    
   }
 
@@ -161,33 +162,10 @@ export class UserService {
 
   }
 
-  updateUser(value:User){
+  updateUser(value:any){
 
-    this.http.put<User>('http://localhost:85/user/'+ this.getUser().id, value, Header).subscribe((res:User)=>{    
-
-    },(err) => {
-      switch(err.status){
-        case 400:
-          alert('ERROR!! Bad Request');
-          break;
-        case 401:
-          alert('ERROR!! Unauthorized');
-          break;
-        case 403:
-          alert('ERROR!! Forbidden');
-          break;
-        case 404:
-          alert('ERROR!! Not Found');
-          break;
-        case 500:
-          alert('ERROR!! Server Error');
-          break;
-        default:
-          alert ('Unknow Error!!');
-          break;
-      }
-    })
-
+    console.log(value)
+    this.http.put('http://localhost:85/user/'+ this.getUser().id, value, Header)
   }
 
   getUserInfo(){

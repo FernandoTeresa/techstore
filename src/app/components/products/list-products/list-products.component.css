@@ -11,12 +11,8 @@ a:hover {
     color: inherit;
 }
 
-.section-products {
-    padding: 80px 0 54px;
-}
-
-.section-products .header {
-    margin-bottom: 50px;
+.section-products{
+    margin-top: 5%;
 }
 
 .section-products .header h3 {

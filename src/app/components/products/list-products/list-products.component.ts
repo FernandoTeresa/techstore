@@ -1,3 +1,4 @@
+import { CartService } from 'src/app/services/cart.service';
 import { ProductsImages } from './../../../classes/products-images';
 import { SubCategories } from './../../../classes/sub-categories';
 import { Categories } from './../../../classes/categories';
@@ -5,6 +6,7 @@ import { Products } from 'src/app/classes/products';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cart } from 'src/app/classes/cart';
 
 @Component({
   selector: 'app-list-products',
@@ -13,11 +15,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListProductsComponent implements OnInit {
 
-  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute, public router:Router) { }
+  constructor(public productservice: ProductsService, public router:Router, public cartservice:CartService) { }
 
   public get products(): Products[] {
     return this.productservice.products;
   }
+
+  cart: Cart[] = []; 
 
   ngOnInit(): void {
       this.productservice.getProducts().subscribe((res: Products[]) => {
@@ -27,6 +31,8 @@ export class ListProductsComponent implements OnInit {
         }
         
       });
+
+      this.cart = this.cartservice.loadCart()
   }
 
   background(id: number) {
@@ -43,7 +49,23 @@ export class ListProductsComponent implements OnInit {
   }
 
   productDetail(id: number){
-    this.router.navigate(['/product/',id]);
+    this.router.navigate(['/product/'+id]);
+  }
+
+  addCart(id:number){
+    
+    let find = this.cart.find((item)=>item.productId === id)
+
+    if (!find){
+      return
+    }
+    let objCart:Cart = {
+      count:find.count,
+      productId: find.productId
+      
+    }
+
+    this.cartservice.addToCart(objCart);
   }
 
 

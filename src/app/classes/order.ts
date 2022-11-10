@@ -15,7 +15,7 @@ export class Order implements iOrders{
         this.order_items = [];
         for(let i=0;i<order_items.length;i++){
             let array = order_items[i]
-            let orderItem = new OrderItem(array.id, array.count, array.unitprice, array.product_id, array.product, array.id)
+            let orderItem = new OrderItem(array.id, array.count, array.unitprice, array.product_id, array.product, array.order_id)
             this.order_items.push(orderItem);
         }
         this.created_at = created_at;

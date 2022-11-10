@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from 'src/app/classes/products';
 import { ProductsImages } from 'src/app/classes/products-images';
 import { ProductsService } from 'src/app/services/products.service';
@@ -19,17 +19,29 @@ export class CarouselComponent implements OnInit {
     return this.productservice.images;
   }
 
-  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute) { }
+  
+
+  constructor(public productservice: ProductsService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
-  image(id:number){
+  image(productId:number){
 
     //fazer localstorage dos favoritos os ultimos 3
 
-    let image = this.images.find(item=>item.product_id === id);
-    return 'http://localhost:8080/'+image?.images;
+    let image = this.products.find((item)=>item.id === productId)
+
+    if (!image){
+      return
+    }
+
+    return 'http://localhost:8080/'+image.products_images[0].images;
+  }
+
+  requestInfoProduct(productId: number){
+    this.router.navigate(['product/'+productId])
   }
 
 
