@@ -11,6 +11,7 @@ import { ListProductsComponent } from './components/products/list-products/list-
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
+import { UpdateProductComponent } from './components/products/update-product/update-product.component';
 
 const routes: Routes = [
   { path: '', component: ListProductsComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'checkout', component:CheckoutComponent},
   { path: 'invoice', component:InvoiceComponent},
   { path: 'listorders', component:ListordersComponent},
-  { path: 'order/:id', component:OrderComponent}
+  { path: 'order/:id', component:OrderComponent},
+  { path: 'update/:id', component: UpdateProductComponent}
 
 ];
 

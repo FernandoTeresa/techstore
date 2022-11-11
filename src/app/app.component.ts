@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from './classes/user';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -14,20 +15,6 @@ export class AppComponent {
 
   ngOnInit(): void {
 
-    // adicionar o local storage aqui
-
-    
-    // let log_obj = JSON.parse(localStorage.getItem('user') || '{}');
-    
-    // if (log_obj === "" || log_obj === null){
-
-    //   this.router.navigate(['/login']);
-    // }else{
-
-    //   this.userservice.user = log_obj;
-
-    //   this.router.navigate(['/']);
-    // }
   }
 
 

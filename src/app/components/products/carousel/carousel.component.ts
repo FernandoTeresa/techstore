@@ -41,7 +41,7 @@ export class CarouselComponent implements OnInit {
   }
 
   requestInfoProduct(productId: number){
-    this.router.navigate(['product/'+productId])
+    this.router.navigate(['product/'+productId]);
   }
 
 

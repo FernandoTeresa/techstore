@@ -20,6 +20,15 @@ export class NavbarComponent implements OnInit {
     this.cart = this.cartservice.loadCart();
     this.cartservice.totalCountCart();
     this.user = this.userservice.getUser();
+
+    if (this.user){
+      window.onload = function () {
+        if (! localStorage.getItem('justOnce')) {
+          localStorage.setItem("justOnce", "true");
+          window.location.reload();
+        }
+      } 
+    }
   }
 
   private _user: User | null = null;
@@ -34,6 +43,7 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this.userservice.logout();
+    window.location.reload()
   }
 
   profile(){
@@ -48,7 +58,7 @@ export class NavbarComponent implements OnInit {
   }
 
   login(){
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'])
   }
 
   register(){

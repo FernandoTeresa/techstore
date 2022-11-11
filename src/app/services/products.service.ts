@@ -42,9 +42,9 @@ export class ProductsService {
 
   requestSubCategories(){
 
-    this.http.get<SubCategories[]>('http://localhost:85/subcategories').subscribe((res: SubCategories[]) => {
+    return this.http.get<SubCategories[]>('http://localhost:85/subcategories').subscribe((res: SubCategories[]) => {
       
-        this.setSubCategories(res)
+        //this.setSubCategories(res)
 
     });
   }
@@ -53,7 +53,7 @@ export class ProductsService {
 
     this.http.get<Categories[]>('http://localhost:85/categories').subscribe((res: Categories[]) => {
       
-        this.setCategories(res)
+        //this.setCategories(res)
 
     });
   }
@@ -90,6 +90,10 @@ export class ProductsService {
     }
   }
 
+  getSubCategories(){
+    return this.http.get<SubCategories[]>('http://localhost:85/subcategories');
+  }
+
   getProduct(id:number){
     let url = "http://localhost:85/products";
     if (id && id>0){
@@ -104,7 +108,7 @@ export class ProductsService {
 
   updateProduct(value:Products, productId:number){
 
-    this.http.put<Products>('http://localhost:85/product/update/'+ productId , value, Header).subscribe((res:Products)=>{    
+    this.http.put<Products>('http://localhost:85/product/'+ productId , value, Header).subscribe((res:Products)=>{    
 
     },(err) => {
       switch(err.status){
@@ -129,5 +133,33 @@ export class ProductsService {
       }
     })
   }
+
+  removeProduct(productId:number){
+    this.http.delete<Products>('http://localhost:85/product/'+ productId, Header).subscribe((res:Products)=>{    
+
+    },(err) => {
+      switch(err.status){
+        case 400:
+          alert('ERROR!! Bad Request');
+          break;
+        case 401:
+          alert('ERROR!! Unauthorized');
+          break;
+        case 403:
+          alert('ERROR!! Forbidden');
+          break;
+        case 404:
+          alert('ERROR!! Not Found');
+          break;
+        case 500:
+          alert('ERROR!! Server Error');
+          break;
+        default:
+          alert ('Unknow Error!!');
+          break;
+      }
+    })
+  }
+
 
 }

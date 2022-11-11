@@ -25,8 +25,14 @@
                 <span class="badge rounded-pill" style="color: red;" id="colorCount" >{{this.countCart()}}</span>
             </a>
             </li>
+
             <li class="nav-item dropdown float-md-right" *ngIf="this.user">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fas fa-user"></i></a>
+              
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
+                <i class="fas fa-user">
+                </i>
+              </a>
+
               <ul class="dropdown-menu" aria-labelledby="dropdown">
                 <li>
                   <div class="px-3 pt-3 d-flex">
@@ -35,8 +41,6 @@
                       <p class="mb-2">{{this.user.email}}</p>
                       </div>
                   </div>
-    
-                  <hr class="mb-2">
     
               </li> 
     

@@ -87,7 +87,7 @@ export class UserService {
 
       if(res.access_token){
         localStorage.setItem('token', res.access_token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/'])
       }else{
         this.router.navigate(['/login']);
       }
@@ -127,8 +127,6 @@ export class UserService {
       localStorage.removeItem('user');
       this.http.post('http://localhost:85/logout',Header)
       this.router.navigate(['/']);
-      
-   
   }
 
   addUser(value: User){
@@ -164,8 +162,9 @@ export class UserService {
 
   updateUser(value:any){
 
-    console.log(value)
-    this.http.put('http://localhost:85/user/'+ this.getUser().id, value, Header)
+    this.http.put('http://localhost:85/user/'+ this.getUser().id, value, Header).subscribe((res:any)=>{
+    })
+
   }
 
   getUserInfo(){
