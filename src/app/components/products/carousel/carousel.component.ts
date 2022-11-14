@@ -29,18 +29,23 @@ export class CarouselComponent implements OnInit {
 
   image(productId:number){
 
-    //fazer localstorage dos favoritos os ultimos 3
-
     let image = this.products.find((item)=>item.id === productId)
 
     if (!image){
-      return
+      return 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'
     }
+
+
 
     return 'http://localhost:8080/'+image.products_images[0].images;
   }
 
+
   requestInfoProduct(productId: number){
+    if(!productId){
+      this.router.navigate(['/']);
+    }
+
     this.router.navigate(['product/'+productId]);
   }
 

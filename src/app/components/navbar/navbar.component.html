@@ -67,6 +67,47 @@
     
               </ul>
             </li>
+
+            <!-- admin space add products and etc -->
+            <div *ngIf="this.user">
+
+            <li class="nav-item dropdown float-md-right">
+              
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
+                <i class="fa-solid fa-cog fa-spin"></i>
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdown">
+    
+              <li>
+                  <a class="dropdown-item" (click)="addProduct()">
+                    <i class="fa-solid fa-clipboard-list fa-fw me-3"></i>
+                      <span>Add Product</span>
+                  </a>
+              </li>
+          
+              <li>
+                  <a class="dropdown-item" (click)="addCategory()">
+                    <i class="fa-solid fa-bookmark fa-fw me-3"></i>
+                      <span>Add Category</span>
+                  </a>
+              </li>
+      
+              <li>
+                  <a class="dropdown-item"(click)="addSubCategory()">
+                      <i class="fas fa-sign-out-alt me-3"></i>
+                      <span>Add Sub Category</span>
+                  </a>
+              </li>
+    
+              </ul>
+            </li>
+
+          </div>
+
+
+
+
           </ul>
         </div>
       </div>

@@ -1,0 +1,78 @@
+<div>
+   <div class="container-fluid">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-lg-10 col-md-8 ml-auto">
+                <div class="row align-items-center pt-md-5 mt-md-5 mb-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-title text-center mt-3">
+                                <h3>Add Product</h3>
+                            </div>
+                            <div class="card-body">
+                                <form #addform="ngForm" (ngSubmit)="addProduct(addform.value)">
+                                    <div class="form-group">
+                                        <label for="productname">Product Name:</label>
+                                        <input type="text" class="form-control" id="productname"
+                                            placeholder="Enter Product Name" name="name" ngModel>
+                                        <div class="invalid-feedback">Product Name Can't Be Empty</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="productid">Description:</label>
+                                        <textarea type="text" class="form-control" id="productid"
+                                            placeholder="Enter Description of the Product" name="desc" ngModel></textarea>
+                                        <div class="invalid-feedback">Description Can't Be Empty</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        
+                                        <label for="productprice">Product Price:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupPrepend">€</span>
+                                              </div>
+                                    
+                                            <input type="number" class="form-control" id="productprice"
+                                                placeholder="Enter Product Price" name="price" ngModel>
+                                            <div class="invalid-feedback">Product Price Can't Be Empty</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="productprice">Product Stock:</label>
+                                        <input type="number" class="form-control" id="productprice"
+                                            placeholder="Enter Product Stock" name="stock" ngModel>
+                                        <div class="invalid-feedback">Product Stock Can't Be Empty</div>
+                                    </div>
+
+                                    <div class="form-group mb-2">
+                                        <div *ngIf="this.subcategories">
+                                            <label for="exampleFormControlSelect1">Sub Categories</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="sub_categories_id" ngModel>
+                                                <option value="" disabled selected>Select the Subcategorie</option>
+                                                <option *ngFor="let subcat of this.subcategories" [value]="subcat.id">{{subcat.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <p>Product Image:</p>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="productimage" required name="image" ngModel>
+                                        <label class="custom-file-label" for="productimage">Choose
+                                            file...</label>
+                                        <div class="invalid-feedback">File Format Not Supported</div>
+                                    </div>
+
+                                    <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">Add Product</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

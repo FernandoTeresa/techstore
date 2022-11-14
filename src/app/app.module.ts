@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { FileUploadComponent } from './components/products/file-upload/file-upload.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ListProductsComponent } from './components/products/list-products/list-products.component';
 import { ProductComponent } from './components/products/product/product.component';
@@ -25,6 +24,9 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import {NgxPrintModule} from 'ngx-print';
 import { OrderComponent } from './components/orders/order/order.component';
 import { ListordersComponent } from './components/orders/listorders/listorders.component';
+import { AddProductComponent } from './components/products/add-product/add-product.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { SubCategoriesComponent } from './components/sub-categories/sub-categories.component';
 
 
 @NgModule({
@@ -33,7 +35,6 @@ import { ListordersComponent } from './components/orders/listorders/listorders.c
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    FileUploadComponent,
     NotFoundComponent,
     ListProductsComponent,
     ProductComponent,
@@ -47,7 +48,10 @@ import { ListordersComponent } from './components/orders/listorders/listorders.c
     CheckoutComponent,
     InvoiceComponent,
     OrderComponent,
-    ListordersComponent
+    ListordersComponent,
+    AddProductComponent,
+    CategoriesComponent,
+    SubCategoriesComponent
   ],
   imports: [
     BrowserModule,

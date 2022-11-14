@@ -1,3 +1,6 @@
+import { SubCategoriesComponent } from './components/sub-categories/sub-categories.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { AddProductComponent } from './components/products/add-product/add-product.component';
 import { OrderComponent } from './components/orders/order/order.component';
 import { ListordersComponent } from './components/orders/listorders/listorders.component';
 import { CheckoutComponent } from './components/cart/checkout/checkout.component';
@@ -25,7 +28,10 @@ const routes: Routes = [
   { path: 'invoice', component:InvoiceComponent},
   { path: 'listorders', component:ListordersComponent},
   { path: 'order/:id', component:OrderComponent},
-  { path: 'update/:id', component: UpdateProductComponent}
+  { path: 'update/:id', component: UpdateProductComponent},
+  { path: 'addProduct', component: AddProductComponent},
+  { path: 'addCategory', component:CategoriesComponent},
+  { path: 'addSubCategory', component:SubCategoriesComponent}
 
 ];
 

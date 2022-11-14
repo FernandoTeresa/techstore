@@ -53,6 +53,7 @@ export class UserService {
     if(!user){
       return;
     }
+
     return user;
 
   }
@@ -66,6 +67,8 @@ export class UserService {
       this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
      
       let user = new User(res.id,res.username,res.password,res.first_name, res.last_name, res.email, res.admin); 
+
+      console.log(res)
       
       let localUser = JSON.stringify(user);
       localStorage.setItem('user',localUser);
@@ -87,12 +90,17 @@ export class UserService {
 
       if(res.access_token){
         localStorage.setItem('token', res.access_token);
-        this.router.navigate(['/'])
+        localStorage.setItem('expiresToken', res.expires_in.toString());
+
+
+        this.router.navigate(['/']);
+
       }else{
         this.router.navigate(['/login']);
       }
 
       if (date > res.expires_in){
+        this.logout();
         this.router.navigate(['/login']);
       }
 
@@ -170,8 +178,6 @@ export class UserService {
   getUserInfo(){
     return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.getUser().id, Header);
   }
-
-
 
   UploadUser(value:File){
     //falta

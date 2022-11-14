@@ -106,7 +106,7 @@
                 <div class="mt-4 mb-4 d-flex justify-content-between">
 
                     <button class="btn btn-primary px-3" (click)="previous()">Previous step</button>
-                    <button class="btn btn-success px-3">Pay 840€</button>    
+                    <button class="btn btn-success px-3">Pay {{this.totalPay()}}</button>    
 
                 </div>
 
@@ -118,9 +118,9 @@
 
                     <span>You have to pay</span>
                     <div class="d-flex flex-row align-items-end mb-3">
-                        <h1 class="mb-0 yellow">549</h1><span>€</span>
+                        <h1 class="mb-0 yellow">{{this.totalPay()}}</h1><span>€</span>
                     </div>
-                    <!-- por info da quantidade de produtos -->
+                    <!-- por info da quantidade de produtos --><h3 class="mb-0 yellow text-center">{{this.itemCountTotal()}} Products</h3>
                     <div class="hightlight">
 
                         <span>Payment 100% Secured </span>

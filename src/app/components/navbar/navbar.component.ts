@@ -16,6 +16,15 @@ export class NavbarComponent implements OnInit {
 
   constructor(public router:Router, public userservice: UserService, public cartservice: CartService) { }
 
+  private _user: User | null = null;
+
+  public get user(): User | null {
+    return this._user;
+  }
+  public set user(value: User | null) {
+    this._user = value;
+  }
+
   ngOnInit(): void {
     this.cart = this.cartservice.loadCart();
     this.cartservice.totalCountCart();
@@ -27,19 +36,11 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem("justOnce", "true");
           window.location.reload();
         }
-      } 
+      }
+      
     }
-  }
 
-  private _user: User | null = null;
-
-  public get user(): User | null {
-    return this._user;
   }
-  public set user(value: User | null) {
-    this._user = value;
-  }
-  
 
   logout(){
     this.userservice.logout();
@@ -73,6 +74,18 @@ export class NavbarComponent implements OnInit {
       return this.cartservice.totalCountCart()
   }
 
+  addProduct(){
+      this.router.navigate(['/addProduct']);
+  }
+
+  addCategory(){
+    this.router.navigate(['/addCategory']);
+  }
+
+  addSubCategory(){
+    this.router.navigate(['/addSubCategory']);
+  }
+
   openNav() {
     let x = <HTMLInputElement>document.getElementById("mySidenav");
     x.style.width = "250px";
@@ -86,6 +99,6 @@ export class NavbarComponent implements OnInit {
     let y =  <HTMLInputElement>document.getElementById("main");
     y.style.marginLeft= "0";
   }
-  
+
 
 }

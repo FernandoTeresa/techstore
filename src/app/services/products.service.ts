@@ -94,6 +94,10 @@ export class ProductsService {
     return this.http.get<SubCategories[]>('http://localhost:85/subcategories');
   }
 
+  getCategories(){
+    return this.http.get<Categories[]>('http://localhost:85/categories');
+  }
+
   getProduct(id:number){
     let url = "http://localhost:85/products";
     if (id && id>0){
@@ -160,6 +164,37 @@ export class ProductsService {
       }
     })
   }
+
+  addProduct(product: any){
+
+
+    this.http.post('http://localhost:85/product/addnew', product, Header).subscribe((res:any)=>{
+      this.requestProducts();
+
+    })
+  }
+
+  uploadImages(image:any, productId:number){
+    this.http.post('http://localhost:85/product/img/'+ productId , image, Header).subscribe((res:any)=>{
+    })
+
+  }
+
+  addNewCategory(category:Categories){
+
+    this.http.post<Categories>('http://localhost:85/categories', category, Header).subscribe((res:Categories)=>{
+    })
+
+  }
+
+  addNewSubCategory(subcategory:SubCategories){
+
+    this.http.post<SubCategories>('http://localhost:85/subcategories', subcategory, Header).subscribe((res:SubCategories)=>{
+    })
+
+  }
+
+
 
 
 }

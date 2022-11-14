@@ -106,7 +106,8 @@ export class InvoiceComponent implements OnInit {
   }
 
   totalTax(){
-    return this.totalPriceCart() * 0.23;
+    let tax =  this.totalPriceCart() * 0.23;
+    return Math.round((tax + Number.EPSILON) * 100) / 100
   }
 
   totalPay(){
