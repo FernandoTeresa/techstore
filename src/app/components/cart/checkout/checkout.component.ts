@@ -6,6 +6,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { Cart } from 'src/app/classes/cart';
 import { Products } from 'src/app/classes/products';
+import { User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-checkout',
@@ -19,10 +20,14 @@ export class CheckoutComponent implements OnInit {
   cart:Cart[]= [];
   products:Products[]=[];
 
+  public get user():User | null {
+    return this.userservice.getUser();
+  }
+
   ngOnInit(): void {
-    let user = this.userservice.getUser();
+  
     this.cart = this.cartservice.loadCart();
-    if (!user){
+    if (!this.user){
       return;
     }
 

@@ -15,13 +15,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(public userservice:UserService, public router:Router) { }
 
-  private _user: User | null = null;
-
   public get user(): User | null {
-    return this._user;
-  }
-  public set user(value: User | null) {
-    this._user = value;
+    return this.userservice.getUser();
   }
 
   private _userInfo: UserInfos | null = null;
@@ -34,7 +29,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.userservice.getUser();
 
     this.userservice.getUserInfo().subscribe((res:UserInfos)=>{
       this.userInfo = new UserInfos(res.id,res.address_1, res.address_2, res.city, res.postal_code, res.country, res.mobile, res.telephone, res.users_id)

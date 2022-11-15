@@ -13,7 +13,6 @@ import { UpdateProductComponent } from './components/products/update-product/upd
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CarouselComponent } from './components/products/carousel/carousel.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
@@ -27,6 +26,7 @@ import { ListordersComponent } from './components/orders/listorders/listorders.c
 import { AddProductComponent } from './components/products/add-product/add-product.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { SubCategoriesComponent } from './components/sub-categories/sub-categories.component';
+import { FavoritesComponent } from './components/products/favorites/favorites.component';
 
 
 @NgModule({
@@ -51,7 +51,8 @@ import { SubCategoriesComponent } from './components/sub-categories/sub-categori
     ListordersComponent,
     AddProductComponent,
     CategoriesComponent,
-    SubCategoriesComponent
+    SubCategoriesComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

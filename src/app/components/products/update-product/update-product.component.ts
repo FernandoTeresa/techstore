@@ -38,7 +38,6 @@ export class UpdateProductComponent implements OnInit {
     })
 
     this.productservice.getSubCategories().subscribe((res:SubCategories[])=>{
-      console.log(res)
 
       for (let i = 0;i<res.length;i++){
         let array = res[i];

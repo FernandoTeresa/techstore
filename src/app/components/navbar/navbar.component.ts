@@ -12,23 +12,19 @@ import { Cart } from 'src/app/classes/cart';
 })
 export class NavbarComponent implements OnInit {
 
-  cart:Cart[]=[];
-
   constructor(public router:Router, public userservice: UserService, public cartservice: CartService) { }
 
-  private _user: User | null = null;
-
   public get user(): User | null {
-    return this._user;
+    return this.userservice.getUser();
   }
-  public set user(value: User | null) {
-    this._user = value;
+
+  public get cart(): Cart[]{
+    return this.cartservice.loadCart();
   }
+
 
   ngOnInit(): void {
-    this.cart = this.cartservice.loadCart();
     this.cartservice.totalCountCart();
-    this.user = this.userservice.getUser();
 
     if (this.user){
       window.onload = function () {
@@ -37,14 +33,12 @@ export class NavbarComponent implements OnInit {
           window.location.reload();
         }
       }
-      
     }
 
   }
 
   logout(){
     this.userservice.logout();
-    window.location.reload()
   }
 
   profile(){

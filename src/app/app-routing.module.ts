@@ -1,3 +1,4 @@
+import { FavoritesComponent } from './components/products/favorites/favorites.component';
 import { SubCategoriesComponent } from './components/sub-categories/sub-categories.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'update/:id', component: UpdateProductComponent},
   { path: 'addProduct', component: AddProductComponent},
   { path: 'addCategory', component:CategoriesComponent},
-  { path: 'addSubCategory', component:SubCategoriesComponent}
+  { path: 'addSubCategory', component:SubCategoriesComponent},
+  { path: 'favorites', component:FavoritesComponent}
 
 ];
 

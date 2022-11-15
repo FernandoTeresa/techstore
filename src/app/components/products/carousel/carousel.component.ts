@@ -19,8 +19,6 @@ export class CarouselComponent implements OnInit {
     return this.productservice.images;
   }
 
-  
-
   constructor(public productservice: ProductsService, private router: Router) { }
 
   ngOnInit(): void {

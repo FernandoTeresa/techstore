@@ -13,7 +13,7 @@ export class CartService {
 
   cart: Cart[] = []; 
 
-  constructor(private http: HttpClient, private router: Router, public userservice:UserService, public productservice:ProductsService) { }
+  constructor(public userservice:UserService, public productservice:ProductsService) { }
 
   savecart(){
     localStorage.setItem('cart', JSON.stringify(this.cart));

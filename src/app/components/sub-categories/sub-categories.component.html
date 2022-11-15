@@ -7,7 +7,7 @@
                             <div class="card">
 
                                 <div class="card-title text-center mt-3">
-                                    <h3>Add Category</h3>
+                                    <h3>Add Sub Category</h3>
                                 </div>
 
                                 <div class="card-body">
@@ -17,7 +17,7 @@
                                             <div *ngIf="this.categories">
                                                 <label for="exampleFormControlSelect1">Categories</label>
                                                 <select class="form-control" id="exampleFormControlSelect1" name="categories_id" ngModel>
-                                                    <option value="" disabled selected>Select the Categorie</option>
+                                                    <option value="" disabled selected>Select the Category</option>
                                                     <option *ngFor="let cat of this.categories" [value]="cat.id">{{cat.name}}</option>
                                                 </select>
                                             </div>
@@ -34,7 +34,6 @@
                                     </form>
                                 
                                 </div>
-                                
                             </div>
                      </div>
                  </div>

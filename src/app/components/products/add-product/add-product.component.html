@@ -59,7 +59,7 @@
 
                                     <p>Product Image:</p>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="productimage" required name="image" ngModel>
+                                        <input type="file" class="custom-file-input" id="productimage" required name="images[]" ngModel (change)="onChange($event)"> 
                                         <label class="custom-file-label" for="productimage">Choose
                                             file...</label>
                                         <div class="invalid-feedback">File Format Not Supported</div>

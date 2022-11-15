@@ -15,15 +15,14 @@ import { Cart } from 'src/app/classes/cart';
 export class CartComponent implements OnInit {
 
   constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService) { }
-
-  cart:Cart[]= [];
   
   products:Products[]=[];
 
-  ngOnInit(): void {
+  public get cart(): Cart[]{
+    return this.cartservice.loadCart();
+  } 
 
-    // this.cartservice.loadCart();
-    this.cart = this.cartservice.loadCart();
+  ngOnInit(): void {
 
     this.productservice.getProducts().subscribe((res: Products[]) => {
       for (let i=0;i<res.length;i++){

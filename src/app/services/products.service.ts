@@ -9,12 +9,14 @@ import { Products } from '../classes/products';
 import { SubCategories } from '../classes/sub-categories';
 import { User } from '../classes/user';
 import { UserService } from './user.service';
+import { Observable } from 'rxjs';
 
 const Header = {
   headers: new HttpHeaders({
     Authorization: 'bearer '+ localStorage.getItem('token'), 
   })
 };
+
 
 @Injectable({
   providedIn: 'root'
@@ -165,13 +167,9 @@ export class ProductsService {
     })
   }
 
-  addProduct(product: any){
+  addProduct(formData: any, HeaderWithImage:any){
 
-
-    this.http.post('http://localhost:85/product/addnew', product, Header).subscribe((res:any)=>{
-      this.requestProducts();
-
-    })
+   return this.http.post('http://localhost:85/product', formData, HeaderWithImage)
   }
 
   uploadImages(image:any, productId:number){

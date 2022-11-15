@@ -26,6 +26,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   private _cart: Cart | null = null;
+  
   public get cart(): Cart | null {
     return this._cart;
   }

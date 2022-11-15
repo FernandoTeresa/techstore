@@ -1,3 +1,5 @@
+import { FavoriteService } from './../../../services/favorite.service';
+import { Favorite } from './../../../classes/favorite';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsImages } from './../../../classes/products-images';
 import { SubCategories } from './../../../classes/sub-categories';
@@ -15,27 +17,29 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.css']
 })
+
+
 export class ListProductsComponent implements OnInit {
 
-  constructor(public productservice: ProductsService, public router:Router, public cartservice:CartService, public userservice:UserService) { }
+  constructor(public productservice: ProductsService, public favoriteservice:FavoriteService ,public router:Router, public cartservice:CartService, public userservice:UserService) { }
 
   public get products(): Products[] {
     return this.productservice.products;
   }
 
-  cart: Cart[] = []; 
-
-  private _user: User | null = null;
+  public get cart(): Cart[]{
+    return this.cartservice.loadCart();
+  }
 
   public get user(): User | null {
-    return this._user;
+    return this.userservice.getUser();
   }
-  public set user(value: User | null) {
-    this._user = value;
+
+  public get favorites():Favorite[]{
+    return this.favoriteservice.loadFavorites();
   }
 
   ngOnInit(): void {
-      this.user = this.userservice.getUser();
 
       this.productservice.getProducts().subscribe((res: Products[]) => {
         for (let i=0;i<res.length;i++){
@@ -44,8 +48,6 @@ export class ListProductsComponent implements OnInit {
         }
         
       });
-
-      this.cart = this.cartservice.loadCart()
 
   }
 
@@ -88,6 +90,20 @@ export class ListProductsComponent implements OnInit {
 
   remove(id:number){
     this.productservice.removeProduct(id);
+  }
+
+  // Favorites
+
+  addFavorite(productid:number){
+
+    let obj:Favorite = {
+      productId: productid
+    }
+
+    this.favoriteservice.addFavorite(obj);
+
+    alert("Added to Favorites");
+
   }
 
 

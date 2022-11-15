@@ -12,18 +12,11 @@ export class LoginComponent implements OnInit {
 
   constructor(public userservice:UserService, public router:Router) { }
 
-  private _user: User | null = null;
-
   public get user(): User | null {
-    return this._user;
-  }
-  public set user(value: User | null) {
-    this._user = value;
+    return this.userservice.getUser();
   }
 
   ngOnInit(): void {
-    this.user = this.userservice.getUser();
-
   }
 
   login_form(value:User){

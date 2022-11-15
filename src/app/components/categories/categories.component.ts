@@ -16,7 +16,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   addcategory(value:Categories){
-    console.log(value)
     this.productservice.addNewCategory(value);
   }
 

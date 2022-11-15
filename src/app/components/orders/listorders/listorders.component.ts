@@ -16,18 +16,11 @@ export class ListordersComponent implements OnInit {
 
   orders:Order[]=[];
 
-  private _user: User | null = null;
-
   public get user(): User | null {
-    return this._user;
-  }
-
-  public set user(value: User | null) {
-    this._user = value;
+    return this.userservice.getUser();
   }
 
   ngOnInit(): void {
-    this.user = this.userservice.getUser();
     if (!this.user){
       return; 
     }

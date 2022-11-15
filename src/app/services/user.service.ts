@@ -1,10 +1,10 @@
+import { IAuthToken } from './../interfaces/i-authToken';
 import { UserInfos } from './../classes/user-infos';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../classes/user';
 import * as moment from 'moment';
-import { IAuthToken } from '../interfaces/i-authToken';
 
 const Header = {
   headers: new HttpHeaders({
@@ -37,10 +37,20 @@ export class UserService {
     this._userInfo = value;
   }
 
+  private _token: IAuthToken | null = null;
+
+  public get token(): IAuthToken | null {
+    return this._token;
+  }
+  public set token(value: IAuthToken | null) {
+    this._token = value;
+  }
+
+
 
   constructor(private http:HttpClient, private router:Router) { }
 
-  getUser(){
+  getUser(){ // esta a mais fora
 
     let localUser = localStorage.getItem('user')
 
@@ -53,6 +63,7 @@ export class UserService {
     if(!user){
       return;
     }
+    
 
     return user;
 
@@ -67,8 +78,6 @@ export class UserService {
       this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
      
       let user = new User(res.id,res.username,res.password,res.first_name, res.last_name, res.email, res.admin); 
-
-      console.log(res)
       
       let localUser = JSON.stringify(user);
       localStorage.setItem('user',localUser);
@@ -88,9 +97,12 @@ export class UserService {
 
       let date = moment().unix();
 
+
       if(res.access_token){
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('expiresToken', res.expires_in.toString());
+
+        this.token = res;
 
 
         this.router.navigate(['/']);
@@ -133,6 +145,7 @@ export class UserService {
   logout(){
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      this.user = null;
       this.http.post('http://localhost:85/logout',Header)
       this.router.navigate(['/']);
   }
