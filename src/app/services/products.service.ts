@@ -17,7 +17,6 @@ const Header = {
   })
 };
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -46,7 +45,7 @@ export class ProductsService {
 
     return this.http.get<SubCategories[]>('http://localhost:85/subcategories').subscribe((res: SubCategories[]) => {
       
-        //this.setSubCategories(res)
+      this.setSubCategories(res)
 
     });
   }
@@ -55,7 +54,7 @@ export class ProductsService {
 
     this.http.get<Categories[]>('http://localhost:85/categories').subscribe((res: Categories[]) => {
       
-        //this.setCategories(res)
+        this.setCategories(res)
 
     });
   }

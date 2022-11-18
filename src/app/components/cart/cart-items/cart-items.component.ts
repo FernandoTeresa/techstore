@@ -16,21 +16,11 @@ export class CartItemsComponent implements OnInit {
 
   constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService) { }
 
-  cart:Cart[]= [];
-  
-  products:Products[]=[];
+  public get cart():Cart[]{
+    return this.cartservice.loadCart();
+  }
 
   ngOnInit(): void {
-
-    // this.cartservice.loadCart();
-    this.cart = this.cartservice.loadCart();
-
-    this.productservice.getProducts().subscribe((res: Products[]) => {
-      for (let i=0;i<res.length;i++){
-        let array = new Products(res[i].id,res[i].name, res[i].desc, res[i].price, res[i].stock, res[i].products_images);
-        this.products.push(array);
-      }
-    });
   }
 
 
@@ -43,24 +33,23 @@ export class CartItemsComponent implements OnInit {
       return;
     }
     this.cartservice.removeProductCart(this.productItem.productId);
-    this.cart = this.cartservice.getCart();
+    // this.cart = this.cartservice.getCart();
     this.router.navigate(['/cart'])
   }
 
   getImages():string{
+
     if(!this.productItem?.productId){
       return "";
     }
-    for (let i=0;i< this.products.length;i++){
-      if (this.products[i].id === this.productItem.productId){
-        for(let j=0;j<this.cart.length;j++){
-          if (this.products[i].id === this.cart[j].productId){
-            return 'http://localhost:8080'+this.products[i].products_images[0].images;
-          }
-        }
-      }
+
+    let find = this.productservice.products.find((item)=> item.id === this.productItem?.productId)
+
+    if (!find){
+      return "";
     }
-    return "";
+
+    return 'http://localhost:8080'+find.products_images[0].images
 }
 
 increment(){
@@ -79,8 +68,6 @@ increment(){
       this.productItem.count;
     }
   }
-
-
 }
 
 decrement(){
@@ -106,11 +93,10 @@ getProductsCart(){
 
   let verify = this.cartservice.productCart(this.productItem);
 
+
   if (verify){
-    for(let i=0;i<this.products.length;i++){
-      if (this.products[i].id === this.productItem.productId)
-        return this.products[i]
-    }
+    let find = this.productservice.products.find((item)=>item.id === this.productItem?.productId)
+    return find;
   }
 }
 

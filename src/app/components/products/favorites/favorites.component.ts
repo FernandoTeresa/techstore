@@ -13,14 +13,31 @@ export class FavoritesComponent implements OnInit {
 
   constructor(public productservice: ProductsService, public favoriteservice:FavoriteService) { }
 
-  public get products(): Products[] {
-    return this.productservice.products;
+
+  public get favorites():Favorite[]{
+    return this.favoriteservice.loadFavorites();
   }
 
-  favorites:Favorite[]=[];
-
   ngOnInit(): void {
+    this.productservice.requestProducts();
+  }
 
+  getProduct(id:number){
+
+    return this.productservice.products.find((item)=> item.id == id)
+   
+  }
+
+  getImages(id:number):string{
+
+    let image = this.productservice.products.find((item)=>item.id === id);
+
+    if(!image){
+      return "";
+    }
+
+
+    return 'http://localhost:8080'+image.products_images[0].images;
 
   }
 

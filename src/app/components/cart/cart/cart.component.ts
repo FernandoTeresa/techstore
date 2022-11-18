@@ -16,20 +16,17 @@ export class CartComponent implements OnInit {
 
   constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService) { }
   
-  products:Products[]=[];
+  public get products():Products[]{
+    return this.productservice.products;
+  }
 
   public get cart(): Cart[]{
     return this.cartservice.loadCart();
   } 
 
   ngOnInit(): void {
+    this.productservice.requestProducts();
 
-    this.productservice.getProducts().subscribe((res: Products[]) => {
-      for (let i=0;i<res.length;i++){
-        let array = new Products(res[i].id,res[i].name, res[i].desc, res[i].price, res[i].stock, res[i].products_images);
-        this.products.push(array);
-      }
-    });
   }
 
   cleanCart(){

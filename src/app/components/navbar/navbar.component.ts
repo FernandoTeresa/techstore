@@ -80,6 +80,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/addSubCategory']);
   }
 
+  favorites(){
+    this.router.navigate(['/favorites']);
+  }
+
   openNav() {
     let x = <HTMLInputElement>document.getElementById("mySidenav");
     x.style.width = "250px";
