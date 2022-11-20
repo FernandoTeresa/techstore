@@ -26,13 +26,13 @@ export class OrderComponent implements OnInit {
   }
 
   public get user(): User | null {
-    return this.userservice.getUser();
+    return this.userservice.user;
   }
 
   private _userInfo: UserInfos | null = null;
 
   public get userInfo(): UserInfos | null {
-    return this._userInfo;
+    return this.userservice.userInfo;
   }
 
   public set userInfo(value: UserInfos | null) {
@@ -48,11 +48,6 @@ export class OrderComponent implements OnInit {
 
       this.orderservice.getOrderById(id).subscribe((res:Order)=>{
           this.order = new Order(res.id, res.user_id, res.total, res.order_items);
-      });
-
-      this.userservice.getUserInfo().subscribe((res:UserInfos)=>{
-        
-        this.userInfo = new UserInfos(res.id, res.address_1, res.address_2, res.city, res.postal_code, res.country, res.mobile, res.telephone, res.users_id);
       });
 
     });

@@ -12,7 +12,6 @@ import { ProductComponent } from './components/products/product/product.componen
 import { UpdateProductComponent } from './components/products/update-product/update-product.component';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CarouselComponent } from './components/products/carousel/carousel.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
@@ -39,7 +38,6 @@ import { FavoritesComponent } from './components/products/favorites/favorites.co
     ListProductsComponent,
     ProductComponent,
     UpdateProductComponent,
-    SidebarComponent,
     ProfileComponent,
     CarouselComponent,
     ProductDetailsComponent,

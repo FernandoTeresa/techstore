@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { AuthToken } from './classes/AuthToken';
 import { User } from './classes/user';
 import { UserService } from './services/user.service';
 
@@ -14,16 +15,33 @@ export class AppComponent {
 
   constructor(public userservice: UserService, public router:Router){}
 
+  public get user():User | null{
+    return this.userservice.user;
+  }
+
+  public get token():AuthToken | null{
+    return this.userservice.token
+  }
+
   ngOnInit(): void {
+    this.userservice.getUser();
+
     let token_time = localStorage.getItem('expiresToken')
-    if(!token_time){
-      return;
+    
+    if (!this.token){
+      return 
     }
+
+    if (!token_time){
+      return
+    }
+
+
     let expires = parseInt(token_time);
 
     let date = moment().unix();
 
-    if (date > expires){
+    if (date > expires || date > this.token.expires_in){
       this.userservice.logout();
       this.router.navigate(['/login']);
     }

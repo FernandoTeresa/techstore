@@ -14,26 +14,21 @@ export class AddProductComponent implements OnInit {
 
   constructor(public productservice:ProductsService, public userservice:UserService) { }
 
-  subcategories:SubCategories[]=[];
+  // subcategories:SubCategories[]=[];
   public file: File |null = null;
 
+  public get subcategories():SubCategories[]{
+    return this.productservice.subcategories
+  }
+
   ngOnInit(): void {
-
-    this.productservice.getSubCategories().subscribe((res:SubCategories[])=>{
-
-      for (let i=0;i<res.length;i++){
-        let array = res[i];
-        let subcategorie = new SubCategories(array.id, array.name, array.categories);
-        this.subcategories.push(subcategorie);
-      }
-
-    })
+    this.productservice.requestSubCategories();
 
   }
 
   addProduct(value:any){
     console.log(value)
-
+    console.log(this.userservice.token)
     if(!this.userservice.token){
       return
     }
@@ -44,6 +39,7 @@ export class AddProductComponent implements OnInit {
       })
     };
 
+    console.log(HeaderWithImage)
     const formData = new FormData();
 
     if (!this.file){
@@ -57,11 +53,9 @@ export class AddProductComponent implements OnInit {
     formData.append("stock",value.stock);
     formData.append("sub_categories_id",value.sub_categories_id);
 
-    console.log(this.userservice.token)
+    this.productservice.addProduct(formData, HeaderWithImage);
 
-    this.productservice.addProduct(formData, HeaderWithImage).subscribe((res:any)=>{
-      console.log(res);
-    });   
+    console.log(formData)
   }
 
   onChange(event:any) {

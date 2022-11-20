@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   constructor(public router:Router, public userservice: UserService, public cartservice: CartService) { }
 
   public get user(): User | null {
-    return this.userservice.getUser();
+    return this.userservice.user;
   }
 
   public get cart(): Cart[]{
@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.userservice.getUser();
     this.cartservice.totalCountCart();
 
     if (this.user){

@@ -17,7 +17,7 @@ export class ListordersComponent implements OnInit {
   orders:Order[]=[];
 
   public get user(): User | null {
-    return this.userservice.getUser();
+    return this.userservice.user;
   }
 
   ngOnInit(): void {

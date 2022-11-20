@@ -24,7 +24,11 @@ export class UpdateProductComponent implements OnInit {
     this._product = value;
   }
 
-  subcategories:SubCategories[]=[];
+  // subcategories:SubCategories[]=[];
+
+  public get subcategories():SubCategories[]{
+    return this.productservice.subcategories;
+  }
 
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params: any) => {
@@ -36,18 +40,6 @@ export class UpdateProductComponent implements OnInit {
       });
 
     })
-
-    this.productservice.getSubCategories().subscribe((res:SubCategories[])=>{
-
-      for (let i = 0;i<res.length;i++){
-        let array = res[i];
-        let subcategorie = new SubCategories(array.id, array.name, array.categories)
-        this.subcategories.push(subcategorie);
-      }
-
-    })
-
-
 
   }
 

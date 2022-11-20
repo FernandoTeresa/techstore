@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
   products:Products[]=[];
 
   public get user():User | null {
-    return this.userservice.getUser();
+    return this.userservice.user;
   }
 
   ngOnInit(): void {

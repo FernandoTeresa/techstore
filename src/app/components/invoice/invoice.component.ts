@@ -21,27 +21,16 @@ export class InvoiceComponent implements OnInit {
   
   products:Products[]=[];
   
-  
   public get user(): User | null {
-    return this.userservice.getUser();
+    return this.userservice.user;
   }
-
-  private _userInfo: UserInfos | null = null;
 
   public get userInfo(): UserInfos | null {
-    return this._userInfo;
-  }
-
-  public set userInfo(value: UserInfos | null) {
-    this._userInfo = value;
+    return this.userservice.userInfo;
   }
 
   ngOnInit(): void {
     this.cart = this.cartservice.loadCart();
-
-    this.userservice.getUserInfo().subscribe((res:UserInfos)=>{
-      this.userInfo = new UserInfos(res.id, res.address_1, res.address_2, res.city, res.postal_code, res.country, res.mobile, res.telephone, res.users_id);
-    });
 
     this.productservice.getProducts().subscribe((res: Products[]) => {
       for (let i=0;i<res.length;i++){

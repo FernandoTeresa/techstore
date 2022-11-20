@@ -10,22 +10,14 @@ import { SubCategories } from 'src/app/classes/sub-categories';
 })
 export class SubCategoriesComponent implements OnInit {
 
-  categories:Categories[]=[];
+  public get categories():Categories[]{
+    return this.productservice.categories;
+  }
 
   constructor(public productservice:ProductsService ) { }
 
   ngOnInit(): void {
 
-    this.productservice.getCategories().subscribe((res:Categories[])=>{
-
-      for (let i=0;i<res.length;i++){
-        let array = res[i];
-        let category = new Categories(array.id, array.name);
-        this.categories.push(category);
-        
-      }
-
-    })
   }
 
   addSubCategory(value:SubCategories){

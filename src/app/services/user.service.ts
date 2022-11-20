@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../classes/user';
 import * as moment from 'moment';
+import { AuthToken } from '../classes/AuthToken';
 
 const Header = {
   headers: new HttpHeaders({
@@ -46,100 +47,41 @@ export class UserService {
     this._token = value;
   }
 
-
-
   constructor(private http:HttpClient, private router:Router) { }
 
-  getUser(){ // esta a mais fora
+  getUser(){
+    let token = localStorage.getItem('token');
+    Header.headers = Header.headers.set('Authorization', 'bearer '+token);
 
-    let localUser = localStorage.getItem('user')
+    if (token){
+      return this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
 
-    if (!localUser){
-      return;
-    }
-
-    let user = JSON.parse(localUser)
-
-    if(!user){
-      return;
-    }
-    
-
-    return user;
-
-  }
-
-  log(){
-    let logon = localStorage.getItem('token');
-
-    Header.headers = Header.headers.set('Authorization', 'bearer '+logon);
-
-    if (logon){
-      this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
-     
-      let user = new User(res.id,res.username,res.password,res.first_name, res.last_name, res.email, res.admin); 
-      
-      let localUser = JSON.stringify(user);
-      localStorage.setItem('user',localUser);
-      
+        this.setUser(res);
       });
-
-    }else{
-
-      this.router.navigate(['/login']);
     }
-
   }
 
-  login(data: User){
+  setUser(user:User){
+    this.user = new User(user.id, user.username, user.password, user.first_name, user.last_name, user.email, user.admin);
+    let localUser = JSON.stringify(this.user);
+    localStorage.setItem('user',localUser);  
+  }
 
-    this.http.post<IAuthToken>('http://localhost:85/login', data, Header).subscribe((res:IAuthToken) => {
+  getToken(value:any){
+    return this.http.post<AuthToken>('http://localhost:85/login', value, Header).subscribe((res:AuthToken)=>{
+      this.setToken(res);
+    })
+  }
 
-      let date = moment().unix();
+  setToken(value:AuthToken){
 
+    if(value.access_token){
+      localStorage.setItem('token', value.access_token);
+      localStorage.setItem('expiresToken', value.expires_in.toString());
 
-      if(res.access_token){
-        localStorage.setItem('token', res.access_token);
-        localStorage.setItem('expiresToken', res.expires_in.toString());
+      this.token = new AuthToken(value.access_token, value.expires_in);
+    }
 
-        this.token = res;
-
-
-        this.router.navigate(['/']);
-
-      }else{
-        this.router.navigate(['/login']);
-      }
-
-      if (date > res.expires_in){
-        this.logout();
-        this.router.navigate(['/login']);
-      }
-
-      this.log();
-    },(err)=> {
-
-      switch(err.status){
-        case 400:
-          alert('ERROR!! Bad Request');
-          break;
-        case 401:
-          alert('ERROR!! Unauthorized');
-          break;
-        case 403:
-          alert('ERROR!! Forbidden');
-          break;
-        case 404:
-          alert('ERROR!! Not Found');
-          break;
-        case 500:
-          alert('ERROR!! Server Error');
-          break;
-        default:
-          alert ('Unknow Error!!');
-          break;
-      };
-    });
   }
 
   logout(){
@@ -147,13 +89,12 @@ export class UserService {
       localStorage.removeItem('user');
       this.user = null;
       this.http.post('http://localhost:85/logout',Header)
-      this.router.navigate(['/']);
   }
 
   addUser(value: User){
     this.http.post<User>('http://localhost:85/user/add',value, Header).subscribe((res:User)=>{
 
-      this.user = new User(res.id,res.username, res.password, res.first_name, res.last_name, res.email);
+      this.setUser(res);
 
     },(err) => {
 
@@ -183,27 +124,27 @@ export class UserService {
 
   updateUser(value:any){
 
-    this.http.put('http://localhost:85/user/'+ this.getUser().id, value, Header).subscribe((res:any)=>{
+    if (!this.user){
+      return "User dont exist";
+    }
+
+    this.http.put('http://localhost:85/user/'+ this.user.id, value, Header).subscribe((res:any)=>{
     })
 
   }
 
   getUserInfo(){
-    return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.getUser().id, Header);
+
+    if(!this.user){
+      return "User dont exist";
+    }
+
+    return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.user.id, Header);
   }
 
   UploadUser(value:File){
     //falta
   }
-
-
-
-
-
-
-
-
-
 
 
 

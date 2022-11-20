@@ -32,7 +32,7 @@ export class ListProductsComponent implements OnInit {
   }
 
   public get user(): User | null {
-    return this.userservice.getUser();
+    return this.userservice.user;
   }
 
   public get favorites():Favorite[]{
