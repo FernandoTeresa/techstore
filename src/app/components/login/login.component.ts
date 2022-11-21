@@ -20,6 +20,12 @@ export class LoginComponent implements OnInit {
   }
 
   login_form(value:User){
+
+    if (value.username === "" || value.password === ""){
+      alert("you must enter the username or the password");
+      return;
+    }
+
     this.userservice.getToken(value);
     this.router.navigate(['/']);
 

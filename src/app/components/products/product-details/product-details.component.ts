@@ -46,6 +46,8 @@ export class ProductDetailsComponent implements OnInit {
       });
 
     })
+
+    this.productservice.requestProducts();
   }
 
 

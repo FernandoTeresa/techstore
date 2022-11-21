@@ -19,26 +19,15 @@ export class NavbarComponent implements OnInit {
   }
 
   public get cart(): Cart[]{
-    return this.cartservice.loadCart();
+    return this.cartservice.cart;
   }
-
 
   ngOnInit(): void {
     this.userservice.getUser();
-    this.cartservice.totalCountCart();
-
-    if (this.user){
-      window.onload = function () {
-        if (! localStorage.getItem('justOnce')) {
-          localStorage.setItem("justOnce", "true");
-          window.location.reload();
-        }
-      }
-    }
-
   }
 
   logout(){
+    this.router.navigate(['/']);
     this.userservice.logout();
   }
 
@@ -63,10 +52,6 @@ export class NavbarComponent implements OnInit {
 
   CartRedirect(){
     this.router.navigate(['/cart']);
-  }
-
-  countCart(){
-      return this.cartservice.totalCountCart()
   }
 
   addProduct(){

@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './../components/cart/checkout/checkout.component';
 import { IAuthToken } from './../interfaces/i-authToken';
 import { UserInfos } from './../classes/user-infos';
 import { Injectable } from '@angular/core';
@@ -47,18 +48,25 @@ export class UserService {
     this._token = value;
   }
 
+
+
+
   constructor(private http:HttpClient, private router:Router) { }
 
   getUser(){
     let token = localStorage.getItem('token');
     Header.headers = Header.headers.set('Authorization', 'bearer '+token);
+    
+    return this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
 
-    if (token){
-      return this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
+      this.setUser(res);
+    },(err)=>{
 
-        this.setUser(res);
-      });
-    }
+      if (err.status === 401){
+        this.logout();
+      }
+    });
+
   }
 
   setUser(user:User){
@@ -70,7 +78,17 @@ export class UserService {
   getToken(value:any){
     return this.http.post<AuthToken>('http://localhost:85/login', value, Header).subscribe((res:AuthToken)=>{
       this.setToken(res);
-    })
+    },(err)=>{
+      console.log(err)
+
+      if (err.status === 422){
+        alert("Password or Username invalid");
+      }
+
+      if (err.status === 401){
+        alert("User dont exist");
+      }
+    });
   }
 
   setToken(value:AuthToken){
@@ -88,11 +106,12 @@ export class UserService {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       this.user = null;
-      this.http.post('http://localhost:85/logout',Header)
+      this.userInfo = null;
+      this.http.post('http://localhost:85/logout',Header);
   }
 
   addUser(value: User){
-    this.http.post<User>('http://localhost:85/user/add',value, Header).subscribe((res:User)=>{
+    this.http.post<User>('http://localhost:85/register',value).subscribe((res:User)=>{
 
       this.setUser(res);
 
@@ -123,7 +142,6 @@ export class UserService {
   }
 
   updateUser(value:any){
-
     if (!this.user){
       return "User dont exist";
     }
@@ -134,13 +152,35 @@ export class UserService {
   }
 
   getUserInfo(){
-
     if(!this.user){
       return "User dont exist";
     }
+    return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.user.id, Header).subscribe((res:UserInfos)=>{
+      this.setUserInfo(res);
+    },(err)=>{
 
-    return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.user.id, Header);
+      if (err.status === 401){
+        this.logout();
+      }
+    });
   }
+
+  setUserInfo(userInfo:UserInfos){
+    this.userInfo = new UserInfos(userInfo.id, userInfo.address_1, userInfo.address_2, userInfo.city, userInfo.postal_code, userInfo.country, userInfo.mobile, userInfo.telephone, userInfo.users_id);
+  }
+
+  // checkPass(username:string, password:string){
+  //   let data:any={
+  //     username: username,
+  //     password: password
+  //   }
+
+  //   return this.http.post<Code>('http://localhost:85/check', data, Header).subscribe((res:any)=>{
+  //     this.code = new Code(res);
+  //   });
+
+  // }
+
 
   UploadUser(value:File){
     //falta

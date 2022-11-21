@@ -12,38 +12,35 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class CartItemsComponent implements OnInit {
 
-  @Input() productItem: Cart |null = null
-
   constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService) { }
 
   public get cart():Cart[]{
     return this.cartservice.loadCart();
   }
 
-  ngOnInit(): void {
+  public get products():Products[]{
+    return this.productservice.products;
   }
 
+  ngOnInit(): void {
+    this.cartservice.getCart();
+    this.productservice.requestProducts();
+
+  }
 
   addCart(cartItem:Cart){
     this.cartservice.addToCart(cartItem);
   }
 
-  removeFromCart(){
-    if (!this.productItem){
-      return;
-    }
-    this.cartservice.removeProductCart(this.productItem.productId);
-    // this.cart = this.cartservice.getCart();
+  removeFromCart(cartItem:Cart){
+ 
+    this.cartservice.removeProductCart(cartItem.productId);
     this.router.navigate(['/cart'])
   }
 
-  getImages():string{
+  getImages(cartItem:Cart):string{
 
-    if(!this.productItem?.productId){
-      return "";
-    }
-
-    let find = this.productservice.products.find((item)=> item.id === this.productItem?.productId)
+    let find = this.productservice.products.find((item)=> item.id === cartItem.productId)
 
     if (!find){
       return "";
@@ -52,52 +49,40 @@ export class CartItemsComponent implements OnInit {
     return 'http://localhost:8080'+find.products_images[0].images
 }
 
-increment(){
+increment(cartItem:Cart){
 
-  if (!this.productItem){
-    return;
-  }
 
   for(let i=0;i<this.cart.length;i++){
 
-    if(this.productItem.productId === this.cart[i].productId){
+    if(cartItem.productId === this.cart[i].productId){
 
-      this.cartservice.addCountToCart(this.productItem);
-      this.productItem.count ++;
+      this.cartservice.addCountToCart(cartItem);
+      cartItem.count ++;
     }else{
-      this.productItem.count;
+      cartItem.count;
     }
   }
 }
 
-decrement(){
+decrement(cartItem:Cart){
 
-  if (!this.productItem){
-    return;
-  }
-
-  if (this.productItem.count > 0){
-    this.cartservice.removeCountToCart(this.productItem)
-    this.productItem.count --;
+  if (cartItem.count > 0){
+    this.cartservice.removeCountToCart(cartItem)
+    cartItem.count --;
   }else{
-    this.productItem.count = 0;
+    cartItem.count = 0;
   }
 
 }
 
-getProductsCart(){
+getProductsCart(cartItem:Cart){
 
-  if(!this.productItem){
-    return;
+  for (let i=0 ; i < this.products.length; i++ ){
+    if(this.products[i].id === cartItem.productId){
+      return this.products[i]
+    }
   }
 
-  let verify = this.cartservice.productCart(this.productItem);
-
-
-  if (verify){
-    let find = this.productservice.products.find((item)=>item.id === this.productItem?.productId)
-    return find;
-  }
 }
 
 }

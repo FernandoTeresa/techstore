@@ -1,7 +1,7 @@
 import { Categories } from './../../../classes/categories';
 import { SubCategories } from './../../../classes/sub-categories';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from 'src/app/classes/products';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -12,7 +12,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class UpdateProductComponent implements OnInit {
 
-  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute) { }
+  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute, public router:Router) { }
 
   private _product: Products |null = null;
  
@@ -24,39 +24,35 @@ export class UpdateProductComponent implements OnInit {
     this._product = value;
   }
 
-  // subcategories:SubCategories[]=[];
-
   public get subcategories():SubCategories[]{
     return this.productservice.subcategories;
   }
 
   ngOnInit(): void {
+    this.productservice.requestSubCategories()
+
     this.activatedroute.paramMap.subscribe((params: any) => {
       const id = +params.get('id');
 
       this.productservice.getProduct(id).subscribe((res:Products) => {
           
-        this.product= new Products (res.id, res.name, res.desc, res.price, res.stock, res.products_images);
+        this.product= new Products (res.id, res.name, res.desc, res.price, res.stock, res.products_images, res.sub_categories);
       });
 
     })
 
+
   }
 
   updateProduct(value: Products){
-    console.log("asnmzbnx cbnzx");
 
-    // if(!this.product){
-    //   return;
-    // }
+    console.log(value)
+    if (!this.product){
+      return "not exist";
+    }
 
-    // if (!this.product.sub_categories){
-    //   return;
-    // }
-
-
-    //NAO FUNCIONA 
-
+    this.productservice.updateProduct(value, this.product.id);
+    this.router.navigate(['/product/'+this.product.id]);
   }
 
   nameSubcategorie():string{
@@ -74,12 +70,6 @@ export class UpdateProductComponent implements OnInit {
 
 
   image(name:string){
-
-    //fazer localstorage dos favoritos os ultimos 3
-
-    // if (!product){
-    //   return
-    // }
 
     return 'http://localhost:8080/'+name;
   }

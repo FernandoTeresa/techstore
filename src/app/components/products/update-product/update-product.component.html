@@ -58,10 +58,11 @@
 
                         <div class="input-group mb-3">
 
-                            <div class="form-check form-check-inline" *ngFor="let subcateg of this.subcategories">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="{{subcateg.id}}" value="{{subcateg.id}}">
-                                <label class="form-check-label" for="{{subcateg.id}}">{{subcateg.name}}</label>
-                            </div>
+                           <span class="input-group-text" id="basic-addon1">Sub Categories:</span>
+                            <select class="form-control" id="exampleFormControlSelect1" name="sub_categories_id" *ngIf="product.sub_categories">
+                                <option *ngFor="let subcat of this.subcategories" [value]="subcat.id" name="sub_categories_id" [(ngModel)]="product.sub_categories.id">{{subcat.name}}</option>
+                            </select>
+            
 
 
                         </div>

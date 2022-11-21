@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { AuthToken } from './classes/AuthToken';
 import { User } from './classes/user';
 import { UserService } from './services/user.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   title = 'TechStore';
 
-  constructor(public userservice: UserService, public router:Router){}
+  constructor(public userservice: UserService, public router:Router, public cartservice:CartService){}
 
   public get user():User | null{
     return this.userservice.user;
@@ -24,9 +25,11 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.userservice.getUser();
 
-    let token_time = localStorage.getItem('expiresToken')
+    this.cartservice.loadCart();
+
+
+    let token_time = localStorage.getItem('expiresToken');
     
     if (!this.token){
       return 

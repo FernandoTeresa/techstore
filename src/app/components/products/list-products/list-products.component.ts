@@ -39,15 +39,9 @@ export class ListProductsComponent implements OnInit {
     return this.favoriteservice.loadFavorites();
   }
 
-  ngOnInit(): void {
 
-      this.productservice.getProducts().subscribe((res: Products[]) => {
-        for (let i=0;i<res.length;i++){
-          let array = new Products(res[i].id,res[i].name, res[i].desc, res[i].price, res[i].stock, res[i].products_images);
-          this.products.push(array);
-        }
-        
-      });
+  ngOnInit(): void {
+    this.productservice.requestProducts();
 
   }
 

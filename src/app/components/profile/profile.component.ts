@@ -23,9 +23,19 @@ export class ProfileComponent implements OnInit {
     return this.userservice.userInfo;
   }
 
+
+
   ngOnInit(): void {
     this.userservice.getUser();
     this.userservice.getUserInfo();
+
+    if(!this.user){
+      this.userservice.getUser();
+    }
+
+    if (!this.userInfo){
+      this.userservice.getUserInfo();
+    }
   }
 
   updateProfile(value:any){
@@ -33,48 +43,42 @@ export class ProfileComponent implements OnInit {
       return
     }
 
-    let old_pass = <HTMLInputElement>document.getElementById("old_pass");
     let pass = <HTMLInputElement>document.getElementById("password");
     let repeat_pass = <HTMLInputElement>document.getElementById("repeat_pass");
-
-    if (pass.value === '' && repeat_pass.value === '' && old_pass.value != ''){
-      alert('you have to introduce the new password');
-
+     
+    if (pass.value != repeat_pass.value){
+          alert("Passwords dont match");
+          pass.value= '';
+          repeat_pass.value = '';  
     }else{
 
-      if (old_pass.value === this.user.password || old_pass.value === ''){ 
+      let data:any={
+        address_1: value.address_1,
+        address_2: value.address_2,
+        city: value.city,
+        country: value.country,
+        first_name: value.first_name,
+        last_name: value.last_name,
+        mobile: value.mobile,
 
-        if (pass.value != repeat_pass.value){
-              alert("Passwords dont match");
-              pass.value= '';
-              repeat_pass.value = '';  
-        }else{
-
-          let data:any={
-            address_1: value.address_1,
-            address_2: value.address_2,
-            city: value.city,
-            country: value.country,
-            first_name: value.first_name,
-            last_name: value.last_name,
-            mobile: value.mobile,
-
-            password: value.password,
-            postal_code: value.postal_code,
-            email: this.user.email,
-            telephone: value.telephone,
-          }
-
-          this.userservice.updateUser(data);
-          this.router.navigate(['/']);
-        }
-
-      }else if(old_pass.value != this.user.password){
-        alert('Current password dont match');
+        password: value.password,
+        postal_code: value.postal_code,
+        email: this.user.email,
+        telephone: value.telephone,
       }
+
+      console.log(data)
+      if (data.password != ""){
+        console.log("parou aqui")
+        this.userservice.logout();
+        this.router.navigate(['/']);
+      }
+      this.userservice.updateUser(data);
     }
+
     
   }
+
 
 
 }
