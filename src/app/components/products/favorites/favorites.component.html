@@ -1,7 +1,15 @@
-
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="row justify-content-center text-center mb-4">
+    <div class="col-md-8 col-lg-6">
+            <div class="header">
+                    <h1 class="text-danger">Favorites</h1>
+            </div>
+    </div>
+</div>
+
 <div class="container">
-    <div class="row">
+    <div class="row ">
         <div class="col-sm-9">
             <div class="row">
                 <!-- Product Item -->
@@ -9,7 +17,7 @@
                     <div *ngIf="this.getProduct(item.productId)">
                         <div class="product-item">
                             <div class="image">
-                                <a href="#"><img [src]="this.getImages(item.productId)" alt="Product"></a>
+                                <img [src]="this.getImages(item.productId)" alt="Product">
                             </div>
                             <div class="caption">
                                 <div class="name">
@@ -26,8 +34,8 @@
 
                                 </div>
                                 <div class="cart">
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-danger ms-4">Remove</button>
+                                    <button type="button" class="btn btn-primary" (click)="this.addProductCart(item)">Add to Cart</button>
+                                    <button type="button" class="btn btn-danger ms-4" (click)="this.removeProduct(item.productId)">Remove</button>
                                 </div>
                                     
                             </div>

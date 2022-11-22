@@ -90,8 +90,6 @@ export class CartService {
   removeProductCart(id:number){
     const index = this.cart.findIndex((item:Cart)=>item.productId === id);
 
-    console.log(index)
-
     if (index > -1){
       this.cart.splice(index,1);
       this.savecart();

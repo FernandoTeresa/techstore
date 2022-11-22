@@ -63,6 +63,7 @@ export class UserService {
     },(err)=>{
 
       if (err.status === 401){
+        this.router.navigate(['/']);
         this.logout();
       }
     });

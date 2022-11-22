@@ -19,11 +19,11 @@
                                 <div class="part-1" [ngStyle]="{'background': 'url(' + background(product.id) + ') no-repeat center'}">
                                         <ul>
                                                 <li><a (click)="addCart(product.id)"><i class="fas fa-shopping-cart"></i></a></li>
-                                                <li><a (click)="addFavorite(product.id)"><i class="fa-solid fa-heart"></i></a></li>        
+                                                <li><a (click)="buttonFavorite(product.id)"><i class="fa-solid fa-heart favorite" id="favorite" [style]="this.iconFavorites(product.id)"></i></a></li>        
                                                 <li><a (click)="productDetail(product.id)"><i class="fas fa-expand"></i></a></li>
                                                 <span *ngIf="this.user">
                                                 <li *ngIf="this.user.admin"><a (click)="edit(product.id)"><i class="fas fa-edit"></i></a></li>
-                                                <li *ngIf="this.user.admin"><a (click)="remove(product.id)"><i class="fas fa-trash"></i></a></li>
+                                                <!-- <li *ngIf="this.user.admin"><a (click)="remove(product.id)"><i class="fas fa-trash"></i></a></li> -->
                                                 </span>
                                                 <!-- admin -->
                                         </ul>

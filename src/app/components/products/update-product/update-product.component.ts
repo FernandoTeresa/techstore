@@ -41,7 +41,6 @@ export class UpdateProductComponent implements OnInit {
 
     })
 
-
   }
 
   updateProduct(value: Products){

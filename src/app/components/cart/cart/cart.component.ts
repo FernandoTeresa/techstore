@@ -1,3 +1,5 @@
+import { User } from 'src/app/classes/user';
+import { UserService } from 'src/app/services/user.service';
 import { ProductComponent } from './../../products/product/product.component';
 import { CartService } from '../../../services/cart.service';
 import { Products } from 'src/app/classes/products';
@@ -14,7 +16,7 @@ import { Cart } from 'src/app/classes/cart';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService) { }
+  constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService, public userservice:UserService) { }
   
   public get products():Products[]{
     return this.productservice.products;
@@ -24,7 +26,12 @@ export class CartComponent implements OnInit {
     return this.cartservice.loadCart();
   } 
 
+  public get user(): User | null{
+    return this.userservice.user;
+  }
+
   ngOnInit(): void {
+    this.productservice.requestProducts();
 
   }
 
@@ -45,7 +52,6 @@ export class CartComponent implements OnInit {
       let cartProduct = this.cart.find((item)=>item.productId === current.id)
 
       if(cartProduct){
-
         return accumulator + (Number(current.price) * cartProduct.count)
       }
       return accumulator
@@ -53,6 +59,12 @@ export class CartComponent implements OnInit {
   }
 
   checkout(){
+      console.log(this.user)
+
+      if(!this.user){
+        alert("you have to login to proceed the request")
+        return;
+      }
       if (this.cart.length < 1){
         return alert('You dont have any products to pay');
       }

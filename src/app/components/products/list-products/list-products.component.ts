@@ -50,7 +50,7 @@ export class ListProductsComponent implements OnInit {
     let product = this.products.find(item=>item.id === id);
 
     if (!product?.products_images){
-      return
+      return "../../../../assets/no-image.jpg"
     }
     for(let i =0; i<product.products_images.length;i++){
       return 'http://localhost:8080'+product.products_images[i].images;
@@ -82,23 +82,52 @@ export class ListProductsComponent implements OnInit {
     this.router.navigate(['/update/'+id]);
   }
 
-  remove(id:number){
-    this.productservice.removeProduct(id);
-  }
+  // remove(id:number){
+  //   this.productservice.removeProduct(id);
+  // }
+
 
   // Favorites
 
-  addFavorite(productid:number){
+  buttonFavorite(productid:number){
 
-    let obj:Favorite = {
-      productId: productid
+    if (!this.user){
+      alert("You have to login to use this ability");
+      return;
+    }
+    
+    let find = this.favorites.find((item)=>item.productId === productid)
+
+    if (!find){
+
+      let obj:Favorite = {
+        productId: productid
+      }
+      this.favoriteservice.addFavorite(obj);
+      return;
+
     }
 
-    this.favoriteservice.addFavorite(obj);
+    let icon = document.getElementById('favorite');
+    if(!icon){
+      return
+    }
 
-    alert("Added to Favorites");
+    icon.style.color = "#444444";
+    this.favoriteservice.removeFavorite(productid);
 
   }
 
+  iconFavorites(id:number){
+
+    let find = this.favorites.find((item)=>item.productId === id);
+
+    if(find){
+      return "color: #fe302f";
+    }else{
+      return "color: #444444";
+    }
+
+  }
 
 }

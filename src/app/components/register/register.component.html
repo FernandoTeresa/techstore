@@ -4,7 +4,7 @@
 
 <div class="main-block">
     <h1>Registration</h1>
-    <form #registerform="ngForm" (ngSubmit)="adduser(registerform.value)">
+    <form ngNativeValidate #registerform="ngForm" (ngSubmit)="adduser(registerform.value)">
       <hr>
       <label id="icon" for="email"><i class="fas fa-envelope"></i></label>
       <input type="text" name="email" id="email" placeholder="Email" required ngModel/><br>

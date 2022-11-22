@@ -1,4 +1,27 @@
 <div>
+    
+    <div class="container-fluid" >
+        <div class="row d-flex align-items-center justify-content-center" style="height: 250px;">
+            <div class="col-lg-10 col-md-8 ml-auto">
+                <div class="card">
+                    <div class="card-title text-center mt-3">
+                        <h3>Category</h3>
+                    </div>
+
+                    <ul class="list-group list-group-flush" *ngFor="let cat of this.categories">
+                        <li class="list-group-item">{{cat.name}}</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- falta bloquear a caixa para se houver mais fazer scroll, fazer reactivo.... quando adicionar aparecer logo
+        se calhar esta parte noutro componente ??!?!?! 
+    -->
+
+
     <div class="container-fluid">
          <div class="row d-flex align-items-center justify-content-center">
              <div class="col-lg-10 col-md-8 ml-auto">
@@ -11,12 +34,11 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <form #addCategoryform="ngForm" (ngSubmit)="addcategory(addCategoryform.value)">
+                                    <form ngNativeValidate #addCategoryform="ngForm" (ngSubmit)="addcategory(addCategoryform.value)">
                                         <div class="form-group">
                                             <label for="productname">Category Name:</label>
                                             <input type="text" class="form-control" id="categoryname"
-                                                placeholder="Enter Category Name" name="name" ngModel>
-                                            <div class="invalid-feedback">Category Name Can't Be Empty</div>
+                                                placeholder="Enter Category Name" name="name" ngModel required>
                                         </div>
 
                                         <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">Add Category</button>

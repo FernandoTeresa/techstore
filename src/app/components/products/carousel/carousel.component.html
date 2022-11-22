@@ -1,40 +1,28 @@
-<div class="container-lg my-3" style="width: 60%;">
+
+<div class="container-lg my-3">
+
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <!-- Carousel indicators -->
-        <ol class="carousel-indicators">
-            <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-            <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-        </ol>
-        
+       
         <!-- Wrapper for carousel items -->
         <div class="carousel-inner">
-            <div class="carousel-item active" *ngFor="let product of this.products">
+
+            <div class="carousel-item" *ngFor="let product of this.products; let i =index" [ngClass]="{'active':i===1}">
                 <a (click)="this.requestInfoProduct(product.id)">
                     <img [src]='image(product.id)' style="align-self: center;" class="d-block w-100 d-flex justify-content-center" [alt]="product.name">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{product.name}}</h5>
                     <p>{{product.price}}€</p>
-                    <div class="star-rating">
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-muted"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item text-muted"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item text-muted"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item text-muted"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item text-muted"><i class="fa fa-star-o"></i></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Carousel controls -->
-        <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" style="background-color: grey;"></span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" style="background-color: grey;"></span>
-        </a>
+            <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" style="background-color: grey;"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" style="background-color: grey;"></span>
+            </a> 
     </div>
 </div>

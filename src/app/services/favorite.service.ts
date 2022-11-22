@@ -1,3 +1,4 @@
+import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { Favorite } from './../classes/favorite';
 import { Injectable } from '@angular/core';
@@ -50,8 +51,6 @@ export class FavoriteService {
 
   removeFavorite(id:number){
     const index = this.favorites.findIndex((item:Favorite)=>item.productId === id);
-
-    console.log(index);
 
     if (index>-1){
       this.favorites.splice(index,1);

@@ -14,7 +14,6 @@ export class AddProductComponent implements OnInit {
 
   constructor(public productservice:ProductsService, public userservice:UserService) { }
 
-  // subcategories:SubCategories[]=[];
   public file: File |null = null;
 
   public get subcategories():SubCategories[]{
@@ -23,24 +22,29 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productservice.requestSubCategories();
-
   }
 
   addProduct(value:any){
+
+    let token = localStorage.getItem('token');
+
     console.log(value)
-    console.log(this.userservice.token)
-    if(!this.userservice.token){
+
+    if(!token){
       return
     }
 
+
     let HeaderWithImage = {
       headers: new HttpHeaders({
-        Authorization: 'bearer '+ this.userservice.token.access_token
+        Authorization: 'bearer '+ token
       })
     };
 
-    console.log(HeaderWithImage)
     const formData = new FormData();
+
+
+    console.log(this.file)
 
     if (!this.file){
       return
@@ -55,7 +59,6 @@ export class AddProductComponent implements OnInit {
 
     this.productservice.addProduct(formData, HeaderWithImage);
 
-    console.log(formData)
   }
 
   onChange(event:any) {

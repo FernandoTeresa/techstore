@@ -22,6 +22,7 @@ export class CarouselComponent implements OnInit {
   constructor(public productservice: ProductsService, private router: Router) { }
 
   ngOnInit(): void {
+    this.productservice.requestProducts();
 
   }
 
@@ -30,10 +31,12 @@ export class CarouselComponent implements OnInit {
     let image = this.products.find((item)=>item.id === productId)
 
     if (!image){
-      return 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'
+      return "";
     }
 
-
+    if (!image.products_images){
+      return "../../../../assets/no-image.jpg"
+    }
 
     return 'http://localhost:8080/'+image.products_images[0].images;
   }

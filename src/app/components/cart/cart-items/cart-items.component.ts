@@ -51,7 +51,6 @@ export class CartItemsComponent implements OnInit {
 
 increment(cartItem:Cart){
 
-
   for(let i=0;i<this.cart.length;i++){
 
     if(cartItem.productId === this.cart[i].productId){
@@ -66,11 +65,11 @@ increment(cartItem:Cart){
 
 decrement(cartItem:Cart){
 
-  if (cartItem.count > 0){
+  if (cartItem.count > 1){
     this.cartservice.removeCountToCart(cartItem)
     cartItem.count --;
   }else{
-    cartItem.count = 0;
+    cartItem.count = 1;
   }
 
 }
@@ -84,5 +83,6 @@ getProductsCart(cartItem:Cart){
   }
 
 }
+
 
 }
