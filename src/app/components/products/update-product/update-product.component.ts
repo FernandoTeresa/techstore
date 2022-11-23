@@ -1,3 +1,5 @@
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/classes/user';
 import { Categories } from './../../../classes/categories';
 import { SubCategories } from './../../../classes/sub-categories';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +14,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class UpdateProductComponent implements OnInit {
 
-  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute, public router:Router) { }
+  constructor(public productservice: ProductsService, private activatedroute: ActivatedRoute, public router:Router, public userservice:UserService) { }
 
   private _product: Products |null = null;
  
@@ -28,7 +30,16 @@ export class UpdateProductComponent implements OnInit {
     return this.productservice.subcategories;
   }
 
+  public get user():User |null{
+    return this.userservice.user;
+  }
+
   ngOnInit(): void {
+
+    if (!this.user){
+      this.router.navigate(['/'])
+      return
+    }
     this.productservice.requestSubCategories()
 
     this.activatedroute.paramMap.subscribe((params: any) => {

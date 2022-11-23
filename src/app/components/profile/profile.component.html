@@ -103,7 +103,7 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4 mb-4">
                                         <div class="form-group">
                                             <label for="country">New Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter New Password" ngModel>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter New Password" ngModel autocomplete="off">
                                             <span class="form-text small text-muted">
                                                 The password must be more then 8 characters, and must <em>not</em> contain spaces.
                                             </span>
@@ -113,7 +113,7 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4 mb-4">
                                         <div class="form-group">
                                             <label for="country">Repeat Password</label>
-                                            <input type="password" class="form-control" id="repeat_pass" name="repeat_pass" placeholder="Repeat Password" ngModel>
+                                            <input type="password" class="form-control" id="repeat_pass" name="repeat_pass" placeholder="Repeat Password" ngModel autocomplete="off">
                                             <span class="form-text small text-muted">
                                                 To confirm, type the new password again.
                                             </span>
@@ -126,7 +126,7 @@
                                 <div class="row gutters">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="text-right">
-                                            <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                                            <button type="button" name="cancel" class="btn btn-secondary" (click)="cancel()">Cancel</button>
                                             <button type="submit" id="submit" name="submit" class="btn btn-primary ms-4">Update</button>
                                         </div>
                                     </div>

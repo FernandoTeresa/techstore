@@ -2,6 +2,7 @@ import { UserService } from './../../services/user.service';
 import { User } from './../../classes/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthToken } from 'src/app/classes/AuthToken';
 
 @Component({
   selector: 'app-login',
@@ -19,14 +20,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login_form(value:User){
+  login_form(value:any){
 
     if (value.username === "" || value.password === ""){
       alert("you must enter the username or the password");
       return;
     }
 
-    this.userservice.getToken(value);
+    this.userservice.requestToken(value).subscribe((res:AuthToken)=>{
+      this.userservice.setToken(res);
+    });
+  
     this.router.navigate(['/']);
 
 

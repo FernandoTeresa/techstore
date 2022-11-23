@@ -5,7 +5,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/classes/order';
 import { Products } from 'src/app/classes/products';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { OrderItem } from 'src/app/classes/order-item';
 
@@ -29,20 +29,18 @@ export class OrderComponent implements OnInit {
     return this.userservice.user;
   }
 
-  private _userInfo: UserInfos | null = null;
-
   public get userInfo(): UserInfos | null {
     return this.userservice.userInfo;
   }
 
-  public set userInfo(value: UserInfos | null) {
-    this._userInfo = value;
-  }
 
-
-  constructor(private activatedroute: ActivatedRoute, public productservice:ProductsService, public orderservice:OrderService, public userservice:UserService) { }
+  constructor(private activatedroute: ActivatedRoute, public productservice:ProductsService, public orderservice:OrderService, public userservice:UserService, public router:Router) { }
 
   ngOnInit(): void {
+    if (!this.user){
+      this.router.navigate(['/'])
+      return;
+    }
     this.activatedroute.paramMap.subscribe((params: any) => {
       const id = +params.get('id');
 

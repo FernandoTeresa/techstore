@@ -4,6 +4,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { Products } from 'src/app/classes/products';
 import { HttpHeaders } from '@angular/common/http';
+import { User } from 'src/app/classes/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -12,7 +14,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class AddProductComponent implements OnInit {
 
-  constructor(public productservice:ProductsService, public userservice:UserService) { }
+  constructor(public productservice:ProductsService, public userservice:UserService, public router:Router) { }
 
   public file: File |null = null;
 
@@ -20,7 +22,15 @@ export class AddProductComponent implements OnInit {
     return this.productservice.subcategories
   }
 
+  public get user():User | null{
+    return this.userservice.user;
+  }
+
   ngOnInit(): void {
+    if (!this.user){
+      this.router.navigate(['/'])
+      return
+    }
     this.productservice.requestSubCategories();
   }
 

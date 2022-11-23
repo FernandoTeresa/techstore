@@ -36,36 +36,43 @@
 
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Name:</span>
+                            <span class="input-group-text">Name:</span>
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name"  [(ngModel)]="product.name" >
                         </div>
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Description::</span>
+                            <span class="input-group-text">Description::</span>
                             <textarea class="form-control" aria-label="With textarea" name="desc" [(ngModel)]="product.desc" ></textarea>
                         </div>
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Price:</span>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="price" [(ngModel)]="product.price" >
+                            <span class="input-group-text">Price:</span>
+                            <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="price" [(ngModel)]="product.price" >
                         </div>
                        
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Stock:</span>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="stock" [(ngModel)]="product.stock" >
+                            <span class="input-group-text">Stock:</span>
+                            <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="stock" [(ngModel)]="product.stock" >
                         </div>
 
 
                         <div class="input-group mb-3">
 
-                           <span class="input-group-text" id="basic-addon1">Sub Categories:</span>
-                            <select class="form-control" id="exampleFormControlSelect1" name="sub_categories_id" *ngIf="product.sub_categories">
-                                <option *ngFor="let subcat of this.subcategories" [value]="subcat.id" name="sub_categories_id" [(ngModel)]="product.sub_categories.id">{{subcat.name}}</option>
+                           <span class="input-group-text" >Sub Categories:</span>
+                            <select class="form-control" id="Select1" name="sub_categories_id" *ngIf="product.sub_categories">
+                                <option *ngFor="let subcat of this.subcategories; let i = index" [value]="subcat.id" name="sub_categories_id" [(ngModel)]="subcat.id">{{subcat.name}}</option>
                             </select>
-            
+
+                            <!-- introduzir a escolha das categorias e depois as sub categorias com o cascade select ou o dropdown cascade 
+                            
+                            -->
 
 
                         </div>
+
+
+
+
 
                         <div class="input-group mb-3">
                             <input type="file" class="form-control" id="inputGroupFile02" />

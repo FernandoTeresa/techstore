@@ -29,8 +29,9 @@ export class ProfileComponent implements OnInit {
     this.userservice.getUser();
     this.userservice.getUserInfo();
 
-    if(!this.user){
-      this.userservice.getUser();
+    if (!this.user){
+      this.router.navigate(['/'])
+      return
     }
 
     if (!this.userInfo){
@@ -77,6 +78,10 @@ export class ProfileComponent implements OnInit {
     }
 
     
+  }
+
+  cancel(){
+    this.router.navigate(['/']);
   }
 
 

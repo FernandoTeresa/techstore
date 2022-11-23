@@ -23,9 +23,11 @@ import {NgxPrintModule} from 'ngx-print';
 import { OrderComponent } from './components/orders/order/order.component';
 import { ListordersComponent } from './components/orders/listorders/listorders.component';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { SubCategoriesComponent } from './components/sub-categories/sub-categories.component';
+import { CategoriesComponent } from './components/categories/categories/categories.component';
+import { SubCategoriesComponent } from './components/sub-categories/sub-categories/sub-categories.component';
 import { FavoritesComponent } from './components/products/favorites/favorites.component';
+import { ListCategoriesComponent } from './components/categories/list-categories/list-categories.component';
+import { ListSubCategoriesComponent } from './components/sub-categories/list-sub-categories/list-sub-categories.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { FavoritesComponent } from './components/products/favorites/favorites.co
     AddProductComponent,
     CategoriesComponent,
     SubCategoriesComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ListCategoriesComponent,
+    ListSubCategoriesComponent
   ],
   imports: [
     BrowserModule,

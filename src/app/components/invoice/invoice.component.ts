@@ -30,6 +30,11 @@ export class InvoiceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.user){
+      this.router.navigate(['/'])
+      return
+    }
+
     this.cart = this.cartservice.loadCart();
 
     this.productservice.getProducts().subscribe((res: Products[]) => {

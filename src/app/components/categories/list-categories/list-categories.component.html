@@ -1,0 +1,21 @@
+
+    <div class="container-fluid" >
+        <div class="row d-flex align-items-center justify-content-center" style="height: 250px;">
+            <div class="col-lg-10 col-md-8 ml-auto">
+                <div class="row align-items-center pt-md-2 mt-md-2 mb-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-title text-center mt-3">
+                                <h3>Category</h3>
+                            </div>
+                            <div class="card-body">
+                            <select class="form-select" size="5" aria-label="Category">
+                                <option selected disabled *ngFor="let cat of this.categories" [value]="cat.id">{{cat.name}}</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

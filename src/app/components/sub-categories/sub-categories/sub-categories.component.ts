@@ -17,13 +17,13 @@ export class SubCategoriesComponent implements OnInit {
   constructor(public productservice:ProductsService ) { }
 
   ngOnInit(): void {
-
+    this.productservice.requestSubCategories();
   }
 
   addSubCategory(value:SubCategories){
-    console.log(value)
-    this.productservice.addNewSubCategory(value);
-    window.location.reload()
+    this.productservice.addNewSubCategory(value).subscribe((res:SubCategories)=>{
+      this.productservice.requestSubCategories();
+    });
   }
 
 

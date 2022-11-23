@@ -181,15 +181,13 @@ export class ProductsService {
 
   addNewCategory(category:Categories){
 
-    this.http.post<Categories>('http://localhost:85/categories', category, Header).subscribe((res:Categories)=>{
-    })
+    return this.http.post<Categories>('http://localhost:85/categories', category, Header)
 
   }
 
   addNewSubCategory(subcategory:SubCategories){
 
-    this.http.post<SubCategories>('http://localhost:85/subcategories', subcategory, Header).subscribe((res:SubCategories)=>{
-    })
+    return this.http.post<SubCategories>('http://localhost:85/subcategories', subcategory, Header)
 
   }
 

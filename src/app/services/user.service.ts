@@ -55,6 +55,11 @@ export class UserService {
 
   getUser(){
     let token = localStorage.getItem('token');
+
+    if (!token){
+      return;
+    }
+
     Header.headers = Header.headers.set('Authorization', 'bearer '+token);
     
     return this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
@@ -68,6 +73,10 @@ export class UserService {
       }
     });
 
+  }
+
+  requestToken(value:any){
+    return this.http.post<AuthToken>('http://localhost:85/login', value, Header)
   }
 
   setUser(user:User){
@@ -99,6 +108,7 @@ export class UserService {
       localStorage.setItem('expiresToken', value.expires_in.toString());
 
       this.token = new AuthToken(value.access_token, value.expires_in);
+      this.getUser()
     }
 
   }

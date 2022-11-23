@@ -28,7 +28,8 @@ export class CheckoutComponent implements OnInit {
   
     this.cart = this.cartservice.loadCart();
     if (!this.user){
-      return;
+      this.router.navigate(['/'])
+      return
     }
 
     this.productservice.getProducts().subscribe((res: Products[]) => {

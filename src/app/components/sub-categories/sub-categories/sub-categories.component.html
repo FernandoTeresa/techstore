@@ -1,8 +1,10 @@
 <div>
+    <app-list-sub-categories></app-list-sub-categories>
+
     <div class="container-fluid">
          <div class="row d-flex align-items-center justify-content-center">
              <div class="col-lg-10 col-md-8 ml-auto">
-                 <div class="row align-items-center pt-md-5 mt-md-5 mb-5">
+                 <div class="row align-items-center pt-md-2 mt-md-2 mb-5">
                      <div class="col-12">
                             <div class="card">
 
@@ -11,12 +13,12 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <form #addSubCategoryform="ngForm" (ngSubmit)="addSubCategory(addSubCategoryform.value)">
+                                    <form ngNativeValidate #addSubCategoryform="ngForm" (ngSubmit)="addSubCategory(addSubCategoryform.value)">
 
                                         <div class="form-group mb-2">
                                             <div *ngIf="this.categories">
-                                                <label for="exampleFormControlSelect1">Categories</label>
-                                                <select class="form-control" id="exampleFormControlSelect1" name="categories_id" ngModel>
+                                                <label for="Select1">Categories</label>
+                                                <select class="form-control" id="Select1" name="categories_id" ngModel required>
                                                     <option value="" disabled selected>Select the Category</option>
                                                     <option *ngFor="let cat of this.categories" [value]="cat.id">{{cat.name}}</option>
                                                 </select>
@@ -25,14 +27,11 @@
 
                                         <div class="form-group">
                                             <label for="productname">Sub Category Name:</label>
-                                            <input type="text" class="form-control" id="subcategoryname"
-                                                placeholder="Enter Category Name" name="name" ngModel>
-                                            <div class="invalid-feedback">Sub Category Name Can't Be Empty</div>
+                                            <input type="text" required class="form-control" id="subcategoryname" placeholder="Enter Category Name" name="name" ngModel>
                                         </div>
 
                                         <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">Add Sub Category</button>
                                     </form>
-                                
                                 </div>
                             </div>
                      </div>

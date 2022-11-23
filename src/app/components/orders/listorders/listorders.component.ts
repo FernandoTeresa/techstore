@@ -22,6 +22,7 @@ export class ListordersComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.user){
+      this.router.navigate(['/'])
       return; 
     }
 
