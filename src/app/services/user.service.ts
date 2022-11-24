@@ -180,18 +180,6 @@ export class UserService {
     this.userInfo = new UserInfos(userInfo.id, userInfo.address_1, userInfo.address_2, userInfo.city, userInfo.postal_code, userInfo.country, userInfo.mobile, userInfo.telephone, userInfo.users_id);
   }
 
-  // checkPass(username:string, password:string){
-  //   let data:any={
-  //     username: username,
-  //     password: password
-  //   }
-
-  //   return this.http.post<Code>('http://localhost:85/check', data, Header).subscribe((res:any)=>{
-  //     this.code = new Code(res);
-  //   });
-
-  // }
-
 
   UploadUser(value:File){
     //falta

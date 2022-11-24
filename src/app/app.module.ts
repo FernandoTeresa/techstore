@@ -28,6 +28,8 @@ import { SubCategoriesComponent } from './components/sub-categories/sub-categori
 import { FavoritesComponent } from './components/products/favorites/favorites.component';
 import { ListCategoriesComponent } from './components/categories/list-categories/list-categories.component';
 import { ListSubCategoriesComponent } from './components/sub-categories/list-sub-categories/list-sub-categories.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { ListSubCategoriesComponent } from './components/sub-categories/list-sub
     SubCategoriesComponent,
     FavoritesComponent,
     ListCategoriesComponent,
-    ListSubCategoriesComponent
+    ListSubCategoriesComponent,
+    SidebarComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
