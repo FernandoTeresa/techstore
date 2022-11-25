@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { Cart } from 'src/app/classes/cart';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,7 +13,10 @@ import { Cart } from 'src/app/classes/cart';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public router:Router, public userservice: UserService, public cartservice: CartService) { }
+  showNav: Boolean = false;
+
+  constructor(public router:Router, public userservice: UserService, public cartservice: CartService) {
+  }
 
   public get user(): User | null {
     return this.userservice.user;
@@ -70,5 +74,15 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/favorites']);
   }
 
+  toggleNav(){
+    let x = <HTMLElement>document.getElementById("mySidenav");
+    if (this.showNav === false){
+      this.showNav = true;
+      x.style.width = "250px";
+    } else {
+      this.showNav = false;
+      x.style.width = "0";
+    }
 
+  }
 }

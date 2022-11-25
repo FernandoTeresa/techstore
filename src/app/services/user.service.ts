@@ -158,7 +158,15 @@ export class UserService {
     }
 
     this.http.put('http://localhost:85/user/'+ this.user.id, value, Header).subscribe((res:any)=>{
-    })
+
+    },(err)=>{
+
+      let errorPass = err.error.old_password
+        
+      alert(errorPass);
+    
+
+    });
 
   }
 

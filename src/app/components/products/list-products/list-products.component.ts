@@ -82,11 +82,6 @@ export class ListProductsComponent implements OnInit {
     this.router.navigate(['/update/'+id]);
   }
 
-  // remove(id:number){
-  //   this.productservice.removeProduct(id);
-  // }
-
-
   // Favorites
 
   buttonFavorite(productid:number){

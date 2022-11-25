@@ -23,8 +23,6 @@ export class ProfileComponent implements OnInit {
     return this.userservice.userInfo;
   }
 
-
-
   ngOnInit(): void {
     this.userservice.getUser();
     this.userservice.getUserInfo();
@@ -45,39 +43,44 @@ export class ProfileComponent implements OnInit {
     }
 
     let pass = <HTMLInputElement>document.getElementById("password");
-    let repeat_pass = <HTMLInputElement>document.getElementById("repeat_pass");
-     
-    if (pass.value != repeat_pass.value){
-          alert("Passwords dont match");
-          pass.value= '';
-          repeat_pass.value = '';  
+    let repeat_pass = <HTMLInputElement>document.getElementById("raw_password");
+    let old_pass = <HTMLInputElement>document.getElementById("old_password");
+    
+    if (pass.value != "" && old_pass.value === "" ){
+      alert("You have to introduce the current password first");
+        old_pass.value = '';
+        pass.value= '';
+        repeat_pass.value = '';
     }else{
 
-      let data:any={
-        address_1: value.address_1,
-        address_2: value.address_2,
-        city: value.city,
-        country: value.country,
-        first_name: value.first_name,
-        last_name: value.last_name,
-        mobile: value.mobile,
+      if (pass.value != repeat_pass.value){
+            alert("Password and Confirm password dont match");
+            pass.value= '';
+            repeat_pass.value = '';  
+      }else{
 
-        password: value.password,
-        postal_code: value.postal_code,
-        email: this.user.email,
-        telephone: value.telephone,
+        let data:any={
+          address_1: value.address_1,
+          address_2: value.address_2,
+          city: value.city,
+          country: value.country,
+          first_name: value.first_name,
+          last_name: value.last_name,
+          mobile: value.mobile,
+          old_password: value.old_password,
+          raw_password: value.raw_password,
+          password: value.password,
+          postal_code: value.postal_code,
+          email: this.user.email,
+          telephone: value.telephone,
+        }
+        if (data.password != ""){
+          this.userservice.logout();
+          this.router.navigate(['/']);
+        }
+        this.userservice.updateUser(data);
       }
-
-      console.log(data)
-      if (data.password != ""){
-        console.log("parou aqui")
-        this.userservice.logout();
-        this.router.navigate(['/']);
-      }
-      this.userservice.updateUser(data);
-    }
-
-    
+    }   
   }
 
   cancel(){
