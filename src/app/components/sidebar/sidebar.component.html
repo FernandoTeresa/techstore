@@ -1,9 +1,41 @@
 
 <div>
-    <div id="mySidenav" class="sidenav">
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
+    <div id="mySidenav" class="sidenav" [ngClass]="this.changeTheme()">
+
+
+        <div *ngFor="let cat of this.categories">
+
+            <p>
+                <a (click)="collapse.toggle()" [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample" style="font-size:larger;">
+                   {{cat.name}}
+                </a>
+            </p>
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="!isCollapsed">
+
+                <div *ngFor="let sub of this.SubCategories">
+
+                    <div *ngIf="sub.categories.id === cat.id">
+
+                        <a style="font-size:medium; color: bisque;">{{sub.name}}</a>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <hr>
+
+        </div>
+            
+
+
+
     </div>
+
 </div>
+
+
+

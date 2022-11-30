@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit {
 
   showNav: Boolean = false;
 
+  theme: Boolean = false;
+
   constructor(public router:Router, public userservice: UserService, public cartservice: CartService) {
   }
 
@@ -27,7 +29,15 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let local = localStorage.getItem("theme")
+    if(!local){
+      return;
+    }
+    this.theme = JSON.parse(local);
+    this.check();
+
     this.userservice.getUser();
+
   }
 
   logout(){
@@ -85,4 +95,37 @@ export class NavbarComponent implements OnInit {
     }
 
   }
+  
+  onChange(event:any) {
+    let radioStatus = event.target.checked;
+    localStorage.setItem("theme", radioStatus);
+
+    window.location.reload();
+
+  }
+
+  check(){
+    let x = document.getElementById("toggle") as HTMLInputElement
+
+    if( this.theme === true && x.checked ===false){
+      x.checked = true;
+    }else if (this.theme === false && x.checked ===true){
+      x.checked = false
+    }
+
+  }
+
+  darkMode(){
+    if (this.theme === true){
+      return 'bg-dark';
+    }else{
+      return 'bg-primary';
+    }
+  }
+
+
+
+
+
+
 }

@@ -30,6 +30,7 @@ import { ListCategoriesComponent } from './components/categories/list-categories
 import { ListSubCategoriesComponent } from './components/sub-categories/list-sub-categories/list-sub-categories.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { FilterComponent } from './components/filter/filter.component';
     HttpClientModule,
     FormsModule,
     TooltipModule.forRoot(),
-    NgxPrintModule
+    NgxPrintModule,
+    NgbCollapseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

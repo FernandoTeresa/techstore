@@ -24,11 +24,11 @@ export class AppComponent {
     return this.userservice.token
   }
 
+
+
   ngOnInit(): void {
-
+ 
     this.cartservice.loadCart();
-
-
     let token_time = localStorage.getItem('expiresToken');
     
     if (!this.token){
@@ -47,6 +47,24 @@ export class AppComponent {
     if (date > expires || date > this.token.expires_in){
       this.userservice.logout();
       this.router.navigate(['/login']);
+    }
+
+  }
+
+
+  changeTheme(){
+    let theme = localStorage.getItem('theme')
+
+    if(!theme){
+      return;
+    }
+
+    let darkMode = JSON.parse(theme);
+
+    if (darkMode === true){
+      return 'bg-secondary'
+    }else{
+      return '';
     }
 
   }

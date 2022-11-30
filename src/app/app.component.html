@@ -1,13 +1,17 @@
-<div style="margin-bottom:20px;">
-    <app-navbar></app-navbar>
-</div>
+<div [ngClass]="this.changeTheme()">
 
-<div>
-    <div>
-        <app-sidebar></app-sidebar>
-    </div>  
-
-    <div>
-        <router-outlet></router-outlet>
+    <div style="margin-bottom:20px;">
+        <app-navbar></app-navbar>
     </div>
+
+    <div>
+        <div>
+            <app-sidebar></app-sidebar>
+        </div>  
+
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
 </div>

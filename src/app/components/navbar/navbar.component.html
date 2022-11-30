@@ -1,127 +1,140 @@
-<div class="nav_bar position-sticky">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+<nav>
+  <div class="nav_bar position-sticky">
+    <nav class="navbar navbar-expand-sm navbar-dark" [ngClass]="darkMode()" >
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-sm-0">
 
-          <li class="nav-item">
-            <a class="nav-link" (click)="toggleNav()"><i class="fas fa-bars"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" (click)="home()">Home</a>
-          </li>
-            <li class="nav-item" *ngIf="!this.user">
-              <a class="nav-link" aria-current="page" (click)="login()">Login</a>
+            <li class="nav-item">
+              <a class="nav-link" (click)="toggleNav()"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item" *ngIf="!this.user">
-              <a class="nav-link" (click)="register()">Register</a>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" (click)="home()">Home</a>
             </li>
-          <div *ngIf="this.user">
-            <li class="nav-item text-secondary">
-              <span (click)="profile()" class="nav-link" >Welcome {{this.user.first_name}} {{this.user.last_name}}</span>
-            </li>
-
-          </div>
-
-          <li class="nav-item">
-            <a class="nav-link" (click)="CartRedirect()" data-mdb-toggle="tooltip" title="Shopping Cart">
-              <i class="fas fa-shopping-cart"></i>
-              <span class="badge rounded-pill" style="color: red;" id="colorCount" >{{this.cartservice.totalCountCart()}}</span>
-          </a>
-          </li>
-
-          <li class="nav-item dropdown float-md-right" *ngIf="this.user">
-            
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
-              <i class="fas fa-user">
-              </i>
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dropdown">
-              <li>
-                <div class="px-3 pt-3 d-flex">
-                    <div *ngIf="this.user">
-                    <h6 class="mb-0 text-capitalize">{{this.user.first_name}} {{this.user.last_name}}</h6>
-                    <p class="mb-2">{{this.user.email}}</p>
-                    </div>
-                </div>
-
-            </li> 
-
-
-            <li>
-              <a class="dropdown-item" (click)="favorites()">
-                  <i class="fas fa-heart fa-fw me-3"></i>
-                  <span>Favorites</span>
-              </a>
-          </li>
-
-            <li>
-                <a class="dropdown-item" (click)="orders()">
-                    <i class="fas fa-dollar-sign fa-fw me-3"></i>
-                    <span>Last Orders</span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="dropdown-item" (click)="profile()">
-                    <i class="fas fa-users-cog fa-fw me-3"></i>
-                    <span>Profile</span>
-                </a>
-            </li>
-    
-            <li>
-                <a class="dropdown-item"(click)="logout()">
-                    <i class="fas fa-sign-out-alt me-3"></i>
-                    <span>Sign out</span>
-                </a>
-            </li>
-
-            </ul>
-          </li>
-
-          <!-- admin space add products and etc -->
-          <div *ngIf="this.user">
-            <div *ngIf="this.user.admin">
-
-              <li class="nav-item dropdown float-md-right">
-                
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
-                  <i class="fa-solid fa-cog fa-spin"></i>
-                </a>
-
-                <ul class="dropdown-menu" aria-labelledby="dropdown">
-      
-                <li>
-                    <a class="dropdown-item" (click)="addProduct()">
-                      <i class="fa-solid fa-clipboard-list fa-fw me-3"></i>
-                        <span>Add Product</span>
-                    </a>
-                </li>
-            
-                <li>
-                    <a class="dropdown-item" (click)="addCategory()">
-                      <i class="fa-solid fa-bookmark fa-fw me-3"></i>
-                        <span>Add Category</span>
-                    </a>
-                </li>
-        
-                <li>
-                    <a class="dropdown-item"(click)="addSubCategory()">
-                        <i class="fas fa-sign-out-alt me-3"></i>
-                        <span>Add Sub Category</span>
-                    </a>
-                </li>
-      
-                </ul>
+              <li class="nav-item" *ngIf="!this.user">
+                <a class="nav-link" aria-current="page" (click)="login()">Login</a>
+              </li>
+              <li class="nav-item" *ngIf="!this.user">
+                <a class="nav-link" (click)="register()">Register</a>
+              </li>
+            <div *ngIf="this.user">
+              <li class="nav-item text-secondary">
+                <span (click)="profile()" class="nav-link" >Welcome {{this.user.first_name}} {{this.user.last_name}}</span>
               </li>
 
             </div>
-          </div>
+
+            <li class="nav-item">
+              <a class="nav-link" (click)="CartRedirect()" data-mdb-toggle="tooltip" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge rounded-pill" style="color: red;" id="colorCount" >{{this.cartservice.totalCountCart()}}</span>
+            </a>
+            </li>
+
+            <li class="nav-item dropdown float-md-right" *ngIf="this.user">
+              
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
+                <i class="fas fa-user">
+                </i>
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdown">
+                <li>
+                  <div class="px-3 pt-3 d-flex">
+                      <div *ngIf="this.user">
+                      <h6 class="mb-0 text-capitalize">{{this.user.first_name}} {{this.user.last_name}}</h6>
+                      <p class="mb-2">{{this.user.email}}</p>
+                      </div>
+                  </div>
+
+              </li> 
 
 
-        </ul>
+              <li>
+                <a class="dropdown-item" (click)="favorites()">
+                    <i class="fas fa-heart fa-fw me-3"></i>
+                    <span>Favorites</span>
+                </a>
+            </li>
+
+              <li>
+                  <a class="dropdown-item" (click)="orders()">
+                      <i class="fas fa-dollar-sign fa-fw me-3"></i>
+                      <span>Last Orders</span>
+                  </a>
+              </li>
+          
+              <li>
+                  <a class="dropdown-item" (click)="profile()">
+                      <i class="fas fa-users-cog fa-fw me-3"></i>
+                      <span>Profile</span>
+                  </a>
+              </li>
+      
+              <li>
+                  <a class="dropdown-item"(click)="logout()">
+                      <i class="fas fa-sign-out-alt me-3"></i>
+                      <span>Sign out</span>
+                  </a>
+              </li>
+
+              </ul>
+            </li>
+
+            <!-- admin space add products and etc -->
+            <div *ngIf="this.user">
+              <div *ngIf="this.user.admin">
+
+                <li class="nav-item dropdown float-md-right">
+                  
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
+                    <i class="fa-solid fa-cog fa-spin"></i>
+                  </a>
+
+                  <ul class="dropdown-menu" aria-labelledby="dropdown">
+        
+                  <li>
+                      <a class="dropdown-item" (click)="addProduct()">
+                        <i class="fa-solid fa-clipboard-list fa-fw me-3"></i>
+                          <span>Add Product</span>
+                      </a>
+                  </li>
+              
+                  <li>
+                      <a class="dropdown-item" (click)="addCategory()">
+                        <i class="fa-solid fa-bookmark fa-fw me-3"></i>
+                          <span>Add Category</span>
+                      </a>
+                  </li>
+          
+                  <li>
+                      <a class="dropdown-item"(click)="addSubCategory()">
+                          <i class="fas fa-sign-out-alt me-3"></i>
+                          <span>Add Sub Category</span>
+                      </a>
+                  </li>
+        
+                  </ul>
+                </li>
+
+              </div>
+            </div>
+
+            <li class="nav-item"  >
+
+              <a class="nav-link"> 
+                <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="toggle" (change)="onChange($event)" />
+                <label class="form-check-label" for="flexSwitchCheckDefault">Theme</label>
+                </div>
+
+              </a>
+
+            </li>
+
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-</div>
+    </nav>
+  </div>
+</nav>

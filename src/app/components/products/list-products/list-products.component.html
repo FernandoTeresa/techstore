@@ -16,7 +16,7 @@
                     <!-- Single Product -->
                 <div class="col-md-6 col-lg-4 col-xl-3 m-4" *ngFor="let product of products">
                         <div id="product-1" class="single-product">
-                                <div class="part-1" [ngStyle]="{'background': 'url(' + background(product.id) + ') no-repeat center'}">
+                                <div class="part-1" [ngStyle]="{'background': 'url(' + background(product.id) + ') no-repeat center'}" style="z-index: 2;">
                                         <ul>
                                                 <li><a (click)="addCart(product.id)"><i class="fas fa-shopping-cart"></i></a></li>
                                                 <li><a (click)="buttonFavorite(product.id)"><i class="fa-solid fa-heart favorite" id="favorite" [style]="this.iconFavorites(product.id)"></i></a></li>        
@@ -28,7 +28,7 @@
                                                 <!-- admin -->
                                         </ul>
                                 </div>
-                                <div class="part-2">
+                                <div class="part-2" style="z-index: 4;">
                                         <h3 class="product-title">{{product.name}}</h3>
                                         <h4 class="product-price">{{product.price}}€</h4>
                                 </div>
