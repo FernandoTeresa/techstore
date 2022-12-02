@@ -1,0 +1,39 @@
+<div class="row">
+
+
+    <div class="col-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <ul *ngFor="let product of this.productSearch">
+            <li class="list-group-item list-group-item-action active" (click)="this.getId(product.id)" [id]="product.id" data-toggle="list" role="tab" aria-controls="home">{{product.name}}
+            </li>
+        </ul>
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="col-8">
+      <div class="tab-content" id="nav-tabContent">
+        <div *ngIf="this.searchproduct">
+            <div *ngFor="let product of this.searchproduct">
+                <!-- imagens -->
+                <!-- melhorar o visual -->
+                <!-- mudar a cor da letra ou letras do search -->
+                {{product.name}}
+                {{product.desc}}
+                {{product.price}}
+
+            </div>
+            
+        </div>
+
+
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list"></div>
+      </div>
+    </div>
+
+
+  </div>

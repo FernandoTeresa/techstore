@@ -16,6 +16,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { UpdateProductComponent } from './components/products/update-product/update-product.component';
+import { SearchComponent } from './components/search/search/search.component';
+import { ListComponent } from './components/search/list/list.component';
 
 const routes: Routes = [
   { path: '', component: ListProductsComponent},
@@ -33,7 +35,8 @@ const routes: Routes = [
   { path: 'addProduct', component: AddProductComponent},
   { path: 'addCategory', component:CategoriesComponent},
   { path: 'addSubCategory', component:SubCategoriesComponent},
-  { path: 'favorites', component:FavoritesComponent}
+  { path: 'favorites', component:FavoritesComponent},
+  { path: 'search', component:ListComponent}
 
 ];
 

@@ -1,0 +1,13 @@
+<form #searchform="ngForm" (ngSubmit)="search(searchform.value)">
+    <div class="input-group">
+     
+      <input type="text" class="form-control" placeholder="Search" name="search" ngModel>
+
+      <div class="input-group-btn">
+        <button class="btn btn-outline-info ms-2" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+      </div>
+
+    </div>
+  </form>

@@ -31,6 +31,8 @@ import { ListSubCategoriesComponent } from './components/sub-categories/list-sub
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchComponent } from './components/search/search/search.component';
+import { ListComponent } from './components/search/list/list.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
     ListCategoriesComponent,
     ListSubCategoriesComponent,
     SidebarComponent,
-    FilterComponent
+    FilterComponent,
+    SearchComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

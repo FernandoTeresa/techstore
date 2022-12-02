@@ -1,3 +1,4 @@
+import { FilterService } from './../../services/filter.service';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   theme: Boolean = false;
 
-  constructor(public router:Router, public userservice: UserService, public cartservice: CartService) {
+  constructor(public router:Router, public filterservice:FilterService ,public userservice: UserService, public cartservice: CartService) {
   }
 
   public get user(): User | null {
@@ -122,6 +123,8 @@ export class NavbarComponent implements OnInit {
       return 'bg-primary';
     }
   }
+
+ 
 
 
 
