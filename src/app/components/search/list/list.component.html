@@ -1,39 +1,46 @@
-<div class="row">
+<section style="background-color: #eee;">
+  <div class="text-center container py-5">
+    <h4 class="mt-4 mb-5"><strong>Bestsellers</strong></h4>
 
-
-    <div class="col-4">
-      <div class="list-group" id="list-tab" role="tablist">
-        <ul *ngFor="let product of this.productSearch">
-            <li class="list-group-item list-group-item-action active" (click)="this.getId(product.id)" [id]="product.id" data-toggle="list" role="tab" aria-controls="home">{{product.name}}
-            </li>
-        </ul>
-
-      </div>
-    </div>
-
-
-
-
-
-    <div class="col-8">
-      <div class="tab-content" id="nav-tabContent">
-        <div *ngIf="this.searchproduct">
-            <div *ngFor="let product of this.searchproduct">
-                <!-- imagens -->
-                <!-- melhorar o visual -->
-                <!-- mudar a cor da letra ou letras do search -->
-                {{product.name}}
-                {{product.desc}}
-                {{product.price}}
-
-            </div>
-            
+    <div class="row ">
+      <div class="col-lg-4 col-md-12 mb-4 d-inline-flex p-2" *ngFor="let product of this.productSearch">
+        <div class="card">
+          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/belt.webp"
+              class="w-100" />
+            <a href="#!">
+              <div class="mask">
+                <div class="d-flex justify-content-start align-items-end h-100">
+                  <h5><span class="badge bg-primary ms-2">New</span></h5>
+                </div>
+              </div>
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a href="" class="text-reset">
+              <h5 class="card-title mb-3">{{product.name}}</h5>
+            </a>
+            <a href="" class="text-reset">
+              <div *ngIf="this.getId(product.id)">
+              <p>{{this.product.categories?.name}} - {{this.product.sub_categories?.name}}</p>
+              </div>
+            </a>
+            <h6 class="mb-3">{{product.price}}€</h6>
+          </div>
         </div>
-
-
-        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list"></div>
       </div>
+
+      <!-- 
+        falta terminar 
+
+       -->
+
+      
+        
     </div>
-
-
   </div>
+</section>

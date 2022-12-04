@@ -26,7 +26,6 @@ export class ListComponent implements OnInit{
     return this.productservice.subcategories;
   }
 
-    searchproduct:Products[]=[]
 
   ngOnInit(): void {
     this.productservice.requestCategories();
@@ -38,10 +37,15 @@ export class ListComponent implements OnInit{
 
 
   getId(id:number){
-    let filter = this.productSearch.filter((item)=>item.id === id)
-    this.searchproduct = filter;
+    let filter = this.productservice.products.find((item)=>item.id === id)
 
-    console.log(this.searchproduct)
+    if(!filter){
+      return;
+    }
+
+    console.log(filter)
+    return filter;
+
   }
 
 
