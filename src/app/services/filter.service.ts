@@ -21,11 +21,18 @@ export class FilterService {
   constructor(private http: HttpClient) { }
 
   search(value:string){
+    this.products = [];
+    console.log(value)
+
+    if (value === ''){
+      return this.products = [];
+    }
+
    return this.http.post('http://localhost:85/search',value).subscribe((res:any)=>{
 
-    console.log(res)
-
       this.setProducts(res.Products);
+
+      console.log(res)
 
    })
   }

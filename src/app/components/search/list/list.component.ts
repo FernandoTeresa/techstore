@@ -28,24 +28,36 @@ export class ListComponent implements OnInit{
 
 
   ngOnInit(): void {
+    this.productservice.requestProducts();
     this.productservice.requestCategories();
     this.productservice.requestSubCategories();
   }
 
-
   //fazer com o onchange para fazer search onthefly
 
-
   getId(id:number){
-    let filter = this.productservice.products.find((item)=>item.id === id)
+    let filter = this.filterservice.products.find((item)=>item.id === id)
 
     if(!filter){
       return;
     }
-
-    console.log(filter)
+    
     return filter;
 
+  }
+
+  images(id: number) {
+
+    let product = this.filterservice.products.find(item=>item.id === id);
+
+    if (!product?.products_images){
+      return "../../../../assets/no-image.jpg"
+    }
+    
+    console.log(product)
+    return 'http://localhost:8080'+product.products_images[0].images;
+  
+    
   }
 
 

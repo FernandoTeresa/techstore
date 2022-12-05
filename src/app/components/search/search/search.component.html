@@ -1,10 +1,10 @@
-<form #searchform="ngForm" (ngSubmit)="search(searchform.value)">
+<form #searchform="ngForm">
     <div class="input-group">
      
-      <input type="text" class="form-control" placeholder="Search" name="search" ngModel>
+      <input type="text" class="form-control" placeholder="Search" name="search" id="search" (keyup)="inputText($event)">
 
       <div class="input-group-btn">
-        <button class="btn btn-outline-info ms-2" type="submit">
+        <button class="btn btn-outline-info ms-2" type="submit" (click)="listSearch()">
             <i class="fa fa-search"></i>
         </button>
       </div>
