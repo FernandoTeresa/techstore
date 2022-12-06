@@ -51,6 +51,20 @@ export class FilterService {
     }
   }
 
+  searchByPrice(value:any){
+    return this.http.post('http://localhost:85/search/byprice', value)
+  }
+
+  searchByCategories(value:any){
+    return this.http.post('http://localhost:85/search/bycategories', value)
+  }
+
+  searchBySubcategories(value:any){
+    return this.http.post('http://localhost:85/search/bysubcategories', value)
+  }
+
+
+
 
 
 }
