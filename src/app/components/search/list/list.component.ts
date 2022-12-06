@@ -3,7 +3,7 @@ import { Categories } from './../../../classes/categories';
 import { FilterService } from './../../../services/filter.service';
 import { Products } from 'src/app/classes/products';
 import { ProductsService } from './../../../services/products.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit{
+
 
   constructor(public productservice: ProductsService, public filterservice:FilterService){ }
 
@@ -26,17 +27,14 @@ export class ListComponent implements OnInit{
     return this.productservice.subcategories;
   }
 
-
   ngOnInit(): void {
     this.productservice.requestProducts();
     this.productservice.requestCategories();
     this.productservice.requestSubCategories();
   }
 
-  //fazer com o onchange para fazer search onthefly
-
   getId(id:number){
-    let filter = this.filterservice.products.find((item)=>item.id === id)
+    let filter = this.productSearch.find((item)=>item.id === id)
 
     if(!filter){
       return;
@@ -48,16 +46,18 @@ export class ListComponent implements OnInit{
 
   images(id: number) {
 
-    let product = this.filterservice.products.find(item=>item.id === id);
+    let product = this.productSearch.find(item=>item.id === id);
 
     if (!product?.products_images){
       return "../../../../assets/no-image.jpg"
     }
     
-    console.log(product)
     return 'http://localhost:8080'+product.products_images[0].images;
-  
-    
+  }
+
+  numberResults(){
+    let results = this.productSearch.length;
+    return results;
   }
 
 

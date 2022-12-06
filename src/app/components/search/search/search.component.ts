@@ -12,10 +12,9 @@ export class SearchComponent implements OnInit{
 
   constructor(public filterservice:FilterService, public router:Router){}
 
+
   ngOnInit(){
   }
-
-  
 
   listSearch(){
     this.router.navigate(['/search']);
@@ -24,11 +23,11 @@ export class SearchComponent implements OnInit{
   inputText(event:any) {
     let InputSearch = event.target.value;
 
+
     let send = {
       search:InputSearch
     }
 
-    console.log(send)
     this.filterservice.search(send.search);
 
   }

@@ -29,10 +29,10 @@ import { FavoritesComponent } from './components/products/favorites/favorites.co
 import { ListCategoriesComponent } from './components/categories/list-categories/list-categories.component';
 import { ListSubCategoriesComponent } from './components/sub-categories/list-sub-categories/list-sub-categories.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { FilterComponent } from './components/filter/filter.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search/search.component';
 import { ListComponent } from './components/search/list/list.component';
+import { FilterComponent } from './components/search/filter/filter.component';
 
 
 @NgModule({

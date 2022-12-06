@@ -18,6 +18,8 @@ export class FilterService {
 
   products:Products[]=[];
 
+  currentSearch = "";
+
   constructor(private http: HttpClient) { }
 
   search(value:string){
@@ -28,6 +30,7 @@ export class FilterService {
       return this.products = [];
     }
 
+    this.currentSearch = value;
    return this.http.post('http://localhost:85/search',value).subscribe((res:any)=>{
 
       this.setProducts(res.Products);
