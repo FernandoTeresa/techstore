@@ -33,6 +33,8 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search/search.component';
 import { ListComponent } from './components/search/list/list.component';
 import { FilterComponent } from './components/search/filter/filter.component';
+import { MultirangeComponent } from './components/search/multirange/multirange.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
@@ -63,12 +65,14 @@ import { FilterComponent } from './components/search/filter/filter.component';
     SidebarComponent,
     FilterComponent,
     SearchComponent,
-    ListComponent
+    ListComponent,
+    MultirangeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatSliderModule,
     FormsModule,
     TooltipModule.forRoot(),
     NgxPrintModule,

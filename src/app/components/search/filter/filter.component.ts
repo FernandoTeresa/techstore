@@ -40,12 +40,7 @@ export class FilterComponent {
     this.price= event.target.value
     console.log(event.target.value)
 
-
   }
-  
 
-
-
-  
 
 }
