@@ -19,7 +19,7 @@ import { CartComponent } from './components/cart/cart/cart.component';
 import { CartItemsComponent } from './components/cart/cart-items/cart-items.component';
 import { CheckoutComponent } from './components/cart/checkout/checkout.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
-import {NgxPrintModule} from 'ngx-print';
+import { NgxPrintModule } from 'ngx-print';
 import { OrderComponent } from './components/orders/order/order.component';
 import { ListordersComponent } from './components/orders/listorders/listorders.component';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
@@ -34,7 +34,10 @@ import { SearchComponent } from './components/search/search/search.component';
 import { ListComponent } from './components/search/list/list.component';
 import { FilterComponent } from './components/search/filter/filter.component';
 import { MultirangeComponent } from './components/search/multirange/multirange.component';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule } from '@angular/material/slider';
+import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+
 
 
 @NgModule({
@@ -73,9 +76,11 @@ import {MatSliderModule} from '@angular/material/slider';
     AppRoutingModule,
     HttpClientModule,
     MatSliderModule,
+    NgxBootstrapSliderModule,
     FormsModule,
     TooltipModule.forRoot(),
     NgxPrintModule,
+    NgxSliderModule,
     NgbCollapseModule
   ],
   providers: [],

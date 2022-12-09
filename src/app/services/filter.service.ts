@@ -18,6 +18,11 @@ export class FilterService {
 
   products:Products[]=[];
 
+  subcategoriId:any;
+  rangeMin: any;
+  rangeMax: any;
+  stock:boolean = true;
+
   currentSearch = "";
 
   constructor(private http: HttpClient) { }
@@ -31,11 +36,21 @@ export class FilterService {
     }
 
     this.currentSearch = value;
-   return this.http.post('http://localhost:85/search',value).subscribe((res:any)=>{
+
+    let data={
+      search: value,
+      min: this.rangeMin,
+      max: this.rangeMax,
+      sub_categories_id: this.subcategoriId,
+      stock: this.stock
+    }
+   return this.http.post('http://localhost:85/search',data).subscribe((res:any)=>{
 
       this.setProducts(res.Products);
 
       console.log(res)
+
+      //problema na api nao manda resultados
 
    })
   }
@@ -51,20 +66,19 @@ export class FilterService {
     }
   }
 
-  searchByPrice(value:any){
-    return this.http.post('http://localhost:85/search/byprice', value)
+
+  getFilterStock(stock:any){
+    this.stock = stock;
   }
 
-  searchByCategories(value:any){
-    return this.http.post('http://localhost:85/search/bycategories', value)
+  getFilterRange(max:any, min:any){
+    this.rangeMax = max;
+    this.rangeMin = min;
   }
 
-  searchBySubcategories(value:any){
-    return this.http.post('http://localhost:85/search/bysubcategories', value)
+  getFilterSubcategorie(sucategorieId:any){
+    this.subcategoriId = sucategorieId;
   }
-
-
-
 
 
 }

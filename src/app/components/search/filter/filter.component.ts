@@ -19,9 +19,10 @@ export class FilterComponent {
       return this.produtservice.subcategories;
     }
 
-    public CategorieId:any
-    public price:any
-
+    public sucategorieId:any
+    public priceMin: any;
+    public priceMax: any;
+    public stock:boolean=true;
     
 
   constructor(public filterservice:FilterService, public produtservice:ProductsService){}
@@ -29,17 +30,31 @@ export class FilterComponent {
   onchangeIdCategorie(event:any){
 
     if (event.target.checked){
-      this.CategorieId = event.target.id
+      this.sucategorieId = event.target.id
     }else{
       return;
     }
 
+    this.filterservice.getFilterSubcategorie(this.sucategorieId);
   }
 
-  onchangePrice(event:any){
-    this.price= event.target.value
-    console.log(event.target.value)
+  addItem(eventData:{min:any, max:any}) {
+    this.priceMin = eventData.min;
+    this.priceMax = eventData.max;
 
+    this.filterservice.getFilterRange(this.priceMin, this.priceMax);
+  }
+
+  stockExist(event:any){
+    
+    if (event.target.id === "radio1"){
+      this.stock = true;
+    }else{
+      this.stock = false;
+    }
+
+    this.filterservice.getFilterStock(this.stock);
+    
   }
 
 

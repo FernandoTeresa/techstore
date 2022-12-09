@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Options } from "@angular-slider/ngx-slider";
 
 @Component({
   selector: 'app-multirange',
@@ -7,14 +8,24 @@ import { Component } from '@angular/core';
 })
 export class MultirangeComponent {
 
+  @Output() newItemEvent = new EventEmitter<any>();
 
-  change(event:any){
+  value: number = 1;
+  highValue: number = 2500;
+  options: Options = {
+    floor: 1,
+    ceil: 2500
+  };
 
-    console.log(event.target);
 
-    // pelo id
-
-    
+  addNewItem(){
+    this.newItemEvent.emit({min:this.value, max:this.highValue});
   }
+
+
+
+
+
+  
 
 }
