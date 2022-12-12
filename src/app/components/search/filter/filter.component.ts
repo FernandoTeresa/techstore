@@ -19,9 +19,8 @@ export class FilterComponent {
       return this.produtservice.subcategories;
     }
 
-    public sucategorieId:any
-    public priceMin: any;
-    public priceMax: any;
+    public subcategorieId:any
+
     public stock:boolean=true;
     
 
@@ -30,19 +29,19 @@ export class FilterComponent {
   onchangeIdCategorie(event:any){
 
     if (event.target.checked){
-      this.sucategorieId = event.target.id
+      this.subcategorieId = event.target.id
     }else{
-      return;
+      this.subcategorieId = '';
     }
 
-    this.filterservice.getFilterSubcategorie(this.sucategorieId);
+    console.log(this.subcategorieId)
+
+    this.filterservice.getFilterSubcategorie(this.subcategorieId);
   }
 
   addItem(eventData:{min:any, max:any}) {
-    this.priceMin = eventData.min;
-    this.priceMax = eventData.max;
 
-    this.filterservice.getFilterRange(this.priceMin, this.priceMax);
+    this.filterservice.getFilterRange(eventData.max, eventData.min);
   }
 
   stockExist(event:any){

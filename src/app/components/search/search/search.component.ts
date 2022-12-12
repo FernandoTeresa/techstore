@@ -23,13 +23,13 @@ export class SearchComponent implements OnInit{
   inputText(event:any) {
     let InputSearch = event.target.value;
 
-
     let send = {
       search:InputSearch
     }
 
     this.filterservice.search(send.search);
 
+    this.listSearch();
   }
   
 

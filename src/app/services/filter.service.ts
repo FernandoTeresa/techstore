@@ -1,9 +1,7 @@
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Categories } from '../classes/categories';
 import { Products } from '../classes/products';
-import { SubCategories } from '../classes/sub-categories';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 const Header = {
   headers: new HttpHeaders({
@@ -14,22 +12,41 @@ const Header = {
 @Injectable({
   providedIn: 'root'
 })
-export class FilterService {
+export class FilterService{
 
   products:Products[]=[];
 
-  subcategoriId:any;
-  rangeMin: any;
-  rangeMax: any;
+  subcategoriId:any = '';
+  rangeMin: number = 1;
+  rangeMax: number = 2500;
   stock:boolean = true;
 
-  currentSearch = "";
+  currentSearch: string = '';
 
   constructor(private http: HttpClient) { }
 
+
+  request(data:any){
+
+    console.log(data)
+    return this.http.post('http://localhost:85/search',data).subscribe((res:any)=>{
+
+    console.log(res.Products)
+
+    this.setProducts(res.Products);
+
+ })
+
+
+ //ver tutorial do ngDoCheck, para ver do filtro
+ //https://www.youtube.com/watch?v=8PysoU6seeM
+
+
+  }
+
+
   search(value:string){
     this.products = [];
-    console.log(value)
 
     if (value === ''){
       return this.products = [];
@@ -39,20 +56,16 @@ export class FilterService {
 
     let data={
       search: value,
-      min: this.rangeMin,
       max: this.rangeMax,
+      min: this.rangeMin,
       sub_categories_id: this.subcategoriId,
       stock: this.stock
     }
-   return this.http.post('http://localhost:85/search',data).subscribe((res:any)=>{
 
-      this.setProducts(res.Products);
 
-      console.log(res)
+    this.request(data)
 
-      //problema na api nao manda resultados
-
-   })
+   
   }
 
   setProducts(products:Products[]){
@@ -74,6 +87,7 @@ export class FilterService {
   getFilterRange(max:any, min:any){
     this.rangeMax = max;
     this.rangeMin = min;
+
   }
 
   getFilterSubcategorie(sucategorieId:any){
