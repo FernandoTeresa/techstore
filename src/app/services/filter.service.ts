@@ -1,18 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, DoCheck } from '@angular/core';
 import { Products } from '../classes/products';
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Filter } from '../classes/filter';
 
-const Header = {
-  headers: new HttpHeaders({
-    Authorization: 'bearer '+ localStorage.getItem('token'), 
-  })
-};
 
 @Injectable({
   providedIn: 'root'
 })
-export class FilterService{
+export class FilterService implements DoCheck{
 
   products:Products[]=[];
 
@@ -20,16 +15,31 @@ export class FilterService{
   rangeMin: number = 1;
   rangeMax: number = 2500;
   stock:boolean = true;
-
   currentSearch: string = '';
+
+  filter:Filter | null = null;
 
   constructor(private http: HttpClient) { }
 
+  ngDoCheck(): void {
+    if (!this.filter){
+      return
+    }
 
-  request(data:any){
+    console.log(this.filter.max);
+    console.log(this.rangeMax)
 
-    console.log(data)
-    return this.http.post('http://localhost:85/search',data).subscribe((res:any)=>{
+    if (this.filter.max != this.rangeMax || this.filter.min != this.rangeMin || this.filter.stock != this.stock || this.filter.sub_categories_id != this.subcategoriId){
+      this.request();
+    }
+
+  }
+
+
+  request(){
+
+    console.log(this.filter)
+    return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
 
     console.log(res.Products)
 
@@ -37,13 +47,12 @@ export class FilterService{
 
  })
 
-
- //ver tutorial do ngDoCheck, para ver do filtro
- //https://www.youtube.com/watch?v=8PysoU6seeM
-
-
   }
 
+
+  setFilter(){
+    this.filter = new Filter (this.currentSearch, this.rangeMax, this.rangeMin, this.subcategoriId, this.stock);
+  }
 
   search(value:string){
     this.products = [];
@@ -54,18 +63,12 @@ export class FilterService{
 
     this.currentSearch = value;
 
-    let data={
-      search: value,
-      max: this.rangeMax,
-      min: this.rangeMin,
-      sub_categories_id: this.subcategoriId,
-      stock: this.stock
-    }
+    console.log(this.filter)
 
+    this.setFilter();
 
-    this.request(data)
+    this.request();
 
-   
   }
 
   setProducts(products:Products[]){
@@ -80,19 +83,18 @@ export class FilterService{
   }
 
 
-  getFilterStock(stock:any){
-    this.stock = stock;
-  }
+  // getFilterStock(stock:any){
+  //   this.stock = stock;
+  // }
 
-  getFilterRange(max:any, min:any){
-    this.rangeMax = max;
-    this.rangeMin = min;
+  // getFilterRange(max:any, min:any){
+  //   this.rangeMax = max;
+  //   this.rangeMin = min;
+  // }
 
-  }
-
-  getFilterSubcategorie(sucategorieId:any){
-    this.subcategoriId = sucategorieId;
-  }
+  // getFilterSubcategorie(sucategorieId:any){
+  //   this.subcategoriId = sucategorieId;
+  // }
 
 
 }

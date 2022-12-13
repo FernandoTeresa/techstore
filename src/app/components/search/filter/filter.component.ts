@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { Categories } from 'src/app/classes/categories';
+import { Filter } from 'src/app/classes/filter';
 import { SubCategories } from 'src/app/classes/sub-categories';
 import { FilterService } from 'src/app/services/filter.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -9,7 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
-export class FilterComponent {
+export class FilterComponent{
 
     public get categories():Categories[]{
       return this.produtservice.categories;
@@ -18,6 +19,10 @@ export class FilterComponent {
     public get subcategories():SubCategories[]{
       return this.produtservice.subcategories;
     }
+
+  public set filter(value: Filter | null) {
+    this.filterservice.filter = value;
+  }
 
     public subcategorieId:any
 
@@ -34,14 +39,26 @@ export class FilterComponent {
       this.subcategorieId = '';
     }
 
-    console.log(this.subcategorieId)
+    if (!this.filter){
+      return;
+    }
 
-    this.filterservice.getFilterSubcategorie(this.subcategorieId);
+    this.filter.sub_categories_id = this.subcategorieId
+
+    //this.filterservice.getFilterSubcategorie(this.subcategorieId);
   }
 
   addItem(eventData:{min:any, max:any}) {
+    if (!this.filter){
+      return;
+    }
 
-    this.filterservice.getFilterRange(eventData.max, eventData.min);
+    this.filter.max = eventData.max;
+    this.filter.min = eventData.min;
+
+    console.log(eventData)
+
+    //this.filterservice.getFilterRange(eventData.max, eventData.min);
   }
 
   stockExist(event:any){
@@ -52,8 +69,13 @@ export class FilterComponent {
       this.stock = false;
     }
 
-    this.filterservice.getFilterStock(this.stock);
-    
+    if (!this.filter){
+      return;
+    }
+
+    this.filter.stock = this.stock;
+
+    //this.filterservice.getFilterStock(this.stock);
   }
 
 
