@@ -20,45 +20,84 @@ export class FilterComponent{
       return this.produtservice.subcategories;
     }
 
-  public set filter(value: Filter | null) {
-    this.filterservice.filter = value;
-  }
-
-    public subcategorieId:any
-
+    public subcategoryId:any = ''
+    public max:any = 2500
+    public min:any = 1
     public stock:boolean=true;
+    public search:any = '';
+
+    private changeDetected:boolean = false;
+
+    public get filter():Filter | null{
+      return this.filterservice.filter;
+    }
     
 
   constructor(public filterservice:FilterService, public produtservice:ProductsService){}
 
+  ngOnInit(){
+    this.filterservice.setFilter();
+    this.filterservice.request();
+  }
+
+  ngDoCheck(){
+
+    if(!this.filter){
+      return
+    }
+
+    if (this.filter.search !== this.search){
+      this.changeDetected = true;
+      this.search = this.filter.search;
+    }
+
+    if (this.filter.max !== this.max){
+      this.changeDetected=true;
+      this.max = this.filter.max
+    }
+
+    if (this.filter.min !== this.min){
+      this.changeDetected=true;
+      this.min = this.filter.min
+    }
+
+    if (this.filter.stock !== this.stock){
+      this.changeDetected=true;
+      this.stock = this.filter.stock
+    }
+
+    if (this.filter.sub_categories_id !== this.subcategoryId){
+
+      //PROBLEMA NO SEARCH COM AS CATEGORIAS
+
+      this.changeDetected=true;
+      this.subcategoryId = this.filter.sub_categories_id
+    }
+
+    if (this.changeDetected){
+      this.filterservice.request();
+    }
+
+    this.changeDetected = false;
+
+  }
+
   onchangeIdCategorie(event:any){
 
     if (event.target.checked){
-      this.subcategorieId = event.target.id
+      this.subcategoryId = event.target.id
     }else{
-      this.subcategorieId = '';
+      this.subcategoryId = '';
     }
 
-    if (!this.filter){
-      return;
-    }
-
-    this.filter.sub_categories_id = this.subcategorieId
-
-    //this.filterservice.getFilterSubcategorie(this.subcategorieId);
+    this.filterservice.getFilterSubcategorie(this.subcategoryId);
   }
 
   addItem(eventData:{min:any, max:any}) {
-    if (!this.filter){
-      return;
-    }
+    this.max = eventData.max;
+    this.min = eventData.min;
 
-    this.filter.max = eventData.max;
-    this.filter.min = eventData.min;
-
-    console.log(eventData)
-
-    //this.filterservice.getFilterRange(eventData.max, eventData.min);
+    this.filterservice.getFilterRange(eventData.max, eventData.min);
   }
 
   stockExist(event:any){
@@ -69,13 +108,7 @@ export class FilterComponent{
       this.stock = false;
     }
 
-    if (!this.filter){
-      return;
-    }
-
-    this.filter.stock = this.stock;
-
-    //this.filterservice.getFilterStock(this.stock);
+    this.filterservice.getFilterStock(this.stock);
   }
 
 

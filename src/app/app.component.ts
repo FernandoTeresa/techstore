@@ -1,3 +1,4 @@
+import { FilterService } from './services/filter.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -5,6 +6,7 @@ import { AuthToken } from './classes/AuthToken';
 import { User } from './classes/user';
 import { UserService } from './services/user.service';
 import { CartService } from 'src/app/services/cart.service';
+import { Filter } from './classes/filter';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +16,14 @@ import { CartService } from 'src/app/services/cart.service';
 export class AppComponent {
   title = 'TechStore';
 
-  constructor(public userservice: UserService, public router:Router, public cartservice:CartService){}
+  constructor(public userservice: UserService, public router:Router, public cartservice:CartService, public filterservice:FilterService){}
 
   public get user():User | null{
     return this.userservice.user;
   }
-
   public get token():AuthToken | null{
     return this.userservice.token
   }
-
 
 
   ngOnInit(): void {

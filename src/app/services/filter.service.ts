@@ -7,11 +7,11 @@ import { Filter } from '../classes/filter';
 @Injectable({
   providedIn: 'root'
 })
-export class FilterService implements DoCheck{
+export class FilterService{
 
   products:Products[]=[];
 
-  subcategoriId:any = '';
+  subcategoryId:any = '';
   rangeMin: number = 1;
   rangeMax: number = 2500;
   stock:boolean = true;
@@ -21,53 +21,30 @@ export class FilterService implements DoCheck{
 
   constructor(private http: HttpClient) { }
 
-  ngDoCheck(): void {
-    if (!this.filter){
-      return
-    }
-
-    console.log(this.filter.max);
-    console.log(this.rangeMax)
-
-    if (this.filter.max != this.rangeMax || this.filter.min != this.rangeMin || this.filter.stock != this.stock || this.filter.sub_categories_id != this.subcategoriId){
-      this.request();
-    }
-
-  }
-
-
   request(){
-
-    console.log(this.filter)
-    return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
-
-    console.log(res.Products)
-
-    this.setProducts(res.Products);
-
- })
-
-  }
-
-
-  setFilter(){
-    this.filter = new Filter (this.currentSearch, this.rangeMax, this.rangeMin, this.subcategoriId, this.stock);
-  }
-
-  search(value:string){
-    this.products = [];
-
-    if (value === ''){
-      return this.products = [];
-    }
-
-    this.currentSearch = value;
-
-    console.log(this.filter)
 
     this.setFilter();
 
-    this.request();
+    return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
+
+    this.setProducts(res.Products);
+
+    })
+
+  }
+
+  setFilter(){
+    this.filter = new Filter (this.currentSearch,this.rangeMax, this.rangeMin, this.subcategoryId, this.stock);
+  }
+
+  search(value:string){
+
+    if (this.currentSearch != value){
+      this.currentSearch = value;
+    }else{
+      this.currentSearch
+    }
+
 
   }
 
@@ -82,19 +59,40 @@ export class FilterService implements DoCheck{
     }
   }
 
+  getFilterStock(stock:any){
 
-  // getFilterStock(stock:any){
-  //   this.stock = stock;
-  // }
+    if (this.stock != stock){
+      this.stock = stock
+    }else{
+      this.stock
+    }
 
-  // getFilterRange(max:any, min:any){
-  //   this.rangeMax = max;
-  //   this.rangeMin = min;
-  // }
+  }
 
-  // getFilterSubcategorie(sucategorieId:any){
-  //   this.subcategoriId = sucategorieId;
-  // }
+  getFilterRange(max:any, min:any){
+  
+    if (this.rangeMax != max){
+      this.rangeMax = max
+    }else{
+      this.rangeMax
+    }
+
+    if (this.rangeMin != min){
+      this.rangeMin = min
+    }else{
+      this.rangeMin
+    }
+
+  }
+
+  getFilterSubcategorie(sub_categorieId:any){
+
+    if (this.subcategoryId != sub_categorieId){
+      this.subcategoryId = sub_categorieId;
+    }else{
+      this.subcategoryId;
+    }
+  }
 
 
 }

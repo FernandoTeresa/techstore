@@ -1,6 +1,5 @@
-
 export class Filter{
-    search?: string;
+    search: string;
     max: number;
     min: number;
     sub_categories_id: number;
