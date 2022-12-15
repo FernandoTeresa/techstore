@@ -25,8 +25,11 @@ export class FilterService{
 
     this.setFilter();
 
+    console.log(this.filter)
+
     return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
 
+    console.log(res.Products)
     this.setProducts(res.Products);
 
     })
@@ -45,7 +48,6 @@ export class FilterService{
       this.currentSearch
     }
 
-
   }
 
   setProducts(products:Products[]){
@@ -53,7 +55,7 @@ export class FilterService{
     this.products= [];
     for (let i = 0; i < products.length; i++) { 
       let a = products[i];
-      let product: Products = new Products(a.id, a.name, a.desc, a.price, a.stock,a.products_images,a.sub_categories, a.categories);
+      let product: Products = new Products(a.id, a.name, a.desc, a.price, a.stock,a.products_images,a.sub_categories);
 
       this.products.push(product);
     }

@@ -44,8 +44,8 @@
 
 
         <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="flush-collapseTwo">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               
                 <div>
                     <h6> Category</h6>
@@ -55,16 +55,54 @@
         
             </button>
           </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample" >
+          <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionFlushExample" >
             <div class="accordion-body">
                 
-                <div class="mb-4">
+                <div>
                     <div class="form-check">
+
                         <div *ngFor="let categorie of this.categories">
-                            <input class="form-check-input" type="checkbox" value="" [id]="categorie.id" (change)="onchangeIdCategorie($event)">
-                            <label class="form-check-label" for="flexCheckDefault">
-                            {{categorie.name}}
-                            </label>
+
+
+                            <div class="accordion accordion-flush">
+                              <h2 class="accordion-header" id="headingSons">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSons" aria-expanded="true" aria-controls="collapseSons">
+                                    <div>
+                                        <h6> {{categorie.name}} </h6>
+                                    </div>
+                                    
+                                    <hr>
+                                </button>
+                              </h2> 
+                              <div id="collapseSons" class="accordion-collapse collapse show" aria-labelledby="headingSons" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    
+                                    <div>
+
+                                      <div *ngFor="let subcategory of this.subcategories">
+
+                                        <div *ngIf="subcategory.categories.id === categorie.id">
+                    
+                                        <div>
+                                          
+                                          <input class="form-check-input ms-2" type="checkbox" value="" [id]="subcategory.id" (change)="onchangeIdSubCategory($event)">
+                                          
+                                          <label class="form-check-label ms-2" for="flexCheckDefault">
+                                            {{subcategory.name}}
+                                          </label>
+
+                                        </div>
+                      
+                                        </div>
+
+                                      </div>
+                    
+                                    </div>
+                                
+                                </div>
+                              </div>
+
+
                         </div>
                       </div>
                 </div>

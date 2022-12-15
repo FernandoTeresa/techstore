@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SubCategories } from './../../../classes/sub-categories';
 import { Categories } from './../../../classes/categories';
 import { FilterService } from './../../../services/filter.service';
@@ -13,7 +14,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 export class ListComponent implements OnInit{
 
 
-  constructor(public productservice: ProductsService, public filterservice:FilterService){ }
+  constructor(public productservice: ProductsService, public filterservice:FilterService, public route:Router){ }
 
   public get productSearch():Products[]{
     return this.filterservice.products;
@@ -31,9 +32,11 @@ export class ListComponent implements OnInit{
     this.productservice.requestProducts();
     this.productservice.requestCategories();
     this.productservice.requestSubCategories();
+
   }
 
   getId(id:number){
+
     let filter = this.productSearch.find((item)=>item.id === id)
 
     if(!filter){
@@ -58,6 +61,11 @@ export class ListComponent implements OnInit{
   numberResults(){
     let results = this.productSearch.length;
     return results;
+  }
+
+
+  redirect(id:number){
+    this.route.navigate(['/product/'+id]);
   }
 
 

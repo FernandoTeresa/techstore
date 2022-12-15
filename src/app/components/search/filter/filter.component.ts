@@ -82,7 +82,7 @@ export class FilterComponent{
 
   }
 
-  onchangeIdCategorie(event:any){
+  onchangeIdSubCategory(event:any){
 
     if (event.target.checked){
       this.subcategoryId = event.target.id

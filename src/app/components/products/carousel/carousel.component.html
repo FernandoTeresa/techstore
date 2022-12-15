@@ -4,16 +4,16 @@
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
        
         <!-- Wrapper for carousel items -->
-        <div class="carousel-inner">
+        <div class="carousel-inner content_image">
 
             <div class="carousel-item" *ngFor="let product of this.products; let i =index" [ngClass]="{'active':i===1}">
                 <a (click)="this.requestInfoProduct(product.id)">
-                    <img [src]='image(product.id)' style="align-self: center;" class="d-block w-100 d-flex justify-content-center" [alt]="product.name">
+                    <img [src]='image(product.id)' class="d-block w-100 d-flex justify-content-center" [alt]="product.name">
                 </a>
-                <div class="carousel-caption d-none d-md-block">
+                <!-- <div class="carousel-caption d-none d-md-block">
                     <h5>{{product.name}}</h5>
                     <p>{{product.price}}€</p>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -25,4 +25,12 @@
                 <span class="carousel-control-next-icon" style="background-color: grey;"></span>
             </a> 
     </div>
+
+
+
+
+
+
+
+
 </div>

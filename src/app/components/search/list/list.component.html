@@ -4,8 +4,6 @@
     <p class="mb-5">Number of Results: {{this.numberResults()}}</p>
   </div>
 
-
-
 </div>
 
 <div class="row">
@@ -14,7 +12,6 @@
     <!-- filter -->
 
       <app-filter></app-filter>
-      
     
   </div>
 
@@ -22,14 +19,14 @@
     <section>
       <div class="text-left container py-5">
         <div class="row align-items-start">
-          <div class="col-lg-4 col-md-12 mb-4 d-inline-flex p-2" *ngFor="let product of this.productSearch" style="height: 250px;">
+          <div class="col-lg-4 col-md-12 mb-4 d-inline-flex p-2" *ngFor="let product of this.productSearch">
             <div class="card">
-              <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+              <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light image_expand"
                 data-mdb-ripple-color="light">
-                <img [src]="this.images(product.id)" class="w-100" />
-                <a href="#!">
+                <img [src]="this.images(product.id)" class="w-100" style="padding: 5px;"/>
+                <a>
                   <div class="mask">
-                    <div class="d-flex justify-content-start align-items-end h-100" style="width: 250px;">
+                    <div class="d-flex justify-content-start align-items-end h-100">
                       <h5><span class="badge bg-primary ms-2">New</span></h5>
                     </div>
                   </div>
@@ -38,17 +35,19 @@
                   </div>
                 </a>
               </div>
+
               <div class="card-body">
-                <a href="" class="text-reset">
+                <a (click)="this.redirect(product.id)" class="text-reset">
                   <h5 class="card-title mb-3">{{product.name}}</h5>
                 </a>
-                <a href="" class="text-reset">
+                <h6 class="text-reset">
                   <div *ngIf="this.getId(product.id)">
-                  <p>{{this.product.categories?.name}} - {{this.product.sub_categories?.name}}</p>
+                    <p *ngIf="this.product.sub_categories"> {{this.getId(this.product.sub_categories.id)?.name}} - {{this.product.sub_categories.name}}</p>
                   </div>
-                </a>
+                </h6>
                 <h6 class="mb-3">{{product.price}}€</h6>
               </div>
+
             </div>
           </div>
             
