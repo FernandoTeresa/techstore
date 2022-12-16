@@ -1,0 +1,41 @@
+.subcategory h6{
+    padding: 8px 8px 8px ;
+    font-weight: bold;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.subcategory a {
+    padding: 8px 8px 8px 20px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.subcategory a:hover {
+color: #f1f1f1;
+}
+
+.subcategory_names{
+    margin-left: 20px;
+  
+}
+
+.button_back a{
+display:flex;
+align-items: flex-start;
+background-color: transparent;
+text-align: center;
+cursor: pointer;
+}
+
+.button_back a:hover{
+transform: scale(1.5);
+transition: 0.3s;
+}
+

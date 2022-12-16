@@ -28,7 +28,7 @@ import { SubCategoriesComponent } from './components/sub-categories/sub-categori
 import { FavoritesComponent } from './components/products/favorites/favorites.component';
 import { ListCategoriesComponent } from './components/categories/list-categories/list-categories.component';
 import { ListSubCategoriesComponent } from './components/sub-categories/list-sub-categories/list-sub-categories.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SidebarComponent } from './components/sidebar/categories/sidebar.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search/search.component';
 import { ListComponent } from './components/search/list/list.component';
@@ -37,6 +37,7 @@ import { MultirangeComponent } from './components/search/multirange/multirange.c
 import { MatSliderModule } from '@angular/material/slider';
 import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { SubcategoriesComponent } from './components/sidebar/subcategories/subcategories.component';
 
 
 
@@ -69,7 +70,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     FilterComponent,
     SearchComponent,
     ListComponent,
-    MultirangeComponent
+    MultirangeComponent,
+    SubcategoriesComponent
   ],
   imports: [
     BrowserModule,

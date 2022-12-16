@@ -87,9 +87,10 @@ export class NavbarComponent implements OnInit {
 
   toggleNav(){
     let x = <HTMLElement>document.getElementById("mySidenav");
+
     if (this.showNav === false){
       this.showNav = true;
-      x.style.width = "250px";
+      x.style.width = "300px";
     } else {
       this.showNav = false;
       x.style.width = "0";

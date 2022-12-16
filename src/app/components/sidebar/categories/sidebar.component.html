@@ -1,0 +1,37 @@
+
+<div>
+
+    <div id="mySidenav" class="sidenav" [ngClass]="this.themeservice.changeTheme()">
+
+        <div>
+
+            <a class="exit_sidebar" (click)="closeSidenav()"><i class="fa fa-times" aria-hidden="true"></i></a>
+        
+        </div>
+
+        <div>
+
+            <div id="category">
+
+                <div *ngFor="let cat of this.categories">
+
+                    <a (click)="category(cat.id)" >
+                        {{cat.name}}
+                    </a>
+                </div>
+
+            </div>
+
+            <div id="subcategory" hidden>
+                <app-subcategories (buttonBack)="backToCategories($event)" [categoryId]="this.categoryId"></app-subcategories>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,17 @@
+
+<div>
+    <div class="subcategory">
+        <div class="row">
+            <div class="button_back col-2">
+                <a class="arrow" (click)="this.backToCategory()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-10">
+                <h6>{{this.subcategory()?.categories?.name}}</h6>
+            </div>
+        </div>
+
+
+
+        <a class="subcategory_names">{{this.subcategory()?.name}}</a>
+    </div>
+</div>
