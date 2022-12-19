@@ -1,9 +1,9 @@
 <nav>
-  <div class="nav_bar position-sticky">
+  <div class="nav_bar fixed-top">
     <nav class="navbar navbar-expand-sm navbar-dark" [ngClass]="darkMode()" >
       <div class="container-fluid">
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <div class="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2">
+          <ul class="navbar-nav mb-2 mr-auto">
 
 
             <!-- MUdar a estrutura da navbar utilizar as classes row e col
@@ -20,15 +20,22 @@
             <li class="nav-item">
               <a class="nav-link" (click)="toggleNav()"><i class="fas fa-bars"></i></a>
             </li>
+
+
             <li class="nav-item">
               <a class="nav-link" aria-current="page" (click)="home()">TechStore</a>
             </li>
-              <li class="nav-item" *ngIf="!this.user">
-                <a class="nav-link" aria-current="page" (click)="login()">Login</a>
-              </li>
-              <li class="nav-item" *ngIf="!this.user">
-                <a class="nav-link" (click)="register()">Register</a>
-              </li>
+
+
+            <li class="nav-item" *ngIf="!this.user">
+              <a class="nav-link" aria-current="page" (click)="login()">Login</a>
+            </li>
+
+            <li class="nav-item" *ngIf="!this.user">
+              <a class="nav-link" (click)="register()">Register</a>
+            </li>
+
+            
             <div *ngIf="this.user">
               <li class="nav-item text-secondary">
                 <span (click)="profile()" class="nav-link" >Welcome {{this.user.first_name}} {{this.user.last_name}}</span>
@@ -36,12 +43,67 @@
 
             </div>
 
-            <li class="nav-item">
-              <a class="nav-link" (click)="CartRedirect()" data-mdb-toggle="tooltip" title="Shopping Cart">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="badge rounded-pill" style="color: red;" id="colorCount" >{{this.cartservice.totalCountCart()}}</span>
-            </a>
+          </ul>
+          
+          <ul class="navbar-nav mb-2 mx-auto">
+          
+            <li class="nav-item justify-content-center">
+              <app-search></app-search>
             </li>
+
+          </ul>
+
+          <ul class="navbar-nav mb-2 ml-auto">
+
+            <li  class="nav-item mt-2"><i class="fa-regular fa-lightbulb fa-fw me-2 iconlight"></i></li>
+
+            <li class="nav-item mt-2">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="toggle" (change)="onChange($event)" />
+                </div>
+            </li>
+
+            <li  class="nav-item mt-2"><i class="fa-regular fa-moon fa-fw me-3 iconmoon"></i></li>
+
+            <button class="button" (click)="toggleSidenavUser()">teste</button>
+            <!-- admin space add products and etc -->
+            <div *ngIf="this.user">
+              <div *ngIf="this.user.admin">
+
+                <li class="nav-item dropdown float-md-right">
+                  
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
+                    <i class="fa-solid fa-cog fa-spin"></i>
+                  </a>
+
+                  <ul class="dropdown-menu" aria-labelledby="dropdown">
+        
+                  <li>
+                      <a class="dropdown-item" (click)="addProduct()">
+                        <i class="fa-solid fa-clipboard-list fa-fw me-3"></i>
+                          <span>Add Product</span>
+                      </a>
+                  </li>
+              
+                  <li>
+                      <a class="dropdown-item" (click)="addCategory()">
+                        <i class="fa-solid fa-bookmark fa-fw me-3"></i>
+                          <span>Add Category</span>
+                      </a>
+                  </li>
+          
+                  <li>
+                      <a class="dropdown-item"(click)="addSubCategory()">
+                          <i class="fas fa-sign-out-alt me-3"></i>
+                          <span>Add Sub Category</span>
+                      </a>
+                  </li>
+        
+                  </ul>
+                </li>
+
+              </div>
+            </div>
 
             <li class="nav-item dropdown float-md-right" *ngIf="this.user">
               
@@ -93,60 +155,15 @@
               </ul>
             </li>
 
-            <!-- admin space add products and etc -->
-            <div *ngIf="this.user">
-              <div *ngIf="this.user.admin">
 
-                <li class="nav-item dropdown float-md-right">
-                  
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"> 
-                    <i class="fa-solid fa-cog fa-spin"></i>
-                  </a>
-
-                  <ul class="dropdown-menu" aria-labelledby="dropdown">
-        
-                  <li>
-                      <a class="dropdown-item" (click)="addProduct()">
-                        <i class="fa-solid fa-clipboard-list fa-fw me-3"></i>
-                          <span>Add Product</span>
-                      </a>
-                  </li>
-              
-                  <li>
-                      <a class="dropdown-item" (click)="addCategory()">
-                        <i class="fa-solid fa-bookmark fa-fw me-3"></i>
-                          <span>Add Category</span>
-                      </a>
-                  </li>
-          
-                  <li>
-                      <a class="dropdown-item"(click)="addSubCategory()">
-                          <i class="fas fa-sign-out-alt me-3"></i>
-                          <span>Add Sub Category</span>
-                      </a>
-                  </li>
-        
-                  </ul>
-                </li>
-
-              </div>
-            </div>
-
-            <li class="nav-item"  >
-
-              <a class="nav-link"> 
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="toggle" (change)="onChange($event)" />
-                <label class="form-check-label" for="flexSwitchCheckDefault">Theme</label>
-                </div>
-
-              </a>
-
-            </li>
 
             <li class="nav-item">
-              <app-search></app-search>
+              <a class="nav-link" (click)="CartRedirect()" data-mdb-toggle="tooltip" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge rounded-pill" style="color: red;" id="colorCount" >{{this.cartservice.totalCountCart()}}</span>
+            </a>
             </li>
+
 
           </ul>
 

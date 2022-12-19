@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
 
   showNav: Boolean = false;
 
+  showNavUser: boolean = false;
+
   theme: Boolean = false;
 
   constructor(public router:Router, public filterservice:FilterService ,public userservice: UserService, public cartservice: CartService) {
@@ -97,7 +99,23 @@ export class NavbarComponent implements OnInit {
     }
 
   }
-  
+
+  toggleSidenavUser(){
+    let y = <HTMLElement>document.getElementById("mySidenavUser");
+
+    console.log(y)
+
+    if (this.showNavUser === false){
+      this.showNavUser = true;
+      y.style.width = "300px";
+    } else {
+      this.showNavUser = false;
+      y.style.width = "0";
+    }
+    
+  }
+
+
   onChange(event:any) {
     let radioStatus = event.target.checked;
     localStorage.setItem("theme", radioStatus);

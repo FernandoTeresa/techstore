@@ -1,5 +1,5 @@
 /* The side navigation menu */
-.sidenav {
+.sidenavUser {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -13,7 +13,7 @@
   }
   
   /* The navigation menu links */
-  .sidenav a {
+  .sidenavUser a {
     padding: 8px 8px 8px 20px;
     text-decoration: none;
     font-size: 15px;
@@ -23,7 +23,7 @@
   }
   
   /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
+  .sidenavUser a:hover {
     color: #f1f1f1;
   }
   

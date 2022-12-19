@@ -38,6 +38,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SubcategoriesComponent } from './components/sidebar/subcategories/subcategories.component';
+import { SidenavUserComponent } from './components/sidebar/sidenav-user/sidenav-user.component';
 
 
 
@@ -71,7 +72,8 @@ import { SubcategoriesComponent } from './components/sidebar/subcategories/subca
     SearchComponent,
     ListComponent,
     MultirangeComponent,
-    SubcategoriesComponent
+    SubcategoriesComponent,
+    SidenavUserComponent
   ],
   imports: [
     BrowserModule,
