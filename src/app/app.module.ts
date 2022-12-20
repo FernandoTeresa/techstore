@@ -35,7 +35,6 @@ import { ListComponent } from './components/search/list/list.component';
 import { FilterComponent } from './components/search/filter/filter.component';
 import { MultirangeComponent } from './components/search/multirange/multirange.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SubcategoriesComponent } from './components/sidebar/subcategories/subcategories.component';
 import { SidenavUserComponent } from './components/sidebar/sidenav-user/sidenav-user.component';
@@ -80,7 +79,6 @@ import { SidenavUserComponent } from './components/sidebar/sidenav-user/sidenav-
     AppRoutingModule,
     HttpClientModule,
     MatSliderModule,
-    NgxBootstrapSliderModule,
     FormsModule,
     TooltipModule.forRoot(),
     NgxPrintModule,

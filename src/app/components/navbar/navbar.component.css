@@ -9,3 +9,19 @@
 .iconlight{
     color: yellow;
 }
+
+.darkmode{
+    background-color: #0f2862;
+}
+
+.darkmode a, span{
+    color: #4f5f76;
+}
+
+.lightmode{
+    background-color:darkgrey;
+  }
+  
+.lightmode a, span{
+    color: #d9d9d9;
+}

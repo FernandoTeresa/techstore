@@ -1,3 +1,19 @@
+.darkmode{
+  background-color: #091f36;
+}
+
+.darkmode a, span{
+  color: #4f5f76;
+}
+
+.lightmode{
+  background-color: darkgrey;
+}
+
+.lightmode a, span{
+  color: #d9d9d9;
+}
+
 /* The side navigation menu */
 .sidenavUser {
     height: 100%; /* 100% Full-height */

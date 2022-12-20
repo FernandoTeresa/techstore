@@ -7,11 +7,6 @@ export class ThemeService {
 
   constructor() { }
 
-  public darkmode:any[]=['#0f2862','#091f36', '#4f5f76'];
-
-  public lightmode:any[]=['#51d0de','#bf4aa8','#d9d9d9'];
-
-
   changeTheme(){
     let theme = localStorage.getItem('theme')
 
@@ -19,12 +14,13 @@ export class ThemeService {
       return;
     }
 
+
     let darkMode = JSON.parse(theme);
 
     if (darkMode === true){
-      return 'bg-dark'
+      return 'darkmode'
     }else{
-      return 'bg-success';
+      return 'lightmode';
     }
   }
 
