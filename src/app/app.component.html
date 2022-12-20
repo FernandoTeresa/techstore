@@ -5,9 +5,13 @@
     </div>
 
     <div style="padding-top: 100px;">
-        <div>
+        <div (mouseleave)="outside($event)">
             <app-sidebar></app-sidebar>
-        </div>  
+        </div> 
+        
+        <div (mouseleave)="outsideUserNav($event)">
+            <app-sidenav-user></app-sidenav-user>
+        </div>
 
         <div>
             <router-outlet></router-outlet>

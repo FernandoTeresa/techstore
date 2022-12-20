@@ -6,7 +6,7 @@
     z-index: 5; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: #111; /* Black*/
+    /*background-color: #111;  Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -21,10 +21,27 @@
     display: block;
     transition: 0.3s;
   }
+
+  .buttons a{
+    padding-left: 8px;
+    color: #111;
+  }
+
+  .card{
+    background-color:#818181 ;
+  }
   
   /* When you mouse over the navigation links, change their color */
   .sidenavUser a:hover {
     color: #f1f1f1;
+  }
+
+  .user_elements h4, p{
+    color:#818181;
+  }
+
+  .user_elements a{
+    font-size: 20px;
   }
   
   /* Position and style the close button (top right corner) */

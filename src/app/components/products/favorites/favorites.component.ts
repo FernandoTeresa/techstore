@@ -70,5 +70,9 @@ export class FavoritesComponent implements OnInit {
     alert("Added to Cart");
   }
 
+  clearfavorites(){
+    this.favoriteservice.clearFavorites();
+  }
+
 
 }

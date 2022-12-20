@@ -1,3 +1,6 @@
+import { ThemeService } from './../../services/theme.service';
+import { Favorite } from './../../classes/favorite';
+import { FavoriteService } from './../../services/favorite.service';
 import { FilterService } from './../../services/filter.service';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from './../../services/user.service';
@@ -20,8 +23,7 @@ export class NavbarComponent implements OnInit {
 
   theme: Boolean = false;
 
-  constructor(public router:Router, public filterservice:FilterService ,public userservice: UserService, public cartservice: CartService) {
-  }
+  constructor(public router:Router, public filterservice:FilterService ,public userservice: UserService, public cartservice: CartService, public favoriteservice:FavoriteService, public themeservice:ThemeService) {}
 
   public get user(): User | null {
     return this.userservice.user;
@@ -30,6 +32,11 @@ export class NavbarComponent implements OnInit {
   public get cart(): Cart[]{
     return this.cartservice.cart;
   }
+
+  public get favorite():Favorite[]{
+    return this.favoriteservice.favorites;
+  }
+
 
   ngOnInit(): void {
     let local = localStorage.getItem("theme")
@@ -41,30 +48,15 @@ export class NavbarComponent implements OnInit {
 
     this.userservice.getUser();
 
-  }
-
-  logout(){
-    this.router.navigate(['/']);
-    this.userservice.logout();
+    this.favoriteservice.getFavorites()
   }
 
   profile(){
     this.router.navigate(['/profile']);
   }
 
-  orders(){
-    this.router.navigate(['/listorders']);
-  }
   home(){
     this.router.navigate(['/']);
-  }
-
-  login(){
-    this.router.navigate(['/login'])
-  }
-
-  register(){
-    this.router.navigate(['/register']);
   }
 
   CartRedirect(){
@@ -103,8 +95,6 @@ export class NavbarComponent implements OnInit {
   toggleSidenavUser(){
     let y = <HTMLElement>document.getElementById("mySidenavUser");
 
-    console.log(y)
-
     if (this.showNavUser === false){
       this.showNavUser = true;
       y.style.width = "300px";
@@ -114,7 +104,6 @@ export class NavbarComponent implements OnInit {
     }
     
   }
-
 
   onChange(event:any) {
     let radioStatus = event.target.checked;
@@ -134,20 +123,5 @@ export class NavbarComponent implements OnInit {
     }
 
   }
-
-  darkMode(){
-    if (this.theme === true){
-      return 'bg-dark';
-    }else{
-      return 'bg-primary';
-    }
-  }
-
- 
-
-
-
-
-
 
 }

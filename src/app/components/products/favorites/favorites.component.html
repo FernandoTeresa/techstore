@@ -43,7 +43,9 @@
                     </div> 
                 </div>
                 <!--/ Product Item -->
-
+                <div *ngIf="this.favorites.length > 0">
+                    <button class="btn btn-outline-danger" (click)="clearfavorites()">Clear Favorites</button>
+                </div>
             </div>
         </div>
     </div>

@@ -69,4 +69,22 @@ export class AppComponent {
 
   }
 
+  outside(event:any){
+
+    let x = <HTMLElement>document.getElementById('mySidenav');
+    if(event){
+      x.style.width = '0';
+    }
+  }
+
+  outsideUserNav(event:any){
+
+    let y = <HTMLElement>document.getElementById('mySidenavUser');
+
+    if(event){
+      y.style.width = '0';
+    }
+
+  }
+
 }
