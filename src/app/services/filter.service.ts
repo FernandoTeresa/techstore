@@ -11,6 +11,7 @@ export class FilterService{
 
   products:Products[]=[];
 
+
   subcategoryId:any = '';
   rangeMin: number = 1;
   rangeMax: number = 2500;
@@ -19,20 +20,28 @@ export class FilterService{
 
   filter:Filter | null = null;
 
+  subCategoryId_search:any
+
   constructor(private http: HttpClient) { }
 
   request(){
 
     this.setFilter();
 
-    console.log(this.filter)
-
     return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
 
-    console.log(res.Products)
-    this.setProducts(res.Products);
-
+        this.setProducts(res.Products);
     })
+
+  }
+
+  requestSubcategoryById(){
+
+    return this.http.get<Products[]>('http://localhost:85/subcategory/'+this.subCategoryId_search).subscribe((res:any)=>{
+
+      this.setProducts(res);
+
+    });
 
   }
 
@@ -49,6 +58,7 @@ export class FilterService{
     }
 
   }
+
 
   setProducts(products:Products[]){
 

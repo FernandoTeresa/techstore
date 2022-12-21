@@ -14,7 +14,6 @@ export class ThemeService {
       return;
     }
 
-
     let darkMode = JSON.parse(theme);
 
     if (darkMode === true){
@@ -23,11 +22,6 @@ export class ThemeService {
       return 'lightmode';
     }
   }
-
-  primarycolor(){
-    
-  }
-
 
   // DARKMODE
 

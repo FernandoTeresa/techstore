@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { FilterService } from './../../../services/filter.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Categories } from 'src/app/classes/categories';
 import { SubCategories } from 'src/app/classes/sub-categories';
@@ -21,7 +23,11 @@ export class SubcategoriesComponent implements OnInit{
     return this.productservice.categories;
   }
 
-  constructor(public productservice:ProductsService){}
+  public set subCategoryId(value: any){
+    this.filterservice.subCategoryId_search = value
+  }
+
+  constructor(public productservice:ProductsService, public filterservice:FilterService, public router:Router){}
 
   ngOnInit(): void {
     this.productservice.requestSubCategories();
@@ -30,14 +36,31 @@ export class SubcategoriesComponent implements OnInit{
   }
 
   subcategory(){
-    let find = this.SubCategories.find(item=> item.categories.id === this.categoryId)
+  
+    let filter = this.SubCategories.filter(item=> item.categories.id === this.categoryId)
 
-    return find;
+    return filter;
+  }
+
+  categoryName(){
+    let find = this.categories.find(item=>item.id === this.categoryId)
+
+    return find
   }
 
   backToCategory(){
     this.buttonBack.emit({back:true});
+  }
 
+  listSearchById(id:any){
+
+    if (id){
+      this.subCategoryId = id;
+      this.filterservice.requestSubcategoryById();
+      this.router.navigate(['/search']);
+    }else{
+      this.subCategoryId = null;
+    }
   }
 
 }

@@ -31,13 +31,21 @@ export class FilterComponent{
     public get filter():Filter | null{
       return this.filterservice.filter;
     }
-    
 
+    public get searchBySubCategoryId():any{
+      return this.filterservice.subCategoryId_search
+    }
+    
   constructor(public filterservice:FilterService, public produtservice:ProductsService){}
 
   ngOnInit(){
     this.filterservice.setFilter();
-    this.filterservice.request();
+
+    if(this.searchBySubCategoryId){
+      this.filterservice.requestSubcategoryById();
+    }else{
+      this.filterservice.request();
+    }
   }
 
   ngDoCheck(){
@@ -68,7 +76,8 @@ export class FilterComponent{
 
     if (this.filter.sub_categories_id !== this.subcategoryId){
 
-      //PROBLEMA NO SEARCH COM AS CATEGORIAS
+      //PROBLEMA NO SEARCH COM AS SUB CATEGORIAS
+      console.log(this.subcategoryId)
 
       this.changeDetected=true;
       this.subcategoryId = this.filter.sub_categories_id
@@ -86,6 +95,7 @@ export class FilterComponent{
 
     if (event.target.checked){
       this.subcategoryId = event.target.id
+
     }else{
       this.subcategoryId = '';
     }

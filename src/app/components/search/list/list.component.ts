@@ -63,10 +63,14 @@ export class ListComponent implements OnInit{
     return results;
   }
 
-
   redirect(id:number){
     this.route.navigate(['/product/'+id]);
   }
+
+
+
+
+
 
 
 }
