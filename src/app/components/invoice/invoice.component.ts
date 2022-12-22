@@ -34,6 +34,9 @@ export class InvoiceComponent implements OnInit {
   localDate = new Date();
 
   ngOnInit(): void {
+    console.log(this.user)
+    console.log()
+
     if (!this.user){
       this.router.navigate(['/'])
       return
