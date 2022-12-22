@@ -1,5 +1,3 @@
-import { Cart } from './../classes/cart';
-import { ProductComponent } from './../components/products/product/product.component';
 import { ProductsImages } from './../classes/products-images';
 import { Categories } from './../classes/categories';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,7 +7,6 @@ import { Products } from '../classes/products';
 import { SubCategories } from '../classes/sub-categories';
 import { User } from '../classes/user';
 import { UserService } from './user.service';
-import { Observable } from 'rxjs';
 
 const Header = {
   headers: new HttpHeaders({

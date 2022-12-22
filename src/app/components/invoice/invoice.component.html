@@ -24,44 +24,45 @@
   
           <div class="row">
             <div *ngIf="this.user && this.userInfo">
-            <div class="col-xl-8">
-              <ul class="list-unstyled">
-                <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{this.user.first_name}} {{this.user.last_name}}</span></li>
-               
-                <div *ngIf='this.userInfo.address_2 === "" || this.userInfo.address_2 === null; else valid'>
-                    <li class="text-muted">{{this.userInfo.address_1}}, {{this.userInfo.city}}</li>
-                </div>
+              <div class="col-xl-8">
+                <ul class="list-unstyled">
+                  <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{this.user.first_name}} {{this.user.last_name}}</span></li>
+                
+                  <div *ngIf='this.userInfo.address_2 === "" || this.userInfo.address_2 === null; else valid'>
+                      <li class="text-muted">{{this.userInfo.address_1}}, {{this.userInfo.city}}</li>
+                  </div>
 
-                <ng-template #valid>
-                    <li class="text-muted">{{this.userInfo.address_1}}, {{this.userInfo.address_2}}, {{this.userInfo.city}}</li>
-                    
-                </ng-template>
+                  <ng-template #valid>
+                      <li class="text-muted">{{this.userInfo.address_1}}, {{this.userInfo.address_2}}, {{this.userInfo.city}}</li>
+                      
+                  </ng-template>
 
 
-                <li class="text-muted">{{this.userInfo.country}}</li>
+                  <li class="text-muted">{{this.userInfo.country}}</li>
 
-                <div *ngIf="this.userInfo.telephone != null; else exist">
-                    <li class="text-muted"><i class="fas fa-phone"></i> {{this.userInfo.telephone}}</li>
-                    <li class="text-muted"><i class="fas fa-mobile"></i> {{this.userInfo.mobile}}</li>
-                </div>
-                <ng-template #exist>
-                    <li class="text-muted"><i class="fas fa-mobile"></i> {{this.userInfo.mobile}}</li>
-                </ng-template>
+                  <div *ngIf="this.userInfo.telephone != null; else exist">
+                      <li class="text-muted"><i class="fas fa-phone"></i> {{this.userInfo.telephone}}</li>
+                      <li class="text-muted"><i class="fas fa-mobile"></i> {{this.userInfo.mobile}}</li>
+                  </div>
+                  <ng-template #exist>
+                      <li class="text-muted"><i class="fas fa-mobile"></i> {{this.userInfo.mobile}}</li>
+                  </ng-template>
 
-              </ul>
-            </div>
-            <div class="col-xl-4">
-              <p class="text-muted">Invoice</p>
-              <ul class="list-unstyled">
-                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="fw-bold">ID:</span>#123-456</li> <!-- falta introduzir o numero da encomenda    -->
-                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="fw-bold">Creation Date: </span>Jun 23,2021</li><!-- falta introduzir a data da encomenda    -->
-                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                    class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
-                    Unpaid</span></li> <!-- falta introduzir o status se foi pago    -->
-              </ul>
-            </div>
+                </ul>
+              </div>
+              <div class="col-xl-4">
+                <p class="text-muted">Invoice</p>
+                <ul class="list-unstyled">
+                  <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                      class="fw-bold">ID:</span>#123-456</li> <!-- falta introduzir o numero da encomenda    -->
+                  <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                      class="fw-bold">Creation Date: </span>{{this.localDate | date:'mediumDate'}}</li><!-- falta introduzir a data da encomenda    -->
+                      <!-- {{order.created_at | date:'mediumDate'}} -->
+                  <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                      class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
+                      Unpaid</span></li> <!-- falta introduzir o status se foi pago    -->
+                </ul>
+              </div>
             </div>
           </div>
   
@@ -78,7 +79,7 @@
               </thead>
               
               <tbody>
-                <tr *ngFor="let cart of this.cart"> <!-- FALTA-->
+                <tr *ngFor="let cart of this.cart">
                   <th scope="row">{{increment()}}</th>
                   <td>{{this.getProduct(cart.productId)?.name}}</td>
                   <td>{{cart.count}}</td>

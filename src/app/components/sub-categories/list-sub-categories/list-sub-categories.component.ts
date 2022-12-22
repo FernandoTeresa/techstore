@@ -50,7 +50,4 @@ export class ListSubCategoriesComponent implements OnInit{
 
   }
 
-  
-
-
 }

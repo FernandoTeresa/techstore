@@ -11,7 +11,6 @@ export class FilterService{
 
   products:Products[]=[];
 
-
   subcategoryId:any = '';
   rangeMin: number = 1;
   rangeMax: number = 2500;
@@ -27,6 +26,9 @@ export class FilterService{
   request(){
 
     this.setFilter();
+
+    console.log(this.filter)
+
 
     return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
 
@@ -58,7 +60,6 @@ export class FilterService{
     }
 
   }
-
 
   setProducts(products:Products[]){
 

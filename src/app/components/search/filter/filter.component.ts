@@ -76,9 +76,6 @@ export class FilterComponent{
 
     if (this.filter.sub_categories_id !== this.subcategoryId){
 
-      //PROBLEMA NO SEARCH COM AS SUB CATEGORIAS
-      console.log(this.subcategoryId)
-
       this.changeDetected=true;
       this.subcategoryId = this.filter.sub_categories_id
     }

@@ -1,6 +1,5 @@
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
-import { ProductComponent } from './../../products/product/product.component';
 import { CartService } from '../../../services/cart.service';
 import { Products } from 'src/app/classes/products';
 import { Component, OnInit } from '@angular/core';
@@ -46,7 +45,6 @@ export class CartComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-
   totalPriceCart(){
     return this.products. reduce((accumulator, current) => {
       let cartProduct = this.cart.find((item)=>item.productId === current.id)
@@ -59,7 +57,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout(){
-      console.log(this.user)
 
       if(!this.user){
         alert("you have to login to proceed the request")

@@ -8,7 +8,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ListProductsComponent } from './components/products/list-products/list-products.component';
-import { ProductComponent } from './components/products/product/product.component';
 import { UpdateProductComponent } from './components/products/update-product/update-product.component';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -49,7 +48,6 @@ import { SidenavUserComponent } from './components/sidebar/sidenav-user/sidenav-
     RegisterComponent,
     NotFoundComponent,
     ListProductsComponent,
-    ProductComponent,
     UpdateProductComponent,
     ProfileComponent,
     CarouselComponent,

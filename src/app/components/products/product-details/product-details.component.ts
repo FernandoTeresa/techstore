@@ -1,6 +1,5 @@
 import { CartService } from './../../../services/cart.service';
 import { Cart } from './../../../classes/cart';
-import { ProductComponent } from './../product/product.component';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Products } from 'src/app/classes/products';

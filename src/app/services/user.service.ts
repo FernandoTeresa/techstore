@@ -164,8 +164,6 @@ export class UserService {
       let errorPass = err.error.old_password
         
       alert(errorPass);
-    
-
     });
 
   }

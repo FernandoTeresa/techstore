@@ -7,12 +7,14 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Cart } from 'src/app/classes/cart';
 import { Products } from 'src/app/classes/products';
 import { UserInfos } from 'src/app/classes/user-infos';
+import { relativeTimeThreshold } from 'moment';
 
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css']
 })
+
 export class InvoiceComponent implements OnInit {
 
   constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService, public userservice:UserService) { }
@@ -28,6 +30,8 @@ export class InvoiceComponent implements OnInit {
   public get userInfo(): UserInfos | null {
     return this.userservice.userInfo;
   }
+
+  localDate = new Date();
 
   ngOnInit(): void {
     if (!this.user){
@@ -88,6 +92,7 @@ export class InvoiceComponent implements OnInit {
       }
       return accumulator
     }, 0)
+
   }
 
   totalTax(){

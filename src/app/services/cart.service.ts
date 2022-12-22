@@ -1,9 +1,6 @@
 import { ProductsService } from 'src/app/services/products.service';
 import { Injectable } from '@angular/core';
 import { Cart } from '../classes/cart';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Products } from '../classes/products';
 import { UserService } from './user.service';
 
 @Injectable({

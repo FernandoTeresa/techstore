@@ -42,6 +42,7 @@ export class ListProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productservice.requestProducts();
+    this.cartservice.getCart();
 
   }
 
@@ -63,15 +64,16 @@ export class ListProductsComponent implements OnInit {
   }
 
   addCart(id:number){
-    
-    let find = this.cart.find((item)=>item.productId === id)
+
+    let find = this.products.find((item)=>item.id === id)
 
     if (!find){
-      return
+      return;
     }
+
     let objCart:Cart = {
-      count:find.count,
-      productId: find.productId
+      count:1,
+      productId: find.id
       
     }
 
