@@ -27,9 +27,6 @@ export class FilterService{
 
     this.setFilter();
 
-    console.log(this.filter)
-
-
     return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
 
         this.setProducts(res.Products);

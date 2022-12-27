@@ -19,12 +19,17 @@ export class CartService {
   addToCart(cart: Cart){
 
     const exist = this.cart.some((item)=>{
+
       return item.productId === cart.productId;
     });
 
     if (exist){
-      this.cart.map((item)=>{
-        item.count++;
+      this.cart.filter((item)=>{
+
+        if (item.productId === cart.productId){
+          item.count++;
+        }
+
       })
     }else{
       this.cart.push(cart);

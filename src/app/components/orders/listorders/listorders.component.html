@@ -30,7 +30,7 @@
 
           <td>{{order.created_at | date:'shortTime'}} </td>
 
-          <td>{{this.totalProducts()}}</td>
+          <td>{{this.totalProducts(order.id)}}</td>
 
           <td> {{order.total}} €</td>
 

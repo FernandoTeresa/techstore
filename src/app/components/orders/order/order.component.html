@@ -11,9 +11,9 @@
               <p class="lead fw-normal mb-0" style="color: #21349c;">Receipt</p>
             </div>
 
-            <div *ngIf="this.order">
+            <div *ngIf="this.orderById">
                 <div>
-                  <div class="card shadow-0 border mb-4" *ngFor="let item of this.order.order_items">
+                  <div class="card shadow-0 border mb-4" *ngFor="let item of this.orderById.order_items">
 
                       <div class="card-body">
                         <div class="row">
@@ -38,19 +38,19 @@
                   </div>
                 </div>
             </div>
-            <div  *ngIf="this.order">
+            <div  *ngIf="this.orderById">
               <div class="d-flex justify-content-between pt-2">
                 <p class="fw-bold mb-0">Order Details</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span>{{this.price()}}€</p>
               </div>
 
               <div class="d-flex justify-content-between pt-2">
-                <p class="text-muted mb-0">Invoice Number : {{this.order.id}}</p>
+                <p class="text-muted mb-0">Invoice Number : {{this.orderById.id}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> 0€</p>
               </div>
 
               <div class="d-flex justify-content-between">
-                <p class="text-muted mb-0">Invoice Date : {{this.order.created_at}}</p>
+                <p class="text-muted mb-0">Invoice Date : {{this.orderById.created_at | date:'mediumDate'}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4">Iva 23%</span> {{this.totalTax()}}€</p>
               </div>
 
@@ -64,8 +64,19 @@
           
           <div class="card-footer border-0 px-4 py-5"
             style="background-color: #21349c; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-            <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
-              paid: <span class="h2 mb-0 ms-2">{{this.totalPay()}}€</span></h5>
+            <div class="d-flex  row"> 
+              <div class="col-4"> 
+                <button class="btn btn-primary justify-content-start" (click)="return()">Return</button>
+              </div>
+              <div class="col-8">
+                <h5 class="justify-content-end text-white text-uppercase mb-0">Total
+                  paid: <span class="h2 mb-0 ms-2">{{this.totalPay()}}€</span></h5>
+              </div>
+              
+              
+
+            </div>
+            
           </div>
         </div>
       </div>

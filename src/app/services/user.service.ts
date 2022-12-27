@@ -48,9 +48,6 @@ export class UserService {
     this._token = value;
   }
 
-
-
-
   constructor(private http:HttpClient, private router:Router) { }
 
   getUser(){
@@ -89,7 +86,6 @@ export class UserService {
     return this.http.post<AuthToken>('http://localhost:85/login', value, Header).subscribe((res:AuthToken)=>{
       this.setToken(res);
     },(err)=>{
-      console.log(err)
 
       if (err.status === 422){
         alert("Password or Username invalid");
@@ -174,6 +170,7 @@ export class UserService {
     }
     return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.user.id, Header).subscribe((res:UserInfos)=>{
       this.setUserInfo(res);
+  
     },(err)=>{
 
       if (err.status === 401){

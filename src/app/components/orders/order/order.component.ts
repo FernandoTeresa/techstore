@@ -16,13 +16,8 @@ import { OrderItem } from 'src/app/classes/order-item';
 })
 export class OrderComponent implements OnInit {
 
-  private _order: Order | null = null;
-
-  public get order(): Order | null {
-    return this._order;
-  }
-  public set order(value: Order | null) {
-    this._order = value;
+  public get orderById():Order | null{
+    return this.orderservice.orderById;
   }
 
   public get user(): User | null {
@@ -44,23 +39,21 @@ export class OrderComponent implements OnInit {
     this.activatedroute.paramMap.subscribe((params: any) => {
       const id = +params.get('id');
 
-      this.orderservice.getOrderById(id).subscribe((res:Order)=>{
-          this.order = new Order(res.id, res.user_id, res.total, res.order_items);
-      });
+      this.orderservice.requestOrderById(id)
 
     });
 
   }
 
   getImages(productId:number):string{
-    if (!this.order){
+    if (!this.orderById){
       return "";
     }
-    if(!this.order.order_items){
+    if(!this.orderById.order_items){
       return "";
     }
 
-    let image = this.order.order_items.find((item)=>item.product.id === productId);
+    let image = this.orderById.order_items.find((item)=>item.product.id === productId);
 
     if(!image){
       return "";
@@ -72,13 +65,13 @@ export class OrderComponent implements OnInit {
 
 
   price():number{
-    if (!this.order){
+    if (!this.orderById){
       return 0;
     }
 
-    return this.order.order_items.reduce((accumulator, current) => {
+    return this.orderById.order_items.reduce((accumulator, current) => {
 
-      let item = this.order?.order_items.find((res)=> res.id === current.id)
+      let item = this.orderById?.order_items.find((res)=> res.id === current.id)
 
       if (item){
         return accumulator + (Number(current.unitprice) * item.count)
@@ -98,6 +91,10 @@ export class OrderComponent implements OnInit {
 
   totalPay():number{
     return this.price() + this.totalTax();
+  }
+
+  return(){
+    this.router.navigate(['/listorders']);
   }
 
 }

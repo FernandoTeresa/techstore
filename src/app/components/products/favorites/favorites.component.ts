@@ -64,7 +64,6 @@ export class FavoritesComponent implements OnInit {
       productId: value.productId,
       count: 1
     }
-    console.log(favoriteToCart);
     this.cartservice.addToCart(favoriteToCart);
     this.removeProduct(value.productId);
     alert("Added to Cart");

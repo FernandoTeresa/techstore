@@ -56,7 +56,6 @@ export class UpdateProductComponent implements OnInit {
 
   updateProduct(value: Products){
 
-    console.log(value)
     if (!this.product){
       return "not exist";
     }

@@ -38,8 +38,6 @@ export class AddProductComponent implements OnInit {
 
     let token = localStorage.getItem('token');
 
-    console.log(value)
-
     if(!token){
       return
     }
@@ -52,9 +50,6 @@ export class AddProductComponent implements OnInit {
     };
 
     const formData = new FormData();
-
-
-    console.log(this.file)
 
     if (!this.file){
       return

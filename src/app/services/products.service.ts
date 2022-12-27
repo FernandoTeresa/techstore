@@ -139,7 +139,7 @@ export class ProductsService {
 
   removeProduct(productId:number){
     this.http.delete<Products>('http://localhost:85/product/'+ productId, Header).subscribe((res:Products)=>{    
-      console.log(res)
+      
     },(err) => {
       switch(err.status){
         case 400:
@@ -167,7 +167,7 @@ export class ProductsService {
   addProduct(formData: any, HeaderWithImage:any){
 
    return this.http.post('http://localhost:85/product', formData, HeaderWithImage).subscribe((res:any)=>{
-      console.log(res)
+     
    })
   }
 

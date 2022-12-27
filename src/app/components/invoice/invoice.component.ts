@@ -8,6 +8,9 @@ import { Cart } from 'src/app/classes/cart';
 import { Products } from 'src/app/classes/products';
 import { UserInfos } from 'src/app/classes/user-infos';
 import { relativeTimeThreshold } from 'moment';
+import { OrderService } from 'src/app/services/order.service';
+import { Order } from 'src/app/classes/order';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-invoice',
@@ -17,7 +20,7 @@ import { relativeTimeThreshold } from 'moment';
 
 export class InvoiceComponent implements OnInit {
 
-  constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService, public userservice:UserService) { }
+  constructor(public productservice:ProductsService, public router:Router, public cartservice:CartService, public userservice:UserService, public orderservice:OrderService) { }
 
   cart:Cart[]= [];
   
@@ -34,8 +37,8 @@ export class InvoiceComponent implements OnInit {
   localDate = new Date();
 
   ngOnInit(): void {
-    console.log(this.user)
-    console.log()
+    this.userservice.getUser();
+    this.userservice.getUserInfo()
 
     if (!this.user){
       this.router.navigate(['/'])
@@ -54,6 +57,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   pay(){
+    this.order();
     this.router.navigate(['/checkout']);
   }
 
@@ -110,6 +114,35 @@ export class InvoiceComponent implements OnInit {
   increment(){
     let count = 1;
     return count ++; 
+  }
+  
+
+  order(){
+    if (!this.user){
+      return;
+    }
+
+    let orderItem:any[]=[]
+
+    let order = {
+      user_id: this.user.id,
+      total: this.totalPriceCart(),
+    }
+
+    for (let i=0;i<this.cart.length;i++){
+      let find = this.products.find((item)=>item.id===this.cart[i].productId);
+
+      let obj={
+        count: this.cart[i].count,
+        unitprice:find?.price,
+        product_id:find?.id,
+        product:find
+      }
+
+      orderItem.push(obj);
+    }
+
+    this.orderservice.addOrder(order, orderItem)
   }
 
 }

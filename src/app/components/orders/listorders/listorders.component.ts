@@ -14,7 +14,9 @@ export class ListordersComponent implements OnInit {
 
   constructor(public orderservice:OrderService, public userservice:UserService, public router:Router) { }
 
-  orders:Order[]=[];
+  public get orders():Order[]{
+    return this.orderservice.orders;
+  }
 
   public get user(): User | null {
     return this.userservice.user;
@@ -26,22 +28,19 @@ export class ListordersComponent implements OnInit {
       return; 
     }
 
-    this.orderservice.getOrders().subscribe((res:Order[])=>{
-
-      for (let i = 0; i<res.length;i++){
-        let array = res[i]
-        let order:Order = new Order (array.id, array.user_id, array.total, array.order_items, array.created_at)
-        this.orders.push(order);
-      }
-
-    });
+    this.orderservice.requestOrder();
   }
 
-  totalProducts(){
+  totalProducts(id:any){
     let count =0;
+
     for (let i =0; i<this.orders.length;i++){
-      for(let j=0;j<this.orders[i].order_items.length; j++){
-        count += this.orders[i].order_items[j].count;
+
+      let filter = this.orders[i].order_items.filter((item)=>item.order_id === id)
+
+      for (let i = 0; i<filter.length;i++){
+
+        count += filter[i].count
       }
     }
     return count;
