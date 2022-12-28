@@ -32,6 +32,8 @@ export class SidenavUserComponent {
 
   login(){
     this.router.navigate(['/login'])
+
+    //embutir o login e o register no sidenav
   }
 
   register(){
