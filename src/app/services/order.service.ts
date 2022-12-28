@@ -65,11 +65,11 @@ export class OrderService {
 
   addOrder(order:any, orderItem:any){
 
-    return this.http.post<Order>('http://localhost:85/order',order, Header).subscribe((res:Order)=>{
+    return this.http.post('http://localhost:85/order',order, Header).subscribe((res:any)=>{
 
       for (let i=0;i<orderItem.length;i++){
 
-        let find = this.products.find((item)=>item.id === orderItem[i].product_id);
+        let find = this.products.find((item)=>item.id == orderItem[i].product_id);
 
         let orderitems:any = {
           count: orderItem[i].count,

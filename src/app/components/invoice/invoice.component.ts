@@ -150,9 +150,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   orderLastId(){
-    let lastId = this.orders.length
-
-    console.log(lastId)
+    let lastId = this.orders.length;
 
     return lastId + 1 ;
   }
