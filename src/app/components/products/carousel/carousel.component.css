@@ -6,10 +6,10 @@
     height:400px;
 }
 
-
 img{
     max-width: 400px;
     margin: auto;
+    object-fit: contain; 
 }
 
 .carousel-item{

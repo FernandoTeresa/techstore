@@ -37,7 +37,6 @@ export class NavbarComponent implements OnInit {
     return this.favoriteservice.favorites;
   }
 
-
   ngOnInit(): void {
     let local = localStorage.getItem("theme")
     if(!local){

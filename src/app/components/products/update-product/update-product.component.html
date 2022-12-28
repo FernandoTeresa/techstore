@@ -55,8 +55,8 @@
                         <div class="input-group mb-3">
 
                            <span class="input-group-text" >Sub Categories:</span>
-                            <select class="form-control" id="Select1" name="sub_categories_id" *ngIf="product.sub_categories">
-                                <option *ngFor="let subcat of this.subcategories; let i = index" [value]="subcat.id" name="sub_categories_id" [(ngModel)]="subcat.id">{{subcat.name}}</option>
+                            <select class="form-control" id="Select1" *ngIf="product.sub_categories">
+                                <option *ngFor="let subcat of this.subcategories; let i = index" [value]="subcat.id" name="sub_categories_id"   [(ngModel)]="subcat.id">{{subcat.name}}</option>
                             </select>
 
                             <!-- introduzir a escolha das categorias e depois as sub categorias com o cascade select ou o dropdown cascade 

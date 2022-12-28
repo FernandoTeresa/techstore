@@ -46,8 +46,10 @@ export class UpdateProductComponent implements OnInit {
       const id = +params.get('id');
 
       this.productservice.getProduct(id).subscribe((res:Products) => {
+
+        console.log(res)
           
-        this.product= new Products (res.id, res.name, res.desc, res.price, res.stock, res.products_images, res.sub_categories);
+        this.product= new Products (res.id, res.name, res.desc, res.price, res.stock, res.products_images, res.sub_categories, res.categories);
       });
 
     })

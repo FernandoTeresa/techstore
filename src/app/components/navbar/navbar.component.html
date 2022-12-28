@@ -44,7 +44,7 @@
 
             <li  class="nav-item mt-2"><i class="fa-regular fa-moon fa-fw me-3 iconmoon"></i></li>
 
-            <li class="nav-item mt-2">
+            <li class="nav-item mt-2" *ngIf="this.user">
 
               <a (click)="favorites()">
                 <div *ngIf="this.favorite.length > 0; else notexist">

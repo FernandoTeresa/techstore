@@ -34,11 +34,16 @@ export class InvoiceComponent implements OnInit {
     return this.userservice.userInfo;
   }
 
+  public get orders():Order[]{
+    return this.orderservice.orders
+  }
+
   localDate = new Date();
 
   ngOnInit(): void {
     this.userservice.getUser();
     this.userservice.getUserInfo()
+    this.orderservice.requestOrder()
 
     if (!this.user){
       this.router.navigate(['/'])
@@ -116,7 +121,6 @@ export class InvoiceComponent implements OnInit {
     return count ++; 
   }
   
-
   order(){
     if (!this.user){
       return;
@@ -142,7 +146,15 @@ export class InvoiceComponent implements OnInit {
       orderItem.push(obj);
     }
 
-    this.orderservice.addOrder(order, orderItem)
+    this.orderservice.addOrder(order, orderItem);
+  }
+
+  orderLastId(){
+    let lastId = this.orders.length
+
+    console.log(lastId)
+
+    return lastId + 1 ;
   }
 
 }

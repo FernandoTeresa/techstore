@@ -97,5 +97,11 @@ export class CheckoutComponent implements OnInit {
     return this.totalPriceCart() + this.totalTax();
   }
 
+  checkout(){
+    this.cartservice.clearCart();
+    this.router.navigate(['/']);
+    alert('thank you for buying');
+  }
+
 
 }

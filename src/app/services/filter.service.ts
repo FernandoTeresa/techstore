@@ -52,10 +52,9 @@ export class FilterService{
 
     if (this.currentSearch != value){
       this.currentSearch = value;
-    }else{
-      this.currentSearch
     }
 
+    this.request();
   }
 
   setProducts(products:Products[]){
