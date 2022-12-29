@@ -7,10 +7,10 @@
                 <h6 class="card-title"> Hey! you already are client of TechStore? </h6>
                 <p class="card-text"> you can be easy and free</p>
 
-                <div class="row buttons">
-
+                <div class="row buttons" *ngIf="!this.clicked">
+                  
                     <div class="col-6">
-                        <a class="btn btn-outline-primary" (click)="login()">Login</a>
+                        <a class="btn btn-outline-primary" (click)="login($event)">Login</a>
                     </div>
 
                     <div class="col-6" >
@@ -19,12 +19,14 @@
 
                 </div>
 
+                <div *ngIf="this.clicked">
+                    <app-login></app-login>
+                </div>
+
             </div>
         </div>
 
     </div>
-
-
     <hr>
 
     <!-- user links -->

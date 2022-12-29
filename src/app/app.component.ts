@@ -7,7 +7,7 @@ import { User } from './classes/user';
 import { UserService } from './services/user.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Filter } from './classes/filter';
-
+  
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,6 +27,18 @@ export class AppComponent {
 
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+
+    if (token){
+      this.userservice.getUser(token).subscribe((res:User)=>{
+
+        this.userservice.setUser(res);
+      },(err)=>{
+        
+        console.log(err);
+        
+      });
+    }
  
     this.cartservice.loadCart();
     let token_time = localStorage.getItem('expiresToken');
@@ -45,8 +57,14 @@ export class AppComponent {
     let date = moment().unix();
 
     if (date > expires || date > this.token.expires_in){
-      this.userservice.logout();
-      this.router.navigate(['/login']);
+      this.userservice.logout().subscribe((res:any)=>{
+
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.userservice.user = null;
+        this.userservice.userInfo = null;
+        this.router.navigate(['/']);
+      });
     }
 
   }

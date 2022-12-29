@@ -17,9 +17,17 @@ export class SidenavUserComponent {
     return this.userservice.user;
   }
 
+  public clicked:boolean = false;
+
   logout(){
-    this.router.navigate(['/']);
-    this.userservice.logout();
+    this.userservice.logout().subscribe((res:any)=>{
+
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.userservice.user = null;
+      this.userservice.userInfo = null;
+      this.router.navigate(['/']);
+    });
   }
 
   orders(){
@@ -30,10 +38,12 @@ export class SidenavUserComponent {
     this.router.navigate(['/profile']);
   }
 
-  login(){
-    this.router.navigate(['/login'])
-
-    //embutir o login e o register no sidenav
+  login(event:any){
+    if (event.returnValue){
+      this.clicked = true;
+    }else{
+      this.clicked = false;
+    }
   }
 
   register(){

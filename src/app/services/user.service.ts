@@ -8,93 +8,63 @@ import { User } from '../classes/user';
 import * as moment from 'moment';
 import { AuthToken } from '../classes/AuthToken';
 
-const Header = {
-  headers: new HttpHeaders({
-    Authorization: 'bearer '+ localStorage.getItem('token')
-  })
-};
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private _user: User | null = null;
+  private _user: User;
 
-  public get user(): User | null {
+  public get user(): User{
     return this._user;
   }
 
-  public set user(value: User | null) {
+  public set user(value: User ) {
     this._user = value;
   }
 
-  private _userInfo: UserInfos | null = null;
+  private _userInfo: UserInfos ;
 
-  public get userInfo(): UserInfos | null {
+  public get userInfo(): UserInfos  {
     return this._userInfo;
   }
-  public set userInfo(value: UserInfos | null) {
+
+  public set userInfo(value: UserInfos ) {
     this._userInfo = value;
   }
 
-  private _token: IAuthToken | null = null;
+  private _token:AuthToken;
 
-  public get token(): IAuthToken | null {
+  public get token(): AuthToken{
     return this._token;
   }
-  public set token(value: IAuthToken | null) {
+
+  public set token(value: AuthToken) {
     this._token = value;
   }
 
-  constructor(private http:HttpClient, private router:Router) { }
+  constructor(private http:HttpClient) { }
 
-  getUser(){
-    let token = localStorage.getItem('token');
+  getUser(token:any){
 
-    if (!token){
-      return;
-    }
-
-    Header.headers = Header.headers.set('Authorization', 'bearer '+token);
+    const Header = { 
+      headers: new HttpHeaders({ Authorization: 'bearer '+ token})
+    };
     
-    return this.http.get<User>('http://localhost:85/auth/user', Header ).subscribe((res:User)=>{
-
-      this.setUser(res);
-    },(err)=>{
-
-      if (err.status === 401){
-        this.router.navigate(['/']);
-        this.logout();
-      }
-    });
+    return this.http.get<User>('http://localhost:85/auth/user', Header )
 
   }
 
   requestToken(value:any){
-    return this.http.post<AuthToken>('http://localhost:85/login', value, Header)
+    
+    return this.http.post<AuthToken>('http://localhost:85/login', value)
   }
 
   setUser(user:User){
     this.user = new User(user.id, user.username, user.password, user.first_name, user.last_name, user.email, user.admin);
     let localUser = JSON.stringify(this.user);
     localStorage.setItem('user',localUser);  
-  }
-
-  getToken(value:any){
-    return this.http.post<AuthToken>('http://localhost:85/login', value, Header).subscribe((res:AuthToken)=>{
-      this.setToken(res);
-    },(err)=>{
-
-      if (err.status === 422){
-        alert("Password or Username invalid");
-      }
-
-      if (err.status === 401){
-        alert("User dont exist");
-      }
-    });
   }
 
   setToken(value:AuthToken){
@@ -104,17 +74,17 @@ export class UserService {
       localStorage.setItem('expiresToken', value.expires_in.toString());
 
       this.token = new AuthToken(value.access_token, value.expires_in);
-      this.getUser()
     }
 
   }
 
+   // o subscribe fora dos serviços e utilizar nos componentes e popular as variaveis nos serviços
   logout(){
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      this.user = null;
-      this.userInfo = null;
-      this.http.post('http://localhost:85/logout',Header);
+
+    const Header = {
+      headers: new HttpHeaders({ Authorization: 'bearer '+ this.token.access_token })
+    };
+      return this.http.post('http://localhost:85/logout',Header);
   }
 
   addUser(value: User){
@@ -149,34 +119,21 @@ export class UserService {
   }
 
   updateUser(value:any){
-    if (!this.user){
-      return "User dont exist";
-    }
 
-    this.http.put('http://localhost:85/user/'+ this.user.id, value, Header).subscribe((res:any)=>{
+    const Header = { 
+      headers: new HttpHeaders({ Authorization: 'bearer '+ this.token.access_token})
+    };
 
-    },(err)=>{
-
-      let errorPass = err.error.old_password
-        
-      alert(errorPass);
-    });
+    return this.http.put('http://localhost:85/user/'+ this.user.id, value, Header);
 
   }
 
   getUserInfo(){
-    if(!this.user){
-      return "User dont exist";
-    }
-    return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.user.id, Header).subscribe((res:UserInfos)=>{
-      this.setUserInfo(res);
-  
-    },(err)=>{
+    const Header = { 
+      headers: new HttpHeaders({ Authorization: 'bearer '+ this.token.access_token})
+    };
 
-      if (err.status === 401){
-        this.logout();
-      }
-    });
+    return this.http.get<UserInfos>('http://localhost:85/user/info/'+this.user.id, Header)
   }
 
   setUserInfo(userInfo:UserInfos){

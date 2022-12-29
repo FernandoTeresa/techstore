@@ -7,12 +7,6 @@ import { User } from '../classes/user';
 import { ProductsService } from './products.service';
 import { UserService } from './user.service';
 
-const Header = {
-  headers: new HttpHeaders({
-    Authorization: 'bearer '+ localStorage.getItem('token'), 
-  })
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +31,11 @@ export class OrderService {
   }
 
   requestOrder(){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
     this.http.get<Order[]>('http://localhost:85/order', Header).subscribe((res:Order[])=>{
 
       this.setOrder(res);
@@ -58,12 +57,22 @@ export class OrderService {
   }
 
   requestOrderById(orderId:number){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
     return this.http.get<Order>('http://localhost:85/order/'+orderId, Header).subscribe((res:Order)=>{
       this.setOrderById(res)
     });
   }
 
   addOrder(order:any, orderItem:any){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
 
     return this.http.post('http://localhost:85/order',order, Header).subscribe((res:any)=>{
 
@@ -87,6 +96,11 @@ export class OrderService {
   }
 
   addOrderItems(items:any){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
 
     return this.http.post('http://localhost:85/order/item',items,Header).subscribe((res:any)=>{
       

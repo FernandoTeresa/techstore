@@ -102,14 +102,21 @@ export class ProductsService {
     if (id && id>0){
       url += "/"+id;
     }
-    return this.http.get<Products>(url,Header);
+    return this.http.get<Products>(url);
   }
 
   getProducts(){
-    return this.http.get<Products[]>("http://localhost:85/products",Header);
+
+
+    return this.http.get<Products[]>("http://localhost:85/products");
   }
 
   updateProduct(value:Products, productId:number){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
 
     this.http.put<Products>('http://localhost:85/product/'+ productId , value, Header).subscribe((res:Products)=>{    
 
@@ -138,6 +145,11 @@ export class ProductsService {
   }
 
   removeProduct(productId:number){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
     this.http.delete<Products>('http://localhost:85/product/'+ productId, Header).subscribe((res:Products)=>{    
       
     },(err) => {
@@ -172,18 +184,33 @@ export class ProductsService {
   }
 
   uploadImages(image:any, productId:number){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
     this.http.post('http://localhost:85/product/img/'+ productId , image, Header).subscribe((res:any)=>{
     })
 
   }
 
   addNewCategory(category:Categories){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
 
     return this.http.post<Categories>('http://localhost:85/categories', category, Header)
 
   }
 
   addNewSubCategory(subcategory:SubCategories){
+    const Header = {
+      headers: new HttpHeaders({
+        Authorization: 'bearer '+ this.userservice.token.access_token
+      })
+    };
 
     return this.http.post<SubCategories>('http://localhost:85/subcategories', subcategory, Header)
 

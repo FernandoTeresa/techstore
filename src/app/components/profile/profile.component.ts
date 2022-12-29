@@ -9,57 +9,51 @@ import { ThisReceiver } from '@angular/compiler';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  constructor(public userservice: UserService, public router: Router) {}
 
-  constructor(public userservice:UserService, public router:Router) { }
-
-  public get user(): User | null {
+  public get user(): User {
     return this.userservice.user;
   }
 
-  public get userInfo(): UserInfos | null {
+  public get userInfo(): UserInfos {
     return this.userservice.userInfo;
   }
 
   ngOnInit(): void {
-    this.userservice.getUser();
-    this.userservice.getUserInfo();
-
-    if (!this.user){
-      this.router.navigate(['/'])
-      return
+    if (!this.user) {
+      this.router.navigate(['/']);
+      return;
     }
 
-    if (!this.userInfo){
-      this.userservice.getUserInfo();
-    }
+    this.userservice.getUserInfo().subscribe((res: UserInfos) => {
+        this.userservice.setUserInfo(res);
+      });
   }
 
-  updateProfile(value:any){
-    if(!this.user){
-      return
+  updateProfile(value: any) {
+    if (!this.user) {
+      return;
     }
 
-    let pass = <HTMLInputElement>document.getElementById("password");
-    let repeat_pass = <HTMLInputElement>document.getElementById("raw_password");
-    let old_pass = <HTMLInputElement>document.getElementById("old_password");
-    
-    if (pass.value != "" && old_pass.value === "" ){
-      alert("You have to introduce the current password first");
-        old_pass.value = '';
-        pass.value= '';
+    let pass = <HTMLInputElement>document.getElementById('password');
+    let repeat_pass = <HTMLInputElement>document.getElementById('raw_password');
+    let old_pass = <HTMLInputElement>document.getElementById('old_password');
+
+    if (pass.value != '' && old_pass.value === '') {
+      alert('You have to introduce the current password first');
+      old_pass.value = '';
+      pass.value = '';
+      repeat_pass.value = '';
+    } else {
+      if (pass.value != repeat_pass.value) {
+        alert('Password and Confirm password dont match');
+        pass.value = '';
         repeat_pass.value = '';
-    }else{
-
-      if (pass.value != repeat_pass.value){
-            alert("Password and Confirm password dont match");
-            pass.value= '';
-            repeat_pass.value = '';  
-      }else{
-
-        let data:any={
+      } else {
+        let data: any = {
           address_1: value.address_1,
           address_2: value.address_2,
           city: value.city,
@@ -73,20 +67,21 @@ export class ProfileComponent implements OnInit {
           postal_code: value.postal_code,
           email: this.user.email,
           telephone: value.telephone,
-        }
-        if (data.password != ""){
-          this.userservice.logout();
-          this.router.navigate(['/']);
-        }
-        this.userservice.updateUser(data);
+        };
+        
+        this.userservice.updateUser(data).subscribe((res:any)=>{
+
+        },(err)=>{
+    
+          let errorPass = err.error.old_password
+            
+          alert(errorPass);
+        });
       }
-    }   
+    }
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(['/']);
   }
-
-
-
 }

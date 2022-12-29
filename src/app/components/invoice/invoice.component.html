@@ -80,9 +80,9 @@
               <tbody>
                 <tr *ngFor="let cart of this.cart">
                   <th scope="row">{{increment()}}</th>
-                  <td>{{this.getProduct(cart.productId)?.name}}</td>
+                  <td>{{this.getProduct(cart.productId).name}}</td>
                   <td>{{cart.count}}</td>
-                  <td>{{this.getProduct(cart.productId)?.price}}€</td>
+                  <td>{{this.getProduct(cart.productId).price}}€</td>
                   <td>{{this.itemCountPrice(cart.productId)}}€</td>
                 </tr>
               </tbody>

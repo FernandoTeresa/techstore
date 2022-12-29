@@ -45,8 +45,6 @@ export class NavbarComponent implements OnInit {
     this.theme = JSON.parse(local);
     this.check();
 
-    this.userservice.getUser();
-
     this.favoriteservice.getFavorites()
   }
 
@@ -96,7 +94,7 @@ export class NavbarComponent implements OnInit {
 
     if (this.showNavUser === false){
       this.showNavUser = true;
-      y.style.width = "300px";
+      y.style.width = "400px";
     } else {
       this.showNavUser = false;
       y.style.width = "0";

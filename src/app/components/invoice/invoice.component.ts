@@ -41,7 +41,6 @@ export class InvoiceComponent implements OnInit {
   localDate = new Date();
 
   ngOnInit(): void {
-    this.userservice.getUser();
     this.userservice.getUserInfo()
     this.orderservice.requestOrder()
 
