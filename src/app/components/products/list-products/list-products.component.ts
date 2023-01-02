@@ -41,7 +41,11 @@ export class ListProductsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.productservice.requestProducts();
+    this.productservice.requestProducts().subscribe((res: Products[]) => {
+      
+      this.productservice.setProducts(res);
+
+    });
     this.cartservice.getCart();
 
   }

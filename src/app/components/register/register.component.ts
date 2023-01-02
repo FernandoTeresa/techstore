@@ -34,7 +34,33 @@ export class RegisterComponent implements OnInit {
             repeat_pass.value = '';  
 
       }else{
-        this.userservice.addUser(values);
+        this.userservice.addUser(values).subscribe((res:User)=>{
+
+          this.userservice.setUser(res);
+    
+        },(err) => {
+    
+          switch(err.status){
+            case 400:
+              alert('ERROR!! Bad Request');
+              break;
+            case 401:
+              alert('ERROR!! Unauthorized');
+              break;
+            case 403:
+              alert('ERROR!! Forbidden');
+              break;
+            case 404:
+              alert('ERROR!! Not Found');
+              break;
+            case 500:
+              alert('ERROR!! Server Error');
+              break;
+            default:
+              alert ('Unknow Error!!');
+              break;
+          }
+        })
         this.router.navigate(['/login']);
       }
     }else{

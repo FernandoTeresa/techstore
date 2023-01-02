@@ -24,8 +24,17 @@ export class ListSubCategoriesComponent implements OnInit{
   constructor(public router:Router, public productservice:ProductsService) { }
 
   ngOnInit(): void {
-    this.productservice.requestSubCategories();
-    this.productservice.requestCategories();
+    this.productservice.requestSubCategories().subscribe((res: SubCategories[]) => {
+      
+      this.productservice.setSubCategories(res)
+
+    });
+    
+    this.productservice.requestCategories().subscribe((res: Categories[]) => {
+      
+      this.productservice.setCategories(res)
+
+    });
 
   }
 

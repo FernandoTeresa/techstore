@@ -31,30 +31,18 @@ export class ProductsService {
 
   requestProducts(){
 
-    this.http.get<Products[]>('http://localhost:85/products').subscribe((res: Products[]) => {
-      
-      this.setProducts(res);
-
-    });
+    return this.http.get<Products[]>('http://localhost:85/products')
 
   }
 
   requestSubCategories(){
 
-    return this.http.get<SubCategories[]>('http://localhost:85/subcategories').subscribe((res: SubCategories[]) => {
-      
-      this.setSubCategories(res)
-
-    });
+    return this.http.get<SubCategories[]>('http://localhost:85/subcategories')
   }
 
   requestCategories(){
 
-    this.http.get<Categories[]>('http://localhost:85/categories').subscribe((res: Categories[]) => {
-      
-        this.setCategories(res)
-
-    });
+    return this.http.get<Categories[]>('http://localhost:85/categories')
   }
 
   setCategories(categories:Categories[]){
@@ -106,8 +94,6 @@ export class ProductsService {
   }
 
   getProducts(){
-
-
     return this.http.get<Products[]>("http://localhost:85/products");
   }
 
@@ -118,81 +104,56 @@ export class ProductsService {
       })
     };
 
-    this.http.put<Products>('http://localhost:85/product/'+ productId , value, Header).subscribe((res:Products)=>{    
-
-    },(err) => {
-      switch(err.status){
-        case 400:
-          alert('ERROR!! Bad Request');
-          break;
-        case 401:
-          alert('ERROR!! Unauthorized');
-          break;
-        case 403:
-          alert('ERROR!! Forbidden');
-          break;
-        case 404:
-          alert('ERROR!! Not Found');
-          break;
-        case 500:
-          alert('ERROR!! Server Error');
-          break;
-        default:
-          alert ('Unknow Error!!');
-          break;
-      }
-    })
+    return this.http.put<Products>('http://localhost:85/product/'+ productId , value, Header)
   }
 
-  removeProduct(productId:number){
-    const Header = {
-      headers: new HttpHeaders({
-        Authorization: 'bearer '+ this.userservice.token.access_token
-      })
-    };
-    this.http.delete<Products>('http://localhost:85/product/'+ productId, Header).subscribe((res:Products)=>{    
+  // removeProduct(productId:number){
+  //   const Header = {
+  //     headers: new HttpHeaders({
+  //       Authorization: 'bearer '+ this.userservice.token.access_token
+  //     })
+  //   };
+  //   this.http.delete<Products>('http://localhost:85/product/'+ productId, Header).subscribe((res:Products)=>{    
       
-    },(err) => {
-      switch(err.status){
-        case 400:
-          alert('ERROR!! Bad Request');
-          break;
-        case 401:
-          alert('ERROR!! Unauthorized');
-          break;
-        case 403:
-          alert('ERROR!! Forbidden');
-          break;
-        case 404:
-          alert('ERROR!! Not Found');
-          break;
-        case 500:
-          alert('ERROR!! Server Error');
-          break;
-        default:
-          alert ('Unknow Error!!');
-          break;
-      }
-    })
-  }
+  //   },(err) => {
+  //     switch(err.status){
+  //       case 400:
+  //         alert('ERROR!! Bad Request');
+  //         break;
+  //       case 401:
+  //         alert('ERROR!! Unauthorized');
+  //         break;
+  //       case 403:
+  //         alert('ERROR!! Forbidden');
+  //         break;
+  //       case 404:
+  //         alert('ERROR!! Not Found');
+  //         break;
+  //       case 500:
+  //         alert('ERROR!! Server Error');
+  //         break;
+  //       default:
+  //         alert ('Unknow Error!!');
+  //         break;
+  //     }
+  //   })
+  // }
 
   addProduct(formData: any, HeaderWithImage:any){
 
-   return this.http.post('http://localhost:85/product', formData, HeaderWithImage).subscribe((res:any)=>{
-     
-   })
+   return this.http.post('http://localhost:85/product', formData, HeaderWithImage)
   }
 
-  uploadImages(image:any, productId:number){
-    const Header = {
-      headers: new HttpHeaders({
-        Authorization: 'bearer '+ this.userservice.token.access_token
-      })
-    };
-    this.http.post('http://localhost:85/product/img/'+ productId , image, Header).subscribe((res:any)=>{
-    })
+  // uploadImages(image:any, productId:number){
+  //   const Header = {
+  //     headers: new HttpHeaders({
+  //       Authorization: 'bearer '+ this.userservice.token.access_token
+  //     })
+  //   };
+  //   this.http.post('http://localhost:85/product/img/'+ productId , image, Header).subscribe((res:any)=>{
+  //   })
 
-  }
+  // }
 
   addNewCategory(category:Categories){
     const Header = {
@@ -215,8 +176,6 @@ export class ProductsService {
     return this.http.post<SubCategories>('http://localhost:85/subcategories', subcategory, Header)
 
   }
-
-
 
 
 }

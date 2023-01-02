@@ -27,20 +27,13 @@ export class FilterService{
 
     this.setFilter();
 
-    return this.http.post('http://localhost:85/search',this.filter).subscribe((res:any)=>{
-
-        this.setProducts(res.Products);
-    })
+    return this.http.post('http://localhost:85/search',this.filter)
 
   }
 
   requestSubcategoryById(){
 
-    return this.http.get<Products[]>('http://localhost:85/subcategory/'+this.subCategoryId_search).subscribe((res:any)=>{
-
-      this.setProducts(res);
-
-    });
+    return this.http.get<Products[]>('http://localhost:85/subcategory/'+this.subCategoryId_search);
 
   }
 

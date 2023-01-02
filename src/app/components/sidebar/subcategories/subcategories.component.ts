@@ -30,7 +30,11 @@ export class SubcategoriesComponent implements OnInit{
   constructor(public productservice:ProductsService, public filterservice:FilterService, public router:Router){}
 
   ngOnInit(): void {
-    this.productservice.requestSubCategories();
+    this.productservice.requestSubCategories().subscribe((res: SubCategories[]) => {
+      
+      this.productservice.setSubCategories(res)
+
+    });
     this.subcategory();
 
   }
@@ -56,7 +60,11 @@ export class SubcategoriesComponent implements OnInit{
 
     if (id){
       this.subCategoryId = id;
-      this.filterservice.requestSubcategoryById();
+      this.filterservice.requestSubcategoryById().subscribe((res:any)=>{
+
+        this.filterservice.setProducts(res);
+  
+      });
       this.router.navigate(['/search']);
     }else{
       this.subCategoryId = null;

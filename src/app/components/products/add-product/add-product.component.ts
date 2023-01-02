@@ -31,7 +31,11 @@ export class AddProductComponent implements OnInit {
       this.router.navigate(['/'])
       return
     }
-    this.productservice.requestSubCategories();
+    this.productservice.requestSubCategories().subscribe((res: SubCategories[]) => {
+      
+      this.productservice.setSubCategories(res)
+
+    });
   }
 
   addProduct(value:any){
@@ -62,7 +66,9 @@ export class AddProductComponent implements OnInit {
     formData.append("stock",value.stock);
     formData.append("sub_categories_id",value.sub_categories_id);
 
-    this.productservice.addProduct(formData, HeaderWithImage);
+    this.productservice.addProduct(formData, HeaderWithImage).subscribe((res:any)=>{
+     
+    });
 
   }
 

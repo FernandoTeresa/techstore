@@ -29,9 +29,23 @@ export class ListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.productservice.requestProducts();
-    this.productservice.requestCategories();
-    this.productservice.requestSubCategories();
+    this.productservice.requestProducts().subscribe((res: Products[]) => {
+      
+      this.productservice.setProducts(res);
+
+    });
+    
+    this.productservice.requestCategories().subscribe((res: Categories[]) => {
+      
+      this.productservice.setCategories(res)
+
+    });
+
+    this.productservice.requestSubCategories().subscribe((res: SubCategories[]) => {
+      
+      this.productservice.setSubCategories(res)
+
+    });
 
   }
 

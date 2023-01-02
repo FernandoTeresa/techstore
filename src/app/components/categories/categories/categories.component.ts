@@ -26,7 +26,13 @@ export class CategoriesComponent implements OnInit {
     if (!this.user){
       this.router.navigate(['/'])
     }
-    this.productservice.requestCategories();
+
+    this.productservice.requestCategories().subscribe((res: Categories[]) => {
+      
+      this.productservice.setCategories(res)
+
+    });
+
   }
 
   addcategory(value:Categories){

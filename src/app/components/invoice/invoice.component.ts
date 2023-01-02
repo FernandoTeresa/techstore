@@ -41,8 +41,12 @@ export class InvoiceComponent implements OnInit {
   localDate = new Date();
 
   ngOnInit(): void {
-    this.userservice.getUserInfo()
-    this.orderservice.requestOrder()
+    this.userservice.getUserInfo();
+    this.orderservice.requestOrder().subscribe((res:Order[])=>{
+
+      this.orderservice.setOrder(res);
+     
+    });
 
     if (!this.user){
       this.router.navigate(['/'])
@@ -145,7 +149,26 @@ export class InvoiceComponent implements OnInit {
       orderItem.push(obj);
     }
 
-    this.orderservice.addOrder(order, orderItem);
+    this.orderservice.addOrder(order).subscribe((res:any)=>{
+
+      for (let i=0;i<orderItem.length;i++){
+
+        let find = this.products.find((item)=>item.id == orderItem[i].product_id);
+
+        let orderitems:any = {
+          count: orderItem[i].count,
+          unitprice: orderItem[i].unitprice,
+          product_id: orderItem[i].product_id,
+          product: find,
+          order_id: res.id
+        }
+
+        this.orderservice.addOrderItems(orderitems).subscribe((res:any)=>{
+      
+        });
+      }
+
+    });;
   }
 
   orderLastId(){

@@ -46,7 +46,11 @@ export class ProductDetailsComponent implements OnInit {
 
     })
 
-    this.productservice.requestProducts();
+    this.productservice.requestProducts().subscribe((res: Products[]) => {
+      
+      this.productservice.setProducts(res);
+
+    });
   }
 
 

@@ -7,7 +7,7 @@ import { User } from './classes/user';
 import { UserService } from './services/user.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Filter } from './classes/filter';
-  
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,12 +16,12 @@ import { Filter } from './classes/filter';
 export class AppComponent {
   title = 'TechStore';
 
-  constructor(public userservice: UserService, public router:Router, public cartservice:CartService, public filterservice:FilterService){}
+  constructor(public userservice: UserService, public router: Router, public cartservice: CartService, public filterservice: FilterService) { }
 
-  public get user():User | null{
+  public get user(): User | null {
     return this.userservice.user;
   }
-  public get token():AuthToken | null{
+  public get token(): AuthToken | null {
     return this.userservice.token
   }
 
@@ -29,77 +29,76 @@ export class AppComponent {
   ngOnInit(): void {
     const token = localStorage.getItem('token');
 
-    if (token){
-      this.userservice.getUser(token).subscribe((res:User)=>{
+    let token_time = localStorage.getItem('expiresToken');
+
+    if (token) {
+      this.userservice.getUser(token).subscribe((res: User) => {
 
         this.userservice.setUser(res);
-      },(err)=>{
-        
+
+        let value: AuthToken = new AuthToken(token, parseInt(token_time))
+
+        this.userservice.setToken(value)
+
+        console.log(this.token)
+
+        this.cartservice.loadCart();
+
+        let expires = parseInt(token_time);
+
+        let date = moment().unix();
+
+        if (date > expires || date > this.token.expires_in) {
+          this.userservice.logout().subscribe((res: any) => {
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            this.userservice.user = null;
+            this.userservice.userInfo = null;
+            this.router.navigate(['/']);
+          });
+        }
+
+      }, (err) => {
+
         console.log(err);
-        
-      });
-    }
- 
-    this.cartservice.loadCart();
-    let token_time = localStorage.getItem('expiresToken');
-    
-    if (!this.token){
-      return 
-    }
+        this.cartservice.loadCart();
 
-    if (!token_time){
-      return
-    }
-
-
-    let expires = parseInt(token_time);
-
-    let date = moment().unix();
-
-    if (date > expires || date > this.token.expires_in){
-      this.userservice.logout().subscribe((res:any)=>{
-
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        this.userservice.user = null;
-        this.userservice.userInfo = null;
-        this.router.navigate(['/']);
       });
     }
 
   }
 
-
-  changeTheme(){
+  changeTheme() {
     let theme = localStorage.getItem('theme')
 
-    if(!theme){
+    if (!theme) {
       return;
     }
 
     let darkMode = JSON.parse(theme);
 
-    if (darkMode === true){
+    if (darkMode === true) {
       return 'bg-secondary'
-    }else{
+    } else {
       return '';
     }
 
   }
 
-  outside(event:any){
+  outside(event: any) {
 
     let x = <HTMLElement>document.getElementById('mySidenav');
-    if(event){
+    if (event) {
       x.style.width = '0';
     }
   }
 
-  outsideUserNav(event:any){
+  outsideUserNav(event: any) {
 
     let y = <HTMLElement>document.getElementById('mySidenavUser');
 
-    if(event){
+    if (event) {
       y.style.width = '0';
     }
 

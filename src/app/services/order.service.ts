@@ -36,11 +36,7 @@ export class OrderService {
         Authorization: 'bearer '+ this.userservice.token.access_token
       })
     };
-    this.http.get<Order[]>('http://localhost:85/order', Header).subscribe((res:Order[])=>{
-
-      this.setOrder(res);
-     
-    });
+    return this.http.get<Order[]>('http://localhost:85/order', Header);
   }
 
   setOrder(orders:Order[]){
@@ -62,36 +58,17 @@ export class OrderService {
         Authorization: 'bearer '+ this.userservice.token.access_token
       })
     };
-    return this.http.get<Order>('http://localhost:85/order/'+orderId, Header).subscribe((res:Order)=>{
-      this.setOrderById(res)
-    });
+    return this.http.get<Order>('http://localhost:85/order/'+orderId, Header)
   }
 
-  addOrder(order:any, orderItem:any){
+  addOrder(order:any){
     const Header = {
       headers: new HttpHeaders({
         Authorization: 'bearer '+ this.userservice.token.access_token
       })
     };
 
-    return this.http.post('http://localhost:85/order',order, Header).subscribe((res:any)=>{
-
-      for (let i=0;i<orderItem.length;i++){
-
-        let find = this.products.find((item)=>item.id == orderItem[i].product_id);
-
-        let orderitems:any = {
-          count: orderItem[i].count,
-          unitprice: orderItem[i].unitprice,
-          product_id: orderItem[i].product_id,
-          product: find,
-          order_id: res.id
-        }
-
-        this.addOrderItems(orderitems);
-      }
-
-    })
+    return this.http.post('http://localhost:85/order',order, Header);
 
   }
 
@@ -102,9 +79,7 @@ export class OrderService {
       })
     };
 
-    return this.http.post('http://localhost:85/order/item',items,Header).subscribe((res:any)=>{
-      
-    })
+    return this.http.post('http://localhost:85/order/item',items,Header)
 
   }
 

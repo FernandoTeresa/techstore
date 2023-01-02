@@ -40,7 +40,11 @@ export class UpdateProductComponent implements OnInit {
       this.router.navigate(['/'])
       return
     }
-    this.productservice.requestSubCategories()
+    this.productservice.requestSubCategories().subscribe((res: SubCategories[]) => {
+      
+      this.productservice.setSubCategories(res)
+
+    });
 
     this.activatedroute.paramMap.subscribe((params: any) => {
       const id = +params.get('id');
@@ -62,7 +66,31 @@ export class UpdateProductComponent implements OnInit {
       return "not exist";
     }
 
-    this.productservice.updateProduct(value, this.product.id);
+    this.productservice.updateProduct(value, this.product.id).subscribe((res:Products)=>{    
+
+    },(err) => {
+      switch(err.status){
+        case 400:
+          alert('ERROR!! Bad Request');
+          break;
+        case 401:
+          alert('ERROR!! Unauthorized');
+          break;
+        case 403:
+          alert('ERROR!! Forbidden');
+          break;
+        case 404:
+          alert('ERROR!! Not Found');
+          break;
+        case 500:
+          alert('ERROR!! Server Error');
+          break;
+        default:
+          alert ('Unknow Error!!');
+          break;
+      }
+    });
+    
     this.router.navigate(['/product/'+this.product.id]);
   }
 

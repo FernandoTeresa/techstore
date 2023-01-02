@@ -42,9 +42,16 @@ export class FilterComponent{
     this.filterservice.setFilter();
 
     if(this.searchBySubCategoryId){
-      this.filterservice.requestSubcategoryById();
+      this.filterservice.requestSubcategoryById().subscribe((res:any)=>{
+
+        this.filterservice.setProducts(res);
+  
+      });;
     }else{
-      this.filterservice.request();
+      this.filterservice.request().subscribe((res:any)=>{
+
+        this.filterservice.setProducts(res.Products);
+    });
     }
   }
 
@@ -81,7 +88,10 @@ export class FilterComponent{
     }
 
     if (this.changeDetected){
-      this.filterservice.request();
+      this.filterservice.request().subscribe((res:any)=>{
+
+        this.filterservice.setProducts(res.Products);
+    });
     }
 
     this.changeDetected = false;

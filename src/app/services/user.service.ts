@@ -1,13 +1,9 @@
-import { CheckoutComponent } from './../components/cart/checkout/checkout.component';
-import { IAuthToken } from './../interfaces/i-authToken';
 import { UserInfos } from './../classes/user-infos';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { User } from '../classes/user';
-import * as moment from 'moment';
 import { AuthToken } from '../classes/AuthToken';
-
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -74,47 +70,20 @@ export class UserService {
       localStorage.setItem('expiresToken', value.expires_in.toString());
 
       this.token = new AuthToken(value.access_token, value.expires_in);
-    }
 
+    }
   }
 
-   // o subscribe fora dos serviços e utilizar nos componentes e popular as variaveis nos serviços
   logout(){
-
     const Header = {
       headers: new HttpHeaders({ Authorization: 'bearer '+ this.token.access_token })
     };
-      return this.http.post('http://localhost:85/logout',Header);
+
+    return this.http.post('http://localhost:85/logout',{},Header);
   }
 
   addUser(value: User){
-    this.http.post<User>('http://localhost:85/register',value).subscribe((res:User)=>{
-
-      this.setUser(res);
-
-    },(err) => {
-
-      switch(err.status){
-        case 400:
-          alert('ERROR!! Bad Request');
-          break;
-        case 401:
-          alert('ERROR!! Unauthorized');
-          break;
-        case 403:
-          alert('ERROR!! Forbidden');
-          break;
-        case 404:
-          alert('ERROR!! Not Found');
-          break;
-        case 500:
-          alert('ERROR!! Server Error');
-          break;
-        default:
-          alert ('Unknow Error!!');
-          break;
-      }
-    })
+    return this.http.post<User>('http://localhost:85/register',value);
 
   }
 
@@ -137,7 +106,7 @@ export class UserService {
   }
 
   setUserInfo(userInfo:UserInfos){
-    this.userInfo = new UserInfos(userInfo.id, userInfo.address_1, userInfo.address_2, userInfo.city, userInfo.postal_code, userInfo.country, userInfo.mobile, userInfo.telephone, userInfo.users_id);
+    return this.userInfo = new UserInfos(userInfo.id, userInfo.address_1, userInfo.address_2, userInfo.city, userInfo.postal_code, userInfo.country, userInfo.mobile, userInfo.telephone, userInfo.users_id);
   }
 
 

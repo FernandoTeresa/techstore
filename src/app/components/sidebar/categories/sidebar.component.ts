@@ -20,7 +20,13 @@ export class SidebarComponent implements OnInit{
   constructor(public productservice:ProductsService, public themeservice:ThemeService){}
 
   ngOnInit(): void {
-    this.productservice.requestCategories();
+
+    this.productservice.requestCategories().subscribe((res: Categories[]) => {
+      
+      this.productservice.setCategories(res)
+
+    });
+    
   }
 
   category(id:number){

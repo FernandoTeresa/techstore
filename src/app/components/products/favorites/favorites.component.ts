@@ -32,7 +32,11 @@ export class FavoritesComponent implements OnInit {
       this.router.navigate(['/'])
       return
     }
-    this.productservice.requestProducts();
+    this.productservice.requestProducts().subscribe((res: Products[]) => {
+      
+      this.productservice.setProducts(res);
+
+    });
   }
 
   getProduct(id:number){

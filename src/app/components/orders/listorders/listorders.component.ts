@@ -28,7 +28,11 @@ export class ListordersComponent implements OnInit {
       return; 
     }
 
-    this.orderservice.requestOrder();
+    this.orderservice.requestOrder().subscribe((res:Order[])=>{
+
+      this.orderservice.setOrder(res);
+     
+    });;
   }
 
   totalProducts(id:any){

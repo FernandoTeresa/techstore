@@ -18,7 +18,11 @@ export class ListCategoriesComponent  implements OnInit{
 
   ngOnInit(): void {
     this.productservice.getCategories();
-    this.productservice.requestCategories();
+    this.productservice.requestCategories().subscribe((res: Categories[]) => {
+      
+      this.productservice.setCategories(res)
+
+    });
   }
 
 }

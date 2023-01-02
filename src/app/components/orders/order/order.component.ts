@@ -39,7 +39,9 @@ export class OrderComponent implements OnInit {
     this.activatedroute.paramMap.subscribe((params: any) => {
       const id = +params.get('id');
 
-      this.orderservice.requestOrderById(id)
+      this.orderservice.requestOrderById(id).subscribe((res:Order)=>{
+        this.orderservice.setOrderById(res)
+      });
 
     });
 

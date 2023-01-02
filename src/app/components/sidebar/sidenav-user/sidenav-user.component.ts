@@ -1,5 +1,6 @@
+import { AuthToken } from 'src/app/classes/AuthToken';
 import { ThemeService } from './../../../services/theme.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './sidenav-user.component.html',
   styleUrls: ['./sidenav-user.component.css']
 })
-export class SidenavUserComponent {
+export class SidenavUserComponent{
 
   constructor(public router:Router ,public userservice: UserService, public themeservice:ThemeService) {}
 
@@ -17,17 +18,25 @@ export class SidenavUserComponent {
     return this.userservice.user;
   }
 
+  public get token():AuthToken{
+    return this.userservice.token;
+  }
+
   public clicked:boolean = false;
 
-  logout(){
-    this.userservice.logout().subscribe((res:any)=>{
 
+  logout(){
+
+    console.log(this.token)
+    this.userservice.logout().subscribe((res:any)=>{
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       this.userservice.user = null;
       this.userservice.userInfo = null;
       this.router.navigate(['/']);
+      
     });
+    
   }
 
   orders(){
